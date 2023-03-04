@@ -1,15 +1,18 @@
-from flask import Flask
-from flask import request
+from flask import Flask, request, render_template
 
 from src.pix import PixModel
 
 app = Flask(__name__)
 
-@app.route("/pix", methods=["GET"])
+@app.route("/", methods=["GET"])
 def index():
+    return render_template("index.html")
+
+@app.route("/pix", methods=["GET"])
+def pix():
     #payload = request.json
     payload = {
-        "txid": "ASFDUIda272b718aasdba2122IUA27S4",
+        "txid": "ASFDUIda272b717atsdba2122IUA27S1",
         "calendario": {
             "expiracao": 60
         },
