@@ -6,10 +6,10 @@ from PIL import Image
 from io import BytesIO
 from flask import send_file, request
 
-from src.credentials import credentials
+from rifaem2.credentials import credentials
 
 
-class PixModel():
+class ModeloPix():
 
     def __init__(self):
         self.headers = {
@@ -18,7 +18,7 @@ class PixModel():
         }
 
     def get_token(self, ):
-        certificado = "./src/credentials/" + credentials.CREDENTIALS['certificate']
+        certificado = credentials.CREDENTIALS['certificate']
 
         auth = base64.b64encode(
             (f"{credentials.CREDENTIALS['client_id']}:{credentials.CREDENTIALS['client_secret']}"
@@ -41,12 +41,13 @@ class PixModel():
         return json.loads(response.content)['access_token']
 
     def create_qrcode(self, location_id):
-        response = requests.get(f"{credentials.URL_PROD}/v2/loc/{location_id}/qrcode", headers=self.headers, cert="./src/credentials/" + credentials.CREDENTIALS['certificate'])
-
+        response = requests.get(f"{credentials.URL_PROD}/v2/loc/{location_id}/qrcode", headers=self.headers, cert=credentials.CREDENTIALS['certificate'])
+        
+        print(response.content)
         return json.loads(response.content)
 
     def create_order(self, txid, payload):
-        response = requests.put(f"{credentials.URL_PROD}/v2/cob/{txid}", data=json.dumps(payload), headers=self.headers, cert="./src/credentials/" + credentials.CREDENTIALS['certificate'])
+        response = requests.put(f"{credentials.URL_PROD}/v2/cob/{txid}", data=json.dumps(payload), headers=self.headers, cert=credentials.CREDENTIALS['certificate'])
 
         if response.status_code == 201:
             return json.loads(response.content)
@@ -54,6 +55,7 @@ class PixModel():
         return {}
 
     def qrcode_generator(self, location_id):
+        '''
         qrcode = self.create_qrcode(location_id)
 
         data_qrcode = qrcode['qrcode']
@@ -67,6 +69,10 @@ class PixModel():
         img_io.seek(0)
 
         return send_file(img_io, mimetype="image/jpeg", as_attachment=False, download_name="image-qrcode.jpg")
+        '''
+        qrcode = self.create_qrcode(location_id)
+
+        return qrcode['imagemQrcode']
 
     def create_charge(self, txid, payload):
         location_id = self.create_order(txid, payload).get("loc").get("id")

@@ -10,6 +10,7 @@ python-dotenv = "*"
 pyqrcode = "*"
 pillow = "*"
 pypng = "*"
+rstr = "*"
 
 [dev-packages]
 
