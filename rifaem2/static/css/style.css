@@ -16,8 +16,11 @@
 }
 
 html {
-    font-size: 62.5%;
+    font-size: 62.5%;	
     background-color: var(--bg-color);
+}
+html, body {
+	overflow: hidden;
 }
 
 /* NAVBAR */
@@ -69,8 +72,10 @@ li:active {
 /* MAIN */
 
 main {
-    height: calc(100vh - 15vh);
+    height: calc(100vh - 15vh + 3px);
     display: grid;
+	position: relative;
+	top: -2px;
     grid-template-columns: 1fr 3fr;
 }
 
@@ -87,6 +92,7 @@ main {
     font-size: 3.4rem;
     font-weight: 300;
     align-self: end;
+	transition: 0.4s;
 }
 
 hr {
@@ -98,24 +104,27 @@ hr {
 .welcome {
     align-self: flex-start;
     text-align: right;
-    font-size: 8rem;
+    font-size: clamp(4rem, 10vh + .1rem, 8rem);
     font-weight: bolder;
+	transition: 0.4s;
 }
 
 .rightSide {
     background: var(--first-font-color);
     display: grid;
     grid-template-columns: 1fr 1fr;
+	transition: 0.4s;
 }
 
 h1.bigTitulo {
-    font-size: 40rem;
+    font-size: clamp(30rem, 60vh + .1rem, 40rem);
     color: var(--bg-color);
     align-self: center;
     letter-spacing: -4rem;
     margin-top: 4rem;
     position: relative;
     right: 1.1rem;
+	transition: 0.4s;
     pointer-events: none;
 }
 .rightInfo {
@@ -123,13 +132,15 @@ h1.bigTitulo {
     height: 100%;
     display: grid;
     place-items: center;
+	transition: 0.4s;
     grid-template-rows: 18%;
 }
 h2.rightTitle {
-    font-size: 2.4rem;
+    font-size: clamp(2rem, 1vw + .9rem, 2.4rem);
     display: grid;
     margin-top: 9rem;
     place-items: center;
+	transition: 0.4s;
     color: var(--bg-color);
 }
 .rightGroup {
@@ -148,7 +159,7 @@ button,
     height: 10rem;
     color: var(--first-font-color);
     font-weight: 900;
-    font-size: 2rem;
+    font-size: clamp(1.4rem, 1vw + .1rem, 2rem);
     align-items: center;
     display: flex;
     justify-content: start;
@@ -160,29 +171,33 @@ button,
 
 i.fa-solid.fa-grip {
     padding: 2rem;
-    margin-left: 3rem;
+    padding-inline: clamp(1rem, 1vw + .1rem, 2rem);
+    margin-left: clamp(1.5rem, .1vw + .1rem, 4rem);
     border-radius: 100vw;
-    transition: 0.4s
+    transition: 0.4s;
 }
 i.fa-solid.fa-question.fa-2x {
-    margin-left: 4rem;
+    margin-left: clamp(2rem, .5vw + .1rem, 4rem);
     padding: 2rem;
+    padding-inline: clamp(1rem, 1vw + .1rem, 2rem);
     border-radius: 100vw;
-    transition: 0.4s
+    transition: 0.4s;
 }
-
+.contatoBar i {
+    transition: 0.4s;
+}
 button i:hover,
 .contatoBar i:hover {
     filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.434));
     transition: 0.4s;
     cursor: pointer;
-    font-size: 4.1rem;
+    transform: scale(1.1);
 }
 
 button hr {
     width: 0.2rem;
     height: 60%;
-    margin-right: 1.5rem;
+    margin-right: clamp(.5rem, .1vw + .1rem, 1.5rem);
 }
 
 .contatoBar {
@@ -213,14 +228,204 @@ button hr {
 
 
 
-
+/*RESPONSIVIDADE*/
 @media(max-width: 80rem) {
-    html {
+    ul {
+		width: 80%;
+	}
+	li {
+		    font-size: 3rem;
+	}
+	li:active {
+		font-size: 2.95rem;
+	}
+	html {
         font-size: 50%;
     }
 
     .leftSide {
         min-width: 243px;
     }
+	
+	h1.bigTitulo {
+		margin-top: -9rem;
+	}
     
+}
+
+@media(max-width: 1080px) {
+    ul {
+		width: 100%;
+	}
+	.rightInfo {
+		place-items: end;
+		grid-template-rows: 100%;
+	}
+	h2.rightTitle {
+		display: none;
+	}
+	.rightGroup {
+		width: unset !important;
+		filter: unset !important;
+		margin-right: 1rem;
+		align-self: center;
+	}
+	
+	button,
+	.contatoBar {
+		font-size: 0;
+		justify-content: center;
+		aspect-ratio: 1 / 1;
+		animation: none;
+	}
+    button i {
+		padding: 0 !important;
+		margin-inline: 4% 0 !important;
+		font-size: 3.5rem !important;
+	}
+	button hr {
+		display: none;
+	}
+	.dot {
+		display: none;
+	}
+	i.fa-brands.fa-whatsapp.fa-2x {
+		font-size: 4rem;
+	}
+	i.fa-brands.fa-instagram.fa-2x {
+		display: none;
+	}
+	i.fa-brands.fa-pix.fa-2x {
+		display: none;
+	}
+}
+
+@media(max-width: 950px) {
+	
+	.rightSide {
+		grid-template-columns: 1fr;
+	}
+	h1.bigTitulo {
+		margin-top: 1rem;
+		align-self: end;
+	}
+	.rightGroup {
+		flex-direction: row;
+		width: 50% !important;
+		transition: 0.4s;
+	}
+}
+
+@media(max-width: 860px) {
+	h1.bigTitulo {
+		font-size: clamp(30rem, 35vw + .1rem, 40rem);
+		right: 1.5rem;
+	}
+	.rightGroup {
+		width: 100% !important;
+		transition: 0.4s;
+	}
+}
+
+@media(max-width: 740px) {
+	html, body {
+        background-color: var(--bg-color);
+    }
+	nav {
+		background: var(--bg-color);
+	}
+	li {
+		color: var(--first-font-color);
+	}
+	main {
+		grid-template-columns: 1fr;
+	}
+	.leftSide {
+		place-items: center;
+		grid-template-rows: unset;
+	}
+	p.welcome {
+		font-size: 0;
+		transition: 0s;
+	}
+	p.welcome::after {
+		content: 'AO SITE DE RIFAS DO';
+		align-self: flex-start;
+		text-align: center;
+		font-size: clamp(3.6rem, 8vw + .1rem, 8rem);
+		font-weight: bolder;
+		transition: 0s;
+	}
+	.rightSide {
+		justify-items: center;
+	}
+	h1.bigTitulo {
+		right: 2.3rem;
+		align-self: start;
+		margin-top: clamp(-5.5rem, 10vw + .1rem, -6.5rem);
+		font-size: clamp(23rem, 50vw + .1rem, 40rem);
+	}
+	.rightInfo {
+		margin-bottom: min(3rem, 10%);
+	}
+	button,
+	.contatoBar {
+		height: clamp(8.5rem, 10vw + 1rem, 10rem);
+	}
+}
+
+
+/*4K DEVICES START*/
+@media(min-width: 1835px) and (min-height: 1160px) {
+	html{
+		font-size: 82.5%;
+	}
+}
+@media(max-width: 1700px) and (min-height: 1160px) {
+	html{
+		font-size: 72.5%;
+	}
+}
+@media(max-width: 1500px) and (min-height: 1160px) {
+	html{
+		font-size: 62.5%;
+	}
+}
+@media(max-width: 1280px) and (min-height: 1160px) {
+	html{
+		font-size: 52.5%;
+	}
+}
+@media(max-width: 740px) and (min-height: 1160px) {
+	html{
+		font-size: 82.5%;
+	}
+}
+/*4K DEVICES END*/
+
+
+/*Ipad Air*/
+@media(width: 820px) and (height: 1180px) {
+	html {
+		font-size: 50.5%;
+	}
+	h1.bigTitulo {
+		margin-top: 13rem;
+		align-self: center;
+	}
+}
+
+/*Nest hub*/
+@media (width: 1024px) and (height: 600px){
+	h1.bigTitulo {
+		margin-top: unset;
+	}
+}
+
+/*surface pro 7*/
+@media (width: 912px) and (height: 1368px){
+	h1.bigTitulo {
+		margin-top: 10rem;
+		align-self: center;
+	}
 }
