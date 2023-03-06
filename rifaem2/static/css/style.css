@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&family=Tilt+Warp&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+}
+
+:root {
+    --bg-color: #ff2d2d;
+    --first-font-color: #fff;
+    --hover-font-color: #fbbac6;
+    --click-font-color: #ff8ea3;
+}
+
+html {
+    font-size: 62.5%;
+    background-color: var(--bg-color);
+}
+
+/* NAVBAR */
+header {
+    height: 15vh;
+    min-height: 118px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+nav {
+    display: flex;
+    background: #fff;
+    justify-content: center;
+}
+.logo {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+img {
+    height: 110px;
+    cursor: pointer;
+}
+ul {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+li {
+    list-style: none;
+    font-size: 2.3rem;
+    font-weight: bold;
+    color: var(--bg-color);
+    transition: .4s;
+}
+li:hover {
+    cursor: pointer;
+    color: var(--click-font-color);
+    margin-inline: .3rem;
+}
+li:active {
+    color: var(--hover-font-color);
+    font-size: 2.25rem;
+}
+
+/* FIM DA NAVBAR */
+
+/* MAIN */
+
+main {
+    height: calc(100vh - 15vh);
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.leftSide {
+    display: grid;
+    grid-template-rows: 20% 4% 40%;
+    place-items: end;
+    min-width: 235px;
+    color: var(--first-font-color);
+    padding: 2rem;
+}
+
+.leftTitle {
+    font-size: 3.4rem;
+    font-weight: 300;
+    align-self: end;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: var(--first-font-color);
+    width: 80%;
+}
+.welcome {
+    align-self: flex-start;
+    text-align: right;
+    font-size: 8rem;
+    font-weight: bolder;
+}
+
+.rightSide {
+    background: var(--first-font-color);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+h1.bigTitulo {
+    font-size: 40rem;
+    color: var(--bg-color);
+    align-self: center;
+    letter-spacing: -4rem;
+    margin-top: 4rem;
+    position: relative;
+    right: 1.1rem;
+    pointer-events: none;
+}
+.rightInfo {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    grid-template-rows: 18%;
+}
+h2.rightTitle {
+    font-size: 2.4rem;
+    display: grid;
+    margin-top: 9rem;
+    place-items: center;
+    color: var(--bg-color);
+}
+.rightGroup {
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 90%;
+    width: 70%;
+    filter: url('#goo');
+}
+button,
+.contatoBar {
+    all: unset;
+    background: var(--bg-color);
+    height: 10rem;
+    color: var(--first-font-color);
+    font-weight: 900;
+    font-size: 2rem;
+    align-items: center;
+    display: flex;
+    justify-content: start;
+    gap: .5rem;
+    text-align: center;
+    border-radius: 100vw;
+    animation: clippath 8s ease-in-out infinite;
+}
+
+i.fa-solid.fa-grip {
+    padding: 2rem;
+    margin-left: 3rem;
+    border-radius: 100vw;
+    transition: 0.4s
+}
+i.fa-solid.fa-question.fa-2x {
+    margin-left: 4rem;
+    padding: 2rem;
+    border-radius: 100vw;
+    transition: 0.4s
+}
+
+button i:hover,
+.contatoBar i:hover {
+    filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.434));
+    transition: 0.4s;
+    cursor: pointer;
+    font-size: 4.1rem;
+}
+
+button hr {
+    width: 0.2rem;
+    height: 60%;
+    margin-right: 1.5rem;
+}
+
+.contatoBar {
+    justify-content: center;
+    gap: 2rem;
+}
+
+.dot {
+    width: .7rem;
+    border-radius: 100%;
+    height: .7rem;
+    background: #fff;
+}
+
+@keyframes clippath {
+    0% {
+        clip-path: polygon(98% 0, 91% 23%, 100% 53%, 91% 76%, 98% 100%, 0 100%, 0 0);
+    }
+    50% {
+        clip-path: polygon(100% 0, 90% 32%, 100% 57%, 94% 83%, 100% 100%, 0 100%, 0 0);
+    }
+    100% {
+        clip-path: polygon(98% 0, 91% 23%, 100% 53%, 91% 76%, 98% 100%, 0 100%, 0 0);
+    }
+}
+
+
+
+
+
+
+@media(max-width: 80rem) {
+    html {
+        font-size: 50%;
+    }
+
+    .leftSide {
+        min-width: 243px;
+    }
+    
+}
