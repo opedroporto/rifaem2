@@ -78,6 +78,7 @@ button.menu-burguer {
     justify-content: center;
     align-items: center;
     width: 20%;
+	z-index: 11;
 }
 .linhas {
 	height: 35%;
@@ -94,17 +95,86 @@ button.menu-burguer {
 .linhas:active .line {
     background: var(--click-font-color);
 }
-.menu-aside {
-	display: none;
-}
 .linhas .line {
     height: 4px;
-	transition: .4s;
+	transition: 1s;
     border-radius: 15px;
     width: 5rem;
-    background: var(--bg-color);
+    background-color: var(--bg-color);
+	transform: unset;
+	opacity: 1;
 }
 
+.menu-aside {
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+	transform: translateX(100%);
+    right: 0;
+    width: 420px;
+    background: var(--bg-color);
+	visibility: hidden;
+	pointer-events: none;
+    transition: 1s, box-shadow 1s .4s;
+    z-index: 10;
+}
+.menu-aside ul {
+    height: calc(100% - 118px);
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.menu-aside ul li {
+    display: flex;
+    font-size: 3rem;
+    width: 80%;
+    height: 10%;
+    justify-content: center;
+    align-items: center;
+    transition: 0.6s;
+    color: var(--first-font-color);
+	text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: clamp(2px, .5vw + .1rem, 4px);
+}
+.menu-aside ul li:hover {
+    cursor: pointer;
+    color: var(--click-font-color);
+    margin-inline: .3rem;
+    transition: 0.6s;
+    box-shadow: inset 0px -1px 0px;
+}
+
+/*  AO CLICAR *ON*  */
+
+button.menu-burguer.on .linhas .line {
+	background-color: var(--first-font-color);
+	transition: 1s;
+}
+
+.menu-aside.on {
+	transform: translateX(0%);
+	visibility: visible;
+	pointer-events: all;
+	box-shadow: -30rem 2rem 10rem 80vw #a51c1c85;
+    transition: 1s, box-shadow 1s .4s;
+}
+button.menu-burguer.on .linhas .line:nth-of-type(1) {
+    transform: rotate(45deg) translate(8px, 7px);
+	transition: .5s;
+}
+button.menu-burguer.on .linhas .line:nth-of-type(2) {
+    opacity: 0;
+	transition: .2s;
+}
+button.menu-burguer.on .linhas .line:nth-of-type(3) {
+    transform: rotate(-45deg) translate(9.5px, -9px);
+	transition: .5s;
+}
 /*FIM MENU-BURGUER NAVBAR*/
 
 /* MAIN */
@@ -285,10 +355,6 @@ button hr {
     .leftSide {
         min-width: 243px;
     }
-	
-	h1.bigTitulo {
-		margin-top: -9rem;
-	}
     
 }
 
@@ -433,6 +499,9 @@ button hr {
 	button.menu-burguer {
 		width: 40%;
 	}
+	.menu-aside {
+		width: 70%;
+	}
 }
 
 
@@ -461,6 +530,14 @@ button hr {
 	html{
 		font-size: 82.5%;
 	}
+	button.menu-burguer.on .linhas .line:nth-of-type(1) {
+		transform: rotate(45deg) translate(8px, 12px);
+		transition: .5s;
+	}
+	button.menu-burguer.on .linhas .line:nth-of-type(3) {
+		transform: rotate(-45deg) translate(9.5px, -18px);
+		transition: .5s;
+	}
 }
 /*4K DEVICES END*/
 
@@ -469,10 +546,6 @@ button hr {
 @media(width: 820px) and (height: 1180px) {
 	html {
 		font-size: 50.5%;
-	}
-	h1.bigTitulo {
-		margin-top: 13rem;
-		align-self: center;
 	}
 }
 
@@ -486,7 +559,34 @@ button hr {
 /*surface pro 7*/
 @media (width: 912px) and (height: 1368px){
 	h1.bigTitulo {
-		margin-top: 10rem;
+		margin-top: 25rem;
 		align-self: center;
+	}
+}
+
+/*maioria dos mobile*/
+@media (max-width: 440px) {
+	button.menu-burguer {
+		width: calc(85% - 1vw);
+	}
+}
+
+/* GALAXY FOLD >:( */
+@media (max-width: 280px) and (max-height: 653px) {
+	header {
+		grid-template-columns: 1fr 1fr;
+	}
+	.logo img {
+		height: 70px;
+	}
+	p.welcome::after {
+		font-size: clamp(3.1rem, 8vw + .1rem, 8rem);
+	}
+	h1.bigTitulo {
+		margin-top: clamp(-5rem, 10vw + .1rem, -6.5rem);
+		font-size: clamp(21rem, 50vw + .1rem, 40rem);
+	}
+	.menu-aside {
+		width: 100%;
 	}
 }
