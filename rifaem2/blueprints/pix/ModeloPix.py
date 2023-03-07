@@ -2,80 +2,56 @@ import base64
 import requests
 import json
 import pyqrcode
+
 from PIL import Image
 from io import BytesIO
 from flask import send_file, request
+from gerencianet import Gerencianet
 
 from rifaem2.credentials import credentials
 
+gn = Gerencianet(credentials.CREDENTIALS)
 
 class ModeloPix():
 
-    def __init__(self):
-        self.headers = {
-            "Authorization": f"Bearer {self.get_token()}",
-            "Content-Type": "application/json"
+    def gerapix(self, dados):
+
+        params = {
+            'txid': dados['txid']
         }
 
-    def get_token(self, ):
-        certificado = credentials.CREDENTIALS['certificate']
-
-        auth = base64.b64encode(
-            (f"{credentials.CREDENTIALS['client_id']}:{credentials.CREDENTIALS['client_secret']}"
-            ).encode()).decode()
-
-        url = "https://api-pix.gerencianet.com.br/oauth/token"
-
-        payload="{\r\n    \"grant_type\": \"client_credentials\"\r\n}"
-        headers = {
-            'Authorization': f"Basic {auth}",
-            'Content-Type': 'application/json'
+        body = {
+            'calendario': {
+                'expiracao': 300
+            },
+            'valor': {
+                'original': dados['preco']
+            },
+            'chave': 'e5ab195e-c2a5-42db-9ce1-3841e6e22615',
+            'solicitacaoPagador': 'Cobrança dos serviços prestados.'
         }
 
-        response = requests.request("POST",
-                                    url,
-                                    headers=headers,
-                                    data=payload,
-                                    cert=certificado)
-
-        return json.loads(response.content)['access_token']
-
-    def create_qrcode(self, location_id):
-        response = requests.get(f"{credentials.URL_PROD}/v2/loc/{location_id}/qrcode", headers=self.headers, cert=credentials.CREDENTIALS['certificate'])
+        response = gn.pix_create_charge(params=params,body=body)
         
-        print(response.content)
-        return json.loads(response.content)
+        return response
 
-    def create_order(self, txid, payload):
-        response = requests.put(f"{credentials.URL_PROD}/v2/cob/{txid}", data=json.dumps(payload), headers=self.headers, cert=credentials.CREDENTIALS['certificate'])
+    def geraqrcode(self, loc_id):
 
-        if response.status_code == 201:
-            return json.loads(response.content)
-        
-        return {}
+        params = {
+            'id': loc_id
+        }
 
-    def qrcode_generator(self, location_id):
+        response = gn.pix_generate_QRCode(params=params)
+        base64 = response['imagemQrcode']
+
+        return base64
+
+    def verificapix(self, txid):
+
         '''
-        qrcode = self.create_qrcode(location_id)
+        params = {
+            'e2eId': ''
+        }
 
-        data_qrcode = qrcode['qrcode']
-
-        url = pyqrcode.QRCode(data_qrcode, error='H')
-        url.png('qrcode.jpg', scale='10')
-        im = Image.open("qrcode.jpg")
-        im = im.convert("RGBA")
-        img_io = BytesIO()
-        im.save(img_io, "PNG", quality='00')
-        img_io.seek(0)
-
-        return send_file(img_io, mimetype="image/jpeg", as_attachment=False, download_name="image-qrcode.jpg")
+        response =  gn.pix_detail(params=params)
         '''
-        qrcode = self.create_qrcode(location_id)
-
-        return qrcode['imagemQrcode']
-
-    def create_charge(self, txid, payload):
-        location_id = self.create_order(txid, payload).get("loc").get("id")
-        qrcode = self.qrcode_generator(location_id)
-
-        return qrcode
