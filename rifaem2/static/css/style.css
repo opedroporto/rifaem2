@@ -69,6 +69,44 @@ li:active {
 
 /* FIM DA NAVBAR */
 
+/*INICIO MENU-BURGUER NAVBAR*/
+
+button.menu-burguer {
+	display: none;
+    border: none;
+    background-color: unset;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+}
+.linhas {
+	height: 35%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    display: flex;
+	cursor: pointer;
+}
+.linhas:hover .line {
+    background: var(--hover-font-color);
+}
+.linhas:active .line {
+    background: var(--click-font-color);
+}
+.menu-aside {
+	display: none;
+}
+.linhas .line {
+    height: 4px;
+	transition: .4s;
+    border-radius: 15px;
+    width: 5rem;
+    background: var(--bg-color);
+}
+
+/*FIM MENU-BURGUER NAVBAR*/
+
 /* MAIN */
 
 main {
@@ -117,11 +155,12 @@ hr {
 }
 
 h1.bigTitulo {
-    font-size: clamp(30rem, 60vh + .1rem, 40rem);
+    font-size: clamp(25rem, 50vh + .1rem, 40rem);
     color: var(--bg-color);
     align-self: center;
     letter-spacing: -4rem;
-    margin-top: 4rem;
+    top: -25%;
+    transform: translateY(40%);
     position: relative;
     right: 1.1rem;
 	transition: 0.4s;
@@ -136,7 +175,7 @@ h1.bigTitulo {
     grid-template-rows: 18%;
 }
 h2.rightTitle {
-    font-size: clamp(2rem, 1vw + .9rem, 2.4rem);
+    font-size: clamp(1.6rem, 5vw + .1rem, 2rem);
     display: grid;
     margin-top: 9rem;
     place-items: center;
@@ -152,7 +191,7 @@ h2.rightTitle {
     width: 70%;
     filter: url('#goo');
 }
-button,
+.rightGroup button,
 .contatoBar {
     all: unset;
     background: var(--bg-color);
@@ -186,7 +225,7 @@ i.fa-solid.fa-question.fa-2x {
 .contatoBar i {
     transition: 0.4s;
 }
-button i:hover,
+.rightGroup button i:hover,
 .contatoBar i:hover {
     filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.434));
     transition: 0.4s;
@@ -224,7 +263,7 @@ button hr {
     }
 }
 
-
+/*FIM DO MAIN*/
 
 
 
@@ -271,19 +310,19 @@ button hr {
 		align-self: center;
 	}
 	
-	button,
+	.rightGroup button,
 	.contatoBar {
 		font-size: 0;
 		justify-content: center;
 		aspect-ratio: 1 / 1;
 		animation: none;
 	}
-    button i {
+    .rightGroup button i {
 		padding: 0 !important;
 		margin-inline: 4% 0 !important;
 		font-size: 3.5rem !important;
 	}
-	button hr {
+	.rightGroup button hr {
 		display: none;
 	}
 	.dot {
@@ -304,9 +343,9 @@ button hr {
 	
 	.rightSide {
 		grid-template-columns: 1fr;
+		grid-auto-rows: 65% 50%;
 	}
 	h1.bigTitulo {
-		margin-top: 1rem;
 		align-self: end;
 	}
 	.rightGroup {
@@ -315,7 +354,12 @@ button hr {
 		transition: 0.4s;
 	}
 }
-
+@media(max-width: 950px) and (min-height: 950px) {
+	.rightSide {
+		grid-auto-rows: 60% 40%;
+	}
+}
+	
 @media(max-width: 860px) {
 	h1.bigTitulo {
 		font-size: clamp(30rem, 35vw + .1rem, 40rem);
@@ -324,6 +368,15 @@ button hr {
 	.rightGroup {
 		width: 100% !important;
 		transition: 0.4s;
+	}
+	button.menu-burguer {
+		display: flex !important;
+	}
+	nav {
+		justify-content: end;
+	}
+	nav ul {
+		display: none;
 	}
 }
 
@@ -362,15 +415,23 @@ button hr {
 	h1.bigTitulo {
 		right: 2.3rem;
 		align-self: start;
+		top: unset;
+		transform: none;
 		margin-top: clamp(-5.5rem, 10vw + .1rem, -6.5rem);
 		font-size: clamp(23rem, 50vw + .1rem, 40rem);
 	}
 	.rightInfo {
 		margin-bottom: min(3rem, 10%);
 	}
-	button,
+	.rightGroup button,
 	.contatoBar {
 		height: clamp(8.5rem, 10vw + 1rem, 10rem);
+	}
+	.linhas .line {
+		background: var(--first-font-color);
+	}
+	button.menu-burguer {
+		width: 40%;
 	}
 }
 
@@ -427,13 +488,5 @@ button hr {
 	h1.bigTitulo {
 		margin-top: 10rem;
 		align-self: center;
-	}
-}
-
-/*tela do pedro*/
-
-@media (height: 1080px) {
-	h1.bigTitulo {
-		margin-top: -8rem;
 	}
 }
