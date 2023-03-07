@@ -11,6 +11,7 @@ pyqrcode = "*"
 pillow = "*"
 pypng = "*"
 rstr = "*"
+colorama = "*"
 
 [dev-packages]
 
