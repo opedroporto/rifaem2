@@ -429,3 +429,11 @@ button hr {
 		align-self: center;
 	}
 }
+
+/*tela do pedro*/
+
+@media (height: 1080) {
+	h1.bigTitulo {
+		margin-top: -8rem;
+	}
+}

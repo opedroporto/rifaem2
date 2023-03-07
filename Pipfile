@@ -12,6 +12,7 @@ pillow = "*"
 pypng = "*"
 rstr = "*"
 colorama = "*"
+importlib-metadata = "*"
 
 [dev-packages]
 
