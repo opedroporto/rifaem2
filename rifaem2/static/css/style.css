@@ -432,7 +432,7 @@ button hr {
 
 /*tela do pedro*/
 
-@media (height: 1080) {
+@media (height: 1080px) {
 	h1.bigTitulo {
 		margin-top: -8rem;
 	}
