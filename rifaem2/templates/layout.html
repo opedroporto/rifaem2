@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+    <body>
+        <header>
+            <div class="logo">
+                <img src="../static/imagens/LogoCompleto.png" alt="Logo do Site">
+            </div> 
+            <nav>
+                <ul>
+                    <li><a>Home</a></li>
+                    <li><a>Rifas</a></li>
+                    <li><a>Pagamento</a></li>
+                    <li><a>Sobre</a></li>
+                </ul>
+
+                <button class="menu-burguer">
+                    <div class="linhas">
+                        <div class="line"></div>
+                        <div class="line"></div>
+                        <div class="line"></div>
+                    </div>  
+                </button>
+
+                <div class="menu-aside">
+                    <ul>
+                        <li><a>Home</a></li>
+                        <li><a>Rifas</a></li>
+                        <li><a>Pagamento</a></li>
+                        <li><a>Sobre</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            {% block body %}
+
+            {% endblock %}
+        </main>
+
+        <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            <defs>
+                <filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />    
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                    <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+                </filter>
+            </defs>
+        </svg>
+
+        <script src="https://kit.fontawesome.com/75b9b9272c.js" crossorigin="anonymous"></script>
+        <script src="../static/js/menuBurguer.js"></script>
+
+    </body>
+</html>
