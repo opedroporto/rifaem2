@@ -10,9 +10,12 @@ def init_app(app):
     def index():
         return render_template("index.html")
 
+    @app.route("/rifa", methods=["GET"])
+    def rifa():
+        return render_template("rifa.html")
+
     @app.route("/requisita-compra", methods=["POST"])
     def requisitaCompra():
-
         if not request.form.get('rifa'):
             abort(400, "Entrada(s) inválida(s)")
         if not request.form.get('numerosRifa'):
