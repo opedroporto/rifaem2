@@ -15,7 +15,7 @@ def init_app(app):
         if request.method == "GET":
             pagina = request.args.get("pagina") or 0
             rifas = carregaRifas(pagina)
-            return render_template("rifa.html", rifas=rifas)
+            return render_template("rifa.html", rifas=rifas['result'])
 
         '''
         if request.method == "POST":

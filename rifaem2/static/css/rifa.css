@@ -12,6 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     height: calc(100vh - 118px);
+    flex-direction: column;
 }
 
 form.rifaGrid {
@@ -20,6 +21,7 @@ form.rifaGrid {
     gap: 1rem 0rem;
     grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
     place-items: center;
+    margin-bottom: 5em;
 }
 
 form.rifaGrid input {
