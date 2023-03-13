@@ -5,37 +5,47 @@
             {% endblock %}
 
             {% block body %}
-
-            <div class="leftSide">
-                <h1 class="leftTitle">
-                    SEJA BEM-VINDO
-                </h1>
-                <hr>
-                <p class="welcome">
-                    AO<br>SITE<br>DE<br>RIFAS
-                </p>
-            </div>
-            <div class="rightSide">
-                <h1 class="bigTitulo">
-                    EM2
-                </h1>
-                <div class="rightInfo">
-                    <h2 class="rightTitle">
-                        Veja mais clicando abaixo <br>
-                        <i class="fa-solid fa-chevron-down fa-1x"></i>
-                    </h2>
-                    <div class="rightGroup">
-                        <button><i class="fa-solid fa-grip fa-2x"></i> <hr> Acesse as rifas</button>
-                        <button><i class="fa-solid fa-question fa-2x"></i> <hr> Acesse o sobre nós</button>
-                        <div class="contatoBar">
-                            <i class="fa-brands fa-whatsapp fa-2x"></i>
-                            <div class="dot"></div>
-                            <i class="fa-brands fa-instagram fa-2x"></i>
-                            <div class="dot"></div>
-                            <i class="fa-brands fa-pix fa-2x"></i>
+            <main>
+                <div class="leftSide">
+                    <h1 class="leftTitle">
+                        SEJA BEM-VINDO
+                    </h1>
+                    <hr>
+                    <p class="welcome">
+                        AO<br>SITE<br>DE<br>RIFAS
+                    </p>
+                </div>
+                <div class="rightSide">
+                    <h1 class="bigTitulo">
+                        EM2
+                    </h1>
+                    <div class="rightInfo">
+                        <h2 class="rightTitle">
+                            Veja mais clicando abaixo <br>
+                            <i class="fa-solid fa-chevron-down fa-1x"></i>
+                        </h2>
+                        <div class="rightGroup">
+                            <button><i class="fa-solid fa-grip fa-2x"></i> <hr> Acesse as rifas</button>
+                            <button><i class="fa-solid fa-question fa-2x"></i> <hr> Acesse o sobre nós</button>
+                            <div class="contatoBar">
+                                <i class="fa-brands fa-whatsapp fa-2x"></i>
+                                <div class="dot"></div>
+                                <i class="fa-brands fa-instagram fa-2x"></i>
+                                <div class="dot"></div>
+                                <i class="fa-brands fa-pix fa-2x"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </main>
+
+            <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                <defs>
+                    <filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur" />    
+                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                        <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+                    </filter>
+                </defs>
+            </svg>
 
             {% endblock %}
