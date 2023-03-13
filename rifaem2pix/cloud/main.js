@@ -1,30 +1,61 @@
 const { geraCobranca, geraQRcode, configWebhook } = require("./pix.js")
 
-const Numero = Parse.Object.extend("Numero");
 const Rifa = Parse.Object.extend("Rifa");
+const Numero = Parse.Object.extend("Numero");
 const Pedido = Parse.Object.extend("Pedido");
 const GnEvent = Parse.Object.extend("GnEvent");
 
-// modificar (add-numero nao pode ficar exposta)
-Parse.Cloud.define("add-numero", async (req) => {
-	if (req.params.rifaID == null) throw "ID da rifa inválido."
+Parse.Cloud.define("lista-rifas", async (req) => {
+	// verificacoes
+	if (req.user == null) throw "Usuário não autenticado";
+	if (req.user.id != "ongE3YwyDO") throw "Usuário não autenticado";
+	if (req.params.pagina == null) throw "Página inválida";
 
+	// rifas
+	const page = req.params.pagina;
+	const query = new Parse.Query(Rifa);
+	query.descending("createdAt");
+	query.limit(3);
+	query.skip(page * 3);
+	const rifas = await query.find({useMasterKey: true});
+	return rifas.map(function(r) {
+		r = r.toJSON();
+		return {
+			"id": r.objectId,
+			"nome": r.nome,
+			"autor": r.autor,
+			"dataLancamento": r.dataLancamento.iso,
+			"dataEncerramento": r.dataEncerramento.iso,
+			"precoNumero": r.precoNumero,
+			"numeroMaximo": r.numeroMaximo
+		}
+	});
+});
+
+Parse.Cloud.define("rifa", async (req) => {
+	// verificacoes
+	if (req.user == null) throw "Usuário não autenticado";
+	if (req.user.id != "ongE3YwyDO") throw "Usuário não autenticado";
+	if (req.params.id == null) throw "Rifa inválida";
+
+	// rifa
 	const rifa = new Rifa();
-	rifa.id = req.params.rifaID;
-	const numeroRifa = req.params.numeroRifa;
-	const nome = req.params.nome;
-	const telefone = req.params.telefone;
-	const email = req.params.email;
-	const numero = new Numero();
-	
-	numero.set("rifa", rifa);
-	numero.set("numeroRifa", numeroRifa);
-	numero.set("nome", nome);
-	numero.set("telefone", telefone);
-	numero.set("email", email);
-  
-	const numeroSalvo = await numero.save(null, {useMasterKey:true});
-	return numeroSalvo.id;
+	rifa.id = req.params.id;
+
+	// numeros da rifa
+	const query = new Parse.Query(Numero);
+	query.equalTo("rifa", rifa);
+	query.select("numeroRifa", "nome", "status");
+	const numerosDados = await query.find({useMasterKey: true});
+
+	return numerosDados.map(function(p) {
+		p = p.toJSON();
+		return {
+			"numeroRifa": p.numeroRifa,
+			"nome": p.nome,
+			"status": p.status
+		}
+	});
 });
 
 Parse.Cloud.define("pedido", async (req) => {
@@ -100,6 +131,7 @@ Parse.Cloud.define("webhook", async (req) => {
 	return "Olá do webhook!";
 });
 
+// TOOD: authenticar
 Parse.Cloud.define("pix", async (req) => {
 	for (const e of req.params.pix) {
 		
