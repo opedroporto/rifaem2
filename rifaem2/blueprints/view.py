@@ -1,10 +1,7 @@
-import rstr
-import base64
-
-from flask import request, render_template
+from flask import request, render_template, abort
 from rifaem2.credentials import credentials
 
-from .pix.ModeloPix import ModeloPix
+from .pix.api import pedido
 
 
 
@@ -13,36 +10,29 @@ def init_app(app):
     def index():
         return render_template("index.html")
 
-    @app.route("/requisitarcompra", methods=["POST"])
-    def requisitarcompra():
-        pix = ModeloPix()
+    @app.route("/requisita-compra", methods=["POST"])
+    def requisitaCompra():
+
+        if not request.form.get('rifa'):
+            abort(400, "Entrada(s) inválida(s)")
+        if not request.form.get('numerosRifa'):
+            abort(400, "Entrada(s) inválida(s)")
+        if not request.form.get('nome'):
+            abort(400, "Entrada(s) inválida(s)")
+        if not request.form.get('telefone'):
+            abort(400, "Entrada(s) inválida(s)")
+        if not request.form.get('email'):
+            abort(400, "Entrada(s) inválida(s)")
 
         dados = {}
-        if request.form.get('cpf'):
-            dados['cpf'] = request.form.get('cpf')
-        if request.form.get('nome'):
-            dados['nome'] = request.form.get('nome')
-        if request.form.get('telefone'):
-            dados['telefone'] = request.form.get('telefone')
-        if request.form.get('email'):
-            dados['email'] = request.form.get('email')
-        if request.form.get('preco'):
-            dados['preco'] = request.form.get('preco')
+        dados['rifa'] = request.form.get('rifa')
+        dados['numerosRifa'] = []
+        for numero in request.form.get('numerosRifa'):
+            dados['numerosRifa'].append(numero)
+        dados['nome'] = request.form.get('nome')
+        dados['telefone'] = request.form.get('telefone')
+        dados['email'] = request.form.get('email')
 
-        txid = rstr.xeger(r'^[a-zA-Z0-9]{26,35}$')
+        resposta = pedido(dados)
 
-        response = pix.gerapix({
-            'preco': dados['preco'],
-            'txid': txid
-        })
-
-        loc_id = response['loc']['id']
-
-        qrcode = pix.geraqrcode(loc_id)
-
-        '''
-        verificacao pix
-        response = pix.verificapix(txid)
-        '''
-
-        return qrcode
+        return resposta

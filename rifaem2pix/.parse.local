@@ -1,0 +1,10 @@
+{
+  "applications": {
+    "_default": {
+      "link": "rifaem2pix"
+    },
+    "rifaem2pix": {
+      "applicationId": "IvARJbWMwQsJdQQtnhw5f0aBpsFogUxBmnQQB5Lr"
+    }
+  }
+}

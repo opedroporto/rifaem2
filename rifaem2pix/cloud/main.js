@@ -1,0 +1,198 @@
+const { geraCobranca, geraQRcode, configWebhook } = require("./pix.js")
+
+const Numero = Parse.Object.extend("Numero");
+const Rifa = Parse.Object.extend("Rifa");
+const Pedido = Parse.Object.extend("Pedido");
+const GnEvent = Parse.Object.extend("GnEvent");
+
+// modificar (add-numero nao pode ficar exposta)
+Parse.Cloud.define("add-numero", async (req) => {
+	if (req.params.rifaID == null) throw "ID da rifa inválido."
+
+	const rifa = new Rifa();
+	rifa.id = req.params.rifaID;
+	const numeroRifa = req.params.numeroRifa;
+	const nome = req.params.nome;
+	const telefone = req.params.telefone;
+	const email = req.params.email;
+	const numero = new Numero();
+	
+	numero.set("rifa", rifa);
+	numero.set("numeroRifa", numeroRifa);
+	numero.set("nome", nome);
+	numero.set("telefone", telefone);
+	numero.set("email", email);
+  
+	const numeroSalvo = await numero.save(null, {useMasterKey:true});
+	return numeroSalvo.id;
+});
+
+Parse.Cloud.define("pedido", async (req) => {
+	// verificacoes
+	if (req.user == null) throw "Usuário não autenticado";
+	if (req.user.id != "ongE3YwyDO") throw "Usuário não autenticado";
+	if (req.params.rifa == null) throw "Rifa inválida";
+	if (req.params.numerosRifa == null) throw "Número(s) inválidos";
+	if (req.params.nome == null) throw "Nome inválido";
+	if (req.params.telefone == null) throw "Telefone inválido";
+	if (req.params.email == null) throw "E-mail inválido";
+
+	// verifica se os números estão disponíveis
+	const rifa = new Rifa();
+	rifa.id = req.params.rifa;
+
+	const query = new Parse.Query(Numero);
+	query.equalTo("rifa", rifa);
+	const numerosDados = await query.find({useMasterKey: true});
+
+	for (const numeroComprado of numerosDados) {
+		for (const numeroRequisitado of req.params.numerosRifa) {
+			if (numeroRequisitado == numeroComprado.toJSON().numeroRifa) throw "Número(s) inválido";
+		}
+	}
+	
+	// tempo de expiração
+	const tempoExpiracao = 600; // 10 min
+	const dataExpiracao = new Date();
+	dataExpiracao.setSeconds(dataExpiracao.getSeconds() + tempoExpiracao)
+
+	// define preço da cobrança
+	const query2 = new Parse.Query(Rifa);
+	query.equalTo("objectId", req.params.rifa);
+	const rifaDados = await query2.first({useMasterKey: true});
+	const precoNumeroRifa = rifaDados.toJSON().precoNumero;
+
+	const preco = req.params.numerosRifa.length * precoNumeroRifa;
+
+	// gera cobrança e qrcode
+	dadosCobranca = await geraCobranca(preco, tempoExpiracao);
+	dadosQrCode = await geraQRcode(dadosCobranca.loc.id);
+
+	// adiciona pedido (db)
+	const pedido = new Pedido();
+	pedido.set("rifa", rifa);
+	pedido.set("numerosRifa", req.params.numerosRifa);
+	pedido.set("nome", req.params.nome);
+	pedido.set("telefone", req.params.telefone);
+	pedido.set("email", req.params.email);
+
+	pedido.set("txid", dadosCobranca.txid);
+	pedido.set("dataExpiracao", dataExpiracao.toISOString());
+	pedido.set("qrcode", dadosQrCode.imagemQrcode);
+	pedido.set("copiaecola", dadosQrCode.qrcode);
+	pedido.set("dadosCobranca", dadosCobranca);
+	pedido.set("dadosQrCode", dadosQrCode);
+	pedido.set("status", "pendente");
+
+	await pedido.save(null, {useMasterKey: true});
+	
+	return {
+		txid: dadosCobranca.txid,
+		dataExpiracao: dataExpiracao.toISOString(),
+		qrcode: dadosQrCode.imagemQrcode,
+		copiaecola: dadosQrCode.qrcode
+	};
+});
+
+Parse.Cloud.define("webhook", async (req) => {
+	if (req.user == null) throw "Usuário inválido";
+	if (req.user.id != "xERDS5p2Jq") throw "Usuário inválido";
+	return "Olá do webhook!";
+});
+
+Parse.Cloud.define("pix", async (req) => {
+	for (const e of req.params.pix) {
+		
+		// gera evento da Gerencianet (db)
+		const gnEvent = new GnEvent();
+		gnEvent.set("eid", e.endToEndId);
+		gnEvent.set("txid", e.txid);
+		gnEvent.set("event", e);
+
+		await gnEvent.save(null, {useMasterKey: true});
+
+
+		// muda status do pedido para pago (db)
+		const query = new Parse.Query(Pedido);
+		query.equalTo("txid", e.txid);
+		
+		const pedido = await query.first({useMasterKey: true})
+		if (pedido == null) {
+			throw "Pedido não encontrado";
+		}
+
+		pedido.set("status", "pago");
+		pedido.set("eid", e.endToEndId);
+
+		await pedido.save(null, {useMasterKey: true});
+
+		// adiciona números da rifa (db)
+		const query2 = new Parse.Query(Pedido);
+		query2.equalTo("txid", e.txid);
+		const pedidoDadosResposta = await query2.first({useMasterKey: true});
+		const pedidoDados = pedidoDadosResposta.toJSON();
+
+		for (const numeroRifa of pedidoDados.numerosRifa) {
+			const numero = new Numero();
+
+			const rifa = new Rifa();
+			rifa.id = pedidoDados.rifa.objectId;
+
+			numero.set("rifa", rifa);
+			numero.set("numeroRifa", numeroRifa);
+			numero.set("nome", pedidoDados.nome);
+			numero.set("telefone", pedidoDados.telefone);
+			numero.set("email", pedidoDados.email);
+			
+			console.log(numero);
+			const numeroSalvo = await numero.save(null, {useMasterKey: true});
+			console.log(numeroSalvo);
+		}
+	}
+	return;
+});
+
+/*
+Parse.Cloud.define("config-webhook", async (req) => {
+	configWebhook(req.params.url)
+});
+*/
+
+/*
+Parse.Cloud.define("sign-up", async (req) => {
+	if (req.params.email == null) throw "Email inválido" 
+	if (req.params.password == null) throw "Senha inválida" 
+	if (req.params.name == null) throw "Nome inválido" 
+
+
+	const user = new Parse.User();
+	user.set("username", req.params.email);
+	user.set("email", req.params.email);
+	user.set("password", req.params.password);
+	user.set("name", req.params.name);
+
+	const usuarioSalvo = await user.signUp(null, {useMasterKey: true});
+	return usuarioSalvo.get("sessionToken");
+});
+*/
+
+/*
+Parse.Cloud.define("login", async (req) => {
+	const user = await Parse.User.logIn(req.params.email, req.params.password);
+	return user;
+});
+*/
+
+
+/** curl -X POST \
+* -H "X-Parse-Application-Id: IvARJbWMwQsJdQQtnhw5f0aBpsFogUxBmnQQB5Lr" \
+* -H "X-Parse-REST-API-Key: vI5o5rwDgF8oqJB4kzs2KgfUNFY7rReOFXyp8nUq" \
+* -H "Content-Type: application/json" \
+* -d "{}" \
+* https://parseapi.back4app.com/functions/hello
+*/
+
+// If you have set a function in another cloud code file, called "test.js" (for example)
+// you need to refer it in your main.js, as you can see below:
+
+/* require("./test.js"); */
