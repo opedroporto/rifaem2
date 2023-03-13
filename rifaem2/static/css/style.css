@@ -54,17 +54,23 @@ li {
     list-style: none;
     font-size: 2.3rem;
     font-weight: bold;
-    color: var(--bg-color);
     transition: .4s;
+}
+li a {
+	color: var(--bg-color);
 }
 li:hover {
     cursor: pointer;
-    color: var(--click-font-color);
     margin-inline: .3rem;
 }
+li:hover a {
+    color: var(--click-font-color);
+}
 li:active {
-    color: var(--hover-font-color);
     font-size: 2.25rem;
+}
+li.active a {
+	color: var(--hover-font-color);
 }
 
 /* FIM DA NAVBAR */
@@ -135,16 +141,22 @@ button.menu-burguer {
     height: 10%;
     justify-content: center;
     align-items: center;
-    transition: 0.6s;
-    color: var(--first-font-color);
+    transition: 0.6s;  
+	color: var(--first-font-color);
 	text-transform: uppercase;
     font-weight: 400;
     letter-spacing: clamp(2px, .5vw + .1rem, 4px);
 }
+.menu-aside ul li a {
+	color: var(--first-font-color);
+}
+.menu-aside ul li:hover a {
+	color: var(--click-font-color);
+}
 .menu-aside ul li:hover {
     cursor: pointer;
-    color: var(--click-font-color);
     margin-inline: .3rem;
+	color: var(--click-font-color);
     transition: 0.6s;
     box-shadow: inset 0px -1px 0px;
 }
@@ -589,4 +601,24 @@ button hr {
 	.menu-aside {
 		width: 100%;
 	}
+}
+
+/* RIFAS */
+
+.principal {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+form.rifaGrid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+	place-items: center;
+}
+
+form.rifaGrid input {
+	background: #000;
 }
