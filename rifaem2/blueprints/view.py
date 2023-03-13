@@ -13,7 +13,7 @@ def init_app(app):
     @app.route("/rifa", methods=["GET", "POST"])
     def rifa():
         if request.method == "GET":
-            pagina = 0
+            pagina = request.args.get("pagina") or 0
             rifas = carregaRifas(pagina)
             return render_template("rifa.html", rifas=rifas)
 
