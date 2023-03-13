@@ -13,16 +13,21 @@
     {% block body %}
         <div class="principal">
                 {% for i in range(rifas|length) %}
-                    <h1>{{ rifas[i].nome }}</h1>
-                    <h2>Autor: {{ rifas[i].autor }}</h2>
-                    <h3>Preço: {{ rifas[i].precoNumero }}</h3>
-                    <h4>Data de lançamento: {{ rifas[i].dataLancamento }}</h4>
-                    <h4>Data de Encerramento: {{ rifas[i].dataEncerramento }}</h4>
-                    <form class="rifaGrid">
-                        {% for j in range(1, rifas[i].numeroMaximo + 1) %}
+					<div class="description">
+						<h1>{{ rifas[i].nome }}</h1>
+						<h2>Autor: {{ rifas[i].autor }}</h2>
+						<h3>Preço: {{ rifas[i].precoNumero }}</h3>
+						<h4>Data de lançamento: {{ rifas[i].dataLancamento }}</h4>
+						<h4>Data de Encerramento: {{ rifas[i].dataEncerramento }}</h4>
+					</div>
+                    <form class="rifaGrid" action="/requisita-compra" method="post">
+                        {% for j in range(1, rifas[i].numeroMaximo + 200) %}
                             <input type="button" data-state="free" value="{{ j }}">
                         {% endfor %}
+						<input type="submit" name="submitBtn" id="submitBtn">
                     </form>
+					
+					<label class="lblSub" for="submitBtn">Concluir</label>
                 {% endfor %}
         </div>
     {% endblock %}

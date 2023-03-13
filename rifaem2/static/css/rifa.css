@@ -1,8 +1,8 @@
 html {	
     background-color: var(--first-font-color);
 }
-body {
-	overflow-y: auto;
+body, html {
+	overflow-y: auto !important;
 }
 
 /* RIFAS */
@@ -11,36 +11,64 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 118px);
+    position: relative;
     flex-direction: column;
+	gap: 5rem;
 }
 
 form.rifaGrid {
     display: grid;
-    width: 50%;
+    width: 83%;
     gap: 1rem 0rem;
-    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(2rem, 5rem));
     place-items: center;
-    margin-bottom: 5em;
+    gap: 0.2rem;
+    row-gap: .8rem;
 }
 
 form.rifaGrid input {
     all: unset;
-    height: 80%;
-    min-height: 78px;
     width: 80%;
+    aspect-ratio: 1 / 1;
     border-radius: 1.2rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: x-large;
+    font-size: 1.5rem;
     font-weight: 800;
     background: var(--bg-color);
-	color: var(--first-font-color);
+    color: var(--first-font-color);
     cursor: pointer;
-	transition: 0.4s;
+    transition: 0.4s;
 }
 
 form.rifaGrid input:hover {
     background-color: var(--click-font-color);
+}
+
+.description {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+input#submitBtn {
+    display: none;
+}
+
+.lblSub {
+	height: 6rem;
+    width: 15%;
+    background: #39c357;
+    border-radius: .3rem;
+    display: grid;
+    place-items: center;
+    font-size: 1.6rem;
+    color: #183a0a;
+    font-weight: bolder;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    cursor: pointer;
+}
+.lblSub:last-of-type {
+	    margin-bottom: 4rem;
 }
