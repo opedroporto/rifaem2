@@ -1,0 +1,44 @@
+html {	
+    background-color: var(--first-font-color);
+}
+body {
+	overflow-y: auto;
+}
+
+/* RIFAS */
+
+.principal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 118px);
+}
+
+form.rifaGrid {
+    display: grid;
+    width: 50%;
+    gap: 1rem 0rem;
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    place-items: center;
+}
+
+form.rifaGrid input {
+    all: unset;
+    height: 80%;
+    min-height: 78px;
+    width: 80%;
+    border-radius: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    font-weight: 800;
+    background: var(--bg-color);
+	color: var(--first-font-color);
+    cursor: pointer;
+	transition: 0.4s;
+}
+
+form.rifaGrid input:hover {
+    background-color: var(--click-font-color);
+}

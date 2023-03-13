@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&family=Tilt+Warp&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+}
+
+:root {
+    --bg-color: #ff2d2d;
+    --first-font-color: #fff;
+    --hover-font-color: #fbbac6;
+    --click-font-color: #ff8ea3;
+}
+
+html {
+    font-size: 62.5%;
+}
+html, body {
+	overflow: hidden;
+}
