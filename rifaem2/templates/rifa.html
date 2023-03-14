@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+	{% block links %}
+		<link rel="stylesheet" href="../static/css/variaveis.css">
+		<link rel="stylesheet" href="../static/css/headerOthers.css">
+		<link rel="stylesheet" href="../static/css/rifa.css">
+	{% endblock %}
+
+    {% block title %}
+        Rifa EM2
+    {% endblock %}
+
+    {% block body %}
+	
+		{% include "modalConfirm.html" %}
+		{% include "modalFinish.html" %}
+		
+        <div class="principal">
+                {% for i in range(rifas|length) %}
+					<div class="description">
+						<h1>{{ rifas[i].nome }}</h1>
+						<h2>Autor: {{ rifas[i].autor }}</h2>
+						<h3>Preço: {{ rifas[i].precoNumero }}</h3>
+						<h4>Data de lançamento: {{ rifas[i].dataLancamento }}</h4>
+						<h4>Data de Encerramento: {{ rifas[i].dataEncerramento }}</h4>
+					</div>
+                    <form class="rifaGrid">
+                        {% for j in range(1, rifas[i].numeroMaximo + 200) %}
+                            <input type="button" data-state="free" onclick="modalcOpen(this)" value="{{ j }}">
+                        {% endfor %}
+						<input type="button" name="btnConc" id="btnConc" onclick="modalfOpen()" disabled="true">
+                    </form>
+					
+					<label class="lblSub" for="btnConc">Concluir</label>
+                {% endfor %}
+				
+				<button type="button" class="resetNums" onclick="limpaNums()">Limpar números</button>
+        </div>
+		
+		<script src="../static/js/rifaFunctions.js"></script>
+    {% endblock %}
