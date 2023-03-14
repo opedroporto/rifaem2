@@ -27,8 +27,8 @@ form.rifaGrid {
 }
 
 form.rifaGrid input {
-    all: unset;
     width: 80%;
+    border:none;
     aspect-ratio: 1 / 1;
     border-radius: 1.2rem;
     display: flex;
