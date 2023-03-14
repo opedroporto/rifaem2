@@ -25,7 +25,7 @@
 						<h4>Data de Encerramento: {{ rifas[i].dataEncerramento }}</h4>
 					</div>
                     <form class="rifaGrid">
-                        {% for j in range(1, rifas[i].numeroMaximo + 200) %}
+                        {% for j in range(1, (rifas[i].numeroMaximo + 1)) %}
                             <input type="button" data-state="free" onclick="modalcOpen(this)" value="{{ j }}">
                         {% endfor %}
 						<input type="button" name="btnConc" id="btnConc" onclick="modalfOpen()" disabled="true">
@@ -38,4 +38,5 @@
         </div>
 		
 		<script src="../static/js/rifaFunctions.js"></script>
+        
     {% endblock %}

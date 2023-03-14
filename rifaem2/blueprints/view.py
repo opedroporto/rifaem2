@@ -29,26 +29,34 @@ def init_app(app):
 
     @app.route("/requisita-compra", methods=["POST"])
     def requisitaCompra():
-        if not request.form.get('rifa'):
-            abort(400, "Entrada(s) inválida(s)")
-        if not request.form.get('numerosRifa'):
-            abort(400, "Entrada(s) inválida(s)")
-        if not request.form.get('nome'):
-            abort(400, "Entrada(s) inválida(s)")
-        if not request.form.get('telefone'):
-            abort(400, "Entrada(s) inválida(s)")
-        if not request.form.get('email'):
-            abort(400, "Entrada(s) inválida(s)")
+        print(request.get_json()) #debug
+        
+        dados = request.get_json()
+        dados['rifa'] = "III9UlG4Cc"
 
-        dados = {}
-        dados['rifa'] = request.form.get('rifa')
-        dados['numerosRifa'] = []
-        for numero in request.form.get('numerosRifa'):
-            dados['numerosRifa'].append(numero)
-        dados['nome'] = request.form.get('nome')
-        dados['telefone'] = request.form.get('telefone')
-        dados['email'] = request.form.get('email')
+        try:
+            if not dados['rifa']:
+                abort(400, "Entrada(s) inválida(s)")
+            if not dados['numerosRifa']:
+                abort(400, "Entrada(s) inválida(s)")
+            if not dados['nome']:
+                abort(400, "Entrada(s) inválida(s)")
+            if not dados['telefone']:
+                abort(400, "Entrada(s) inválida(s)")
+            if not dados['email']:
+                abort(400, "Entrada(s) inválida(s)")
+        except:
+            abort(400, "Entrada(s) inválida(s)")
 
         resposta = pedido(dados)
-
-        return resposta
+        if 'code' in resposta and resposta['code'] != 200:
+            abort(400, "Erro ao fazer processar pedido")
+        
+        try:
+            dadosPix = {
+                "qrcode": resposta['result']['qrcode'],
+                "copiaecola": resposta['result']['copiaecola'],
+            }
+            return dadosPix
+        except:
+            abort(400, "Erro ao fazer processar pedido")

@@ -4,8 +4,8 @@ const modalbtnClose = document.getElementById("btnClose");
 const lblConcluir = document.querySelector(".lblSub");
 const btnReset = document.querySelector(".resetNums");
 
-var numrAtual = "";
 const numsRifa = [];
+let numAtual = -1
 
 function checkRifa() {
 	if(numsRifa.length != 0){
@@ -21,25 +21,21 @@ function checkRifa() {
 
 function modalcOpen(v) {
 	modalConfirm.classList.add("on");
-	numrAtual = numrAtual + v.value;
+	numAtual = v.value
 }
 function modalfOpen() {
 	modalFinish.classList.add("on");
-	let teste = document.getElementById("numRifaF").value;
-	teste = numsRifa;
-	console.log(teste)
+	document.getElementById("numerosRifa").value = numsRifa;
 }
 
 function confirm() {
 	modalConfirm.classList.remove("on");
-	numsRifa.push({numrAtual});
-	numrAtual = "";
+	numsRifa.push(parseInt(numAtual));
 	checkRifa();
 }
 
 function modalClose() {
 	modalConfirm.classList.remove("on");
-	numrAtual = "";
 	checkRifa()
 }
 function modalCloseF() {
@@ -50,3 +46,38 @@ function limpaNums() {
 	numsRifa.length = 0;
 	checkRifa();
 }
+
+function mostraDadosPix(data) {
+	console.log(data.qrcode);
+	console.log(data.copiaecola);
+}
+
+function requisitaCompraErro(error) {
+	console.log("Erro ao tentar comprar");
+	console.log(error);
+}
+
+document.querySelectorAll('.modalForm').forEach((form) => {
+	form.addEventListener("submit", event => {
+		event.preventDefault();
+
+		const formData = new FormData(form);
+		const data = Object.fromEntries(formData);
+		data.numerosRifa = numsRifa;
+
+		fetch("/requisita-compra", {
+			method: "POST",
+			headers: {
+				"Access-Control-Allow-Origin": "*",
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify(data)
+		}).then(res => res.json())
+		.then(data => mostraDadosPix(data))
+		.then(error => requisitaCompraErro(error))
+		.catch(error => requisitaCompraErro(error))
+	})
+})
+
+
+
