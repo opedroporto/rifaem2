@@ -1,5 +1,5 @@
 html {	
-    background-color: var(--bg-color);
+    background: var(--bg-linear-gradient);
 }
 
 /* MAIN */
@@ -89,7 +89,7 @@ h2.rightTitle {
 .rightGroup button,
 .contatoBar {
     all: unset;
-    background: var(--bg-color);
+    background: var(--bg-linear-gradient);
     height: 10rem;
     color: var(--first-font-color);
     font-weight: 900;
@@ -253,7 +253,7 @@ button hr {
 
 @media(max-width: 740px) {
 	html, body {
-        background-color: var(--bg-color);
+        background: var(--bg-linear-gradient);
     }
 	main {
 		grid-template-columns: 1fr;

@@ -9,7 +9,8 @@
 }
 
 :root {
-    --bg-color: #ff2d2d;
+    --bg-color: #024e25;
+	--bg-linear-gradient: linear-gradient(25deg, #036225, #022a25);
     --first-font-color: #fff;
     --hover-font-color: #fbbac6;
     --click-font-color: #ff8ea3;
