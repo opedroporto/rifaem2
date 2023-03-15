@@ -29,8 +29,6 @@ def init_app(app):
 
     @app.route("/requisita-compra", methods=["POST"])
     def requisitaCompra():
-        print(request.get_json()) #debug
-        
         dados = request.get_json()
 
         try:
