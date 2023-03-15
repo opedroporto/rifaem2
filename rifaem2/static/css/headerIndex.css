@@ -127,12 +127,12 @@ button.menu-burguer {
 	color: var(--first-font-color);
 }
 .menu-aside ul li:hover a {
-	color: var(--click-font-color);
+	color: var(--hover-font-color);
 }
 .menu-aside ul li:hover {
     cursor: pointer;
     margin-inline: .3rem;
-	color: var(--click-font-color);
+	color: var(--hover-font-color);
     transition: 0.6s;
     box-shadow: inset 0px -1px 0px;
 }
@@ -143,12 +143,15 @@ button.menu-burguer.on .linhas .line {
 	background-color: var(--first-font-color);
 	transition: 1s;
 }
+button.menu-burguer.on .linhas:hover .line {
+	background-color: var(--hover-font-color);
+}
 
 .menu-aside.on {
 	transform: translateX(0%);
 	visibility: visible;
 	pointer-events: all;
-	box-shadow: -30rem 2rem 10rem 80vw #a51c1c85;
+	box-shadow: -30rem 2rem 10rem 80vw #0b361685;
     transition: 1s, box-shadow 1s .4s;
 }
 button.menu-burguer.on .linhas .line:nth-of-type(1) {
@@ -205,7 +208,7 @@ button.menu-burguer.on .linhas .line:nth-of-type(3) {
         background-color: var(--bg-color);
     }
 	nav {
-		background: var(--bg-color);
+		background: transparent;
 	}
 	li {
 		color: var(--first-font-color);
