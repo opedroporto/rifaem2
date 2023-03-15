@@ -32,7 +32,6 @@ def init_app(app):
         print(request.get_json()) #debug
         
         dados = request.get_json()
-        dados['rifa'] = "III9UlG4Cc"
 
         try:
             if not dados['rifa']:

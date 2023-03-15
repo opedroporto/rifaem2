@@ -5,7 +5,9 @@ const lblConcluir = document.querySelector(".lblSub");
 const btnReset = document.querySelector(".resetNums");
 
 const numsRifa = [];
-let numAtual = -1
+let numAtualEl;
+let numAtual;
+let rifaId;
 
 function checkRifa() {
 	if(numsRifa.length != 0){
@@ -19,9 +21,10 @@ function checkRifa() {
 	}
 }
 
-function modalcOpen(v) {
+function modalcOpen(numEl) {
 	modalConfirm.classList.add("on");
-	numAtual = v.value
+	numAtualEl = numEl
+	numAtual = numEl.value
 }
 function modalfOpen() {
 	modalFinish.classList.add("on");
@@ -31,6 +34,9 @@ function modalfOpen() {
 function confirm() {
 	modalConfirm.classList.remove("on");
 	numsRifa.push(parseInt(numAtual));
+
+	rifaId = numAtualEl.parentElement.querySelector("#rifaId").dataset.id
+
 	checkRifa();
 }
 
@@ -64,6 +70,7 @@ document.querySelectorAll('.modalForm').forEach((form) => {
 		const formData = new FormData(form);
 		const data = Object.fromEntries(formData);
 		data.numerosRifa = numsRifa;
+		data.rifa = rifaId;
 
 		fetch("/requisita-compra", {
 			method: "POST",
@@ -74,7 +81,6 @@ document.querySelectorAll('.modalForm').forEach((form) => {
 			body: JSON.stringify(data)
 		}).then(res => res.json())
 		.then(data => mostraDadosPix(data))
-		.then(error => requisitaCompraErro(error))
 		.catch(error => requisitaCompraErro(error))
 	})
 })
