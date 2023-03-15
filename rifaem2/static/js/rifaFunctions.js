@@ -1,5 +1,6 @@
 const modalConfirm = document.querySelector(".modalBg");
 const modalFinish = document.querySelector(".modalBgF");
+const modalPix = document.querySelector(".modalbgPix");
 const modalbtnClose = document.getElementById("btnClose");
 const lblConcluir = document.querySelector(".lblSub");
 const btnReset = document.querySelector(".resetNums");
@@ -54,6 +55,8 @@ function limpaNums() {
 }
 
 function mostraDadosPix(data) {
+	document.getElementById("imgPix").src = data.qrcode;
+	document.getElementById("pixChave").innerHTML = data.copiaecola;
 	console.log(data.qrcode);
 	console.log(data.copiaecola);
 }
@@ -85,5 +88,10 @@ document.querySelectorAll('.modalForm').forEach((form) => {
 	})
 })
 
-
-
+function mostraPix() {
+	modalPix.classList.add("on");
+	modalFinish.classList.remove("on");
+}
+function modalCloseP() {
+	modalPix.classList.remove("on");
+}
