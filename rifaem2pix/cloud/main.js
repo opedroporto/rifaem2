@@ -32,6 +32,7 @@ Parse.Cloud.define("lista-rifas", async (req) => {
 	});
 });
 
+/*
 Parse.Cloud.define("rifa", async (req) => {
 	// verificacoes
 	if (req.user == null) throw "Usuário não autenticado";
@@ -57,6 +58,7 @@ Parse.Cloud.define("rifa", async (req) => {
 		}
 	});
 });
+*/
 
 Parse.Cloud.define("pedido", async (req) => {
 	// verificacoes
