@@ -3,12 +3,12 @@ header {
     height: 15vh;
     min-height: 118px;
     display: grid;
-	background-color: var(--bg-color);
+	background: var(--bg-linear-gradient);
     grid-template-columns: 1fr 3fr;
 }
 nav {
     display: flex;
-    background: var(--bg-color);
+    background: transparent;
     justify-content: center;
 }
 .logo {
@@ -34,6 +34,7 @@ li {
 }
 li a {
 	color: var(--first-font-color);
+	transition: 0.4s;
 }
 li:hover {
     cursor: pointer;
@@ -127,12 +128,12 @@ button.menu-burguer {
 	color: var(--first-font-color);
 }
 .menu-aside ul li:hover a {
-	color: var(--click-font-color);
+	color: var(--hover-font-color);
 }
 .menu-aside ul li:hover {
     cursor: pointer;
     margin-inline: .3rem;
-	color: var(--click-font-color);
+	color: var(--hover-font-color);
     transition: 0.6s;
     box-shadow: inset 0px -1px 0px;
 }
@@ -148,9 +149,13 @@ button.menu-burguer.on .linhas .line {
 	transform: translateX(0%);
 	visibility: visible;
 	pointer-events: all;
-	box-shadow: -30rem 2rem 10rem 80vw #a51c1c85;
+	box-shadow: -30rem 2rem 10rem 80vw #0b361685;
     transition: 1s, box-shadow 1s .4s;
 }
+button.menu-burguer.on .linhas:hover .line {
+	background-color: var(--hover-font-color);
+}
+
 button.menu-burguer.on .linhas .line:nth-of-type(1) {
     transform: rotate(45deg) translate(8px, 7px);
 	transition: .5s;
