@@ -100,7 +100,7 @@ button.menu-burguer {
     background: var(--bg-color);
 	visibility: hidden;
 	pointer-events: none;
-    transition: 1s, box-shadow 1s .4s;
+    transition: 1s;
     z-index: 10;
 }
 .menu-aside ul {
@@ -149,8 +149,7 @@ button.menu-burguer.on .linhas .line {
 	transform: translateX(0%);
 	visibility: visible;
 	pointer-events: all;
-	box-shadow: -30rem 2rem 10rem 80vw #0b361685;
-    transition: 1s, box-shadow 1s .4s;
+    transition: 1s;
 }
 button.menu-burguer.on .linhas:hover .line {
 	background-color: var(--hover-font-color);

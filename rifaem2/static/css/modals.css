@@ -14,11 +14,11 @@
 .modalBody,
 .modalBodyF,
 .modalBodyP {
-    height: 20%;
+    height: 27%;
     width: 30%;
     border-radius: 2rem;
     padding: 2rem;
-    background: var(--first-font-color);
+    background: var(--bg-linear-gradient);
     display: grid;
     grid-template-columns: 1fr 5rem;
     grid-template-rows: 1fr 1rem 2fr;
@@ -37,6 +37,7 @@
     display: flex;
     grid-column-start: 1;
     align-items: center;
+	color: #56e55f;
     font-size: 1.5rem;
     justify-content: space-between;
     grid-column-end: 4;
@@ -45,6 +46,10 @@
 i.fa-solid.fa-times {
     font-size: 3.7rem;
 	cursor: pointer;
+	transition: 0.4s;
+}
+i.fa-solid.fa-times.fa-4x:hover {
+    color: #2fbb37;
 }
 
 hr.modalHr {
@@ -52,7 +57,7 @@ hr.modalHr {
     grid-column-start: 1;
     border: none;
     height: 1px;
-    background-color: #4c4c4ca8;
+    background-color: #047a00a8;
 }
 .modalContent, .modalContentF {
     grid-column-end: 4;
@@ -100,13 +105,25 @@ input#btnDecline {
     cursor: pointer;
 }
 input#btnConfirm {
-	color: #009501;
-    border: 1px solid #009501;
+	color: #025217;
+    margin-top: 2rem;
+    background: #01bd43;
+}
+input#btnConfirm:hover {
+    letter-spacing: .2rem;
+    background: #0ad152;
+    box-shadow: inset 0px 0px 20px #39e148;
 }
 
 input#btnDecline {
-	color: #950000;
-    border: 1px solid #a70000;
+    background: #890e0ec7;
+    color: #300000;
+}
+input#btnDecline:hover {
+    letter-spacing: .2rem;
+    color: #2c0000;
+    background: #8d0c0cd9;
+    box-shadow: inset 0px 0px 15px #9f0a0abf;
 }
 
 form.modalForm {
@@ -118,6 +135,7 @@ form.modalForm {
 }
 form.modalForm label {
     font-size: 1.24rem;
+	color: #70ef78;
     font-weight: bold;
 }
 form.modalForm input {
@@ -138,7 +156,12 @@ input#btnEnviar {
     border-radius: .5rem;
     text-transform: uppercase;
     cursor: pointer;
+	transition: 0.4s;
     background: #3aa333;
+}
+input#btnEnviar:hover {
+    letter-spacing: .2rem;
+    background: #1cb336;
 }
 
 #numerosRifa {
