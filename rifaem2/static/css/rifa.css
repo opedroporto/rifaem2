@@ -17,22 +17,19 @@ body, html {
 }
 
 form.rifaGrid {
-    display: grid;
+    display: flex;
     width: 83%;
-    gap: 1rem 0rem;
-    grid-template-columns: repeat(auto-fit, minmax(2rem, 5rem));
-    place-items: center;
-    row-gap: .8rem;
+    flex-wrap: wrap;
+    gap: .8rem 1rem;
+    justify-content: center;
+    align-items: center;
 }
 
 form.rifaGrid input {
-    width: 80%;
-    border:none;
+    width: 38px;
+    border: none;
     aspect-ratio: 1 / 1;
     border-radius: 1.2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-size: 1.5rem;
     font-weight: 800;
     background: var(--bg-color);
