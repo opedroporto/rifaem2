@@ -94,29 +94,31 @@ function requisitaCompraErro(error) {
 
 function carregaRifas() {
 	if (!fimCarregamentoRifas) {
+		inicioCarregamentoPaginaRifas();
 		fetch("/rifa", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				body: JSON.stringify({
-					"pagina": pagina,
-					"quantidade": quantidade
-				})
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				"pagina": pagina,
+				"quantidade": quantidade
 			})
-			.then(res => res.text())
-			.then((data) => {
-				if (data.length == 0) {
-					fimCarregamentoRifas = true;
-				}
-				pagina += 1;
-				const rifa = document.createElement("div");
-				rifa.innerHTML = data;
-				document.querySelector(".principal").insertAdjacentHTML("beforeend", data);
+		})
+		.then(res => res.text())
+		.then((data) => {
+			if (data.length == 0) {
+				fimCarregamentoRifas = true;
+			}
+			pagina += 1;
+			const rifa = document.createElement("div");
+			rifa.innerHTML = data;
+			document.querySelector(".principal").insertAdjacentHTML("beforeend", data);
 
-				desabilitaNumeros()
-			})
-			.catch(error => console.log(error))
+			desabilitaNumeros()
+		})
+		.catch(error => console.log(error))
+		fimCarregamentoPaginaRifas();
 	}
 }
 
@@ -126,6 +128,14 @@ window.onscroll = () => {
 	}
 }
 
+function inicioCarregamentoPaginaRifas() {
+
+}
+
+function fimCarregamentoPaginaRifas() {
+
+}
+
 function desabilitaNumeros() {
 	document.querySelectorAll(".numero").forEach((numero) => {
 		if (["alocado", "reservado"].includes(numero.dataset.state)) {
@@ -133,6 +143,8 @@ function desabilitaNumeros() {
 		}
 	})
 }
+
+
 
 document.addEventListener("DOMContentLoaded", () => {
 	carregaRifas();

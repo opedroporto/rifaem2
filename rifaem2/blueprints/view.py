@@ -1,5 +1,4 @@
 from flask import request, render_template, abort
-from rifaem2.credentials import credentials
 
 from .pix.api import pedido, carregaRifas, carregaRifa
 
