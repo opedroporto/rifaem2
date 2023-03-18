@@ -13,36 +13,40 @@ def init_app(app):
     @app.route("/rifa", methods=["GET", "POST"])
     def rifa():
         if request.method == "GET":
-            pagina = request.args.get("pagina") or 0
-            quantidade = request.args.get("quantidade") or 3
-            rifas = carregaRifas(pagina, quantidade)
+            return render_template("rifa.html")
 
-            return render_template("rifa.html", rifas=rifas)
-
-        '''
         if request.method == "POST":
-            if not request.form.get('id'):
+            dados = request.get_json()
+
+            try:
+                if dados['pagina'] is None:
+                    abort(400, "Entrada(s) inválida(s)")
+                if dados['quantidade'] is None:
+                    abort(400, "Entrada(s) inválida(s)")
+            except:
                 abort(400, "Entrada(s) inválida(s)")
 
-            rifaId = request.form.get('id')
+            pagina = dados['pagina']
+            quantidade = dados['quantidade']
 
-            return carregaRifa(rifaId)
-        '''
+            rifas = carregaRifas(pagina, quantidade)
+
+            return render_template("paginaRifa.html", rifas=rifas)
 
     @app.route("/requisita-compra", methods=["POST"])
     def requisitaCompra():
         dados = request.get_json()
 
         try:
-            if not dados['rifa']:
+            if dados['rifa'] is None:
                 abort(400, "Entrada(s) inválida(s)")
-            if not dados['numerosRifa']:
+            if dados['numerosRifa'] is None:
                 abort(400, "Entrada(s) inválida(s)")
-            if not dados['nome']:
+            if dados['nome'] is None:
                 abort(400, "Entrada(s) inválida(s)")
-            if not dados['telefone']:
+            if dados['telefone'] is None:
                 abort(400, "Entrada(s) inválida(s)")
-            if not dados['email']:
+            if dados['email'] is None:
                 abort(400, "Entrada(s) inválida(s)")
         except:
             abort(400, "Entrada(s) inválida(s)")

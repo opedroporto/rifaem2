@@ -17,48 +17,9 @@
 		{% include "modalPix.html" %}
 		
         <div class="principal">
-                {% for i in range(rifas|length) %}
-					<div class="description">
-						<h1>{{ rifas[i].nome }}</h1>
-						<h2>Autor: {{ rifas[i].autor }}</h2>
-						<h3>Preço: {{ rifas[i].precoNumero }}</h3>
-						<h4>Data de lançamento: {{ rifas[i].dataLancamento }}</h4>
-						<h4>Data de Encerramento: {{ rifas[i].dataEncerramento }}</h4>
-					</div>
-                    <form class="rifaGrid">
-                        <input id="rifaId" type="hidden" data-id="{{ rifas[i].id }}"/>
-
-						
-						{# renderiza números #}
-						{% set numeros = rifas[i].numeros %}
-                        {% for j in range(1, (rifas[i].numeroMaximo + 1)) %}
-
-							{# verifica se número é especial (reservado ou alocado) #}
-							{% set numeroEspecial = {} %}
-							{%for numero in numeros %}
-								{% if numero.numeroRifa == j %}
-									{% set numeroEspecial = numeroEspecial.update(numero) %}
-								{% endif %}
-							{% endfor %}
-
-							{# renderiza número #}
-							{% if numeroEspecial != {} %}
-								<input class="numero" type="button" data-state="{{ numeroEspecial.status }}" data-nome="{{ numeroEspecial.nome }}"  onclick="modalcOpen(this)" value="{{ j }}">
-							{% else %}
-								<input class="numero" type="button" data-state="free" onclick="modalcOpen(this)" value="{{ j }}">
-							{% endif %}
-
-                        {% endfor %}
-
-						<input type="button" name="btnConc" id="btnConc" onclick="modalfOpen()" disabled="true">
-                    </form>
-					
-					<label class="lblSub" for="btnConc">Concluir</label>
-                {% endfor %}
-				
-				<button type="button" class="resetNums" onclick="limpaNums()">Limpar números</button>
+			<button type="button" class="resetNums" onclick="limpaNums()">Limpar números</button>
         </div>
 		
-		<script src="../static/js/rifaFunctions.js"></script>
+		<script src="{{ url_for('static',filename='js/rifaFunctions.js') }}"></script>
         
     {% endblock %}

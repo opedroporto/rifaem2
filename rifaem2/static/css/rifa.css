@@ -7,7 +7,7 @@ body, html {
 
 /* RIFAS */
 
-.principal {
+.rifa {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -119,6 +119,7 @@ button.resetNums {
     text-transform: uppercase;
 	opacity: 0;
 	pointer-events: none;
+    z-index: 1;
 }
 button.resetNums.on {
 	opacity: 1;

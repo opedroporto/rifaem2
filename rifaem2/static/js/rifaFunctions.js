@@ -2,7 +2,7 @@ const modalConfirm = document.querySelector(".modalBg");
 const modalFinish = document.querySelector(".modalBgF");
 const modalPix = document.querySelector(".modalbgPix");
 const modalbtnClose = document.getElementById("btnClose");
-const lblConcluir = document.querySelector(".lblSub");
+//const lblConcluir = document.querySelector(".lblSub");
 const btnReset = document.querySelector(".resetNums");
 
 const numsRifa = [];
@@ -10,22 +10,38 @@ let numAtualEl;
 let numAtual;
 let rifaId;
 
+let pagina = 0;
+const quantidade = 3;
+let fimCarregamentoRifas = false;
+
 function checkRifa() {
-	if(numsRifa.length != 0){
+	if (numsRifa.length != 0) {
 		document.getElementById("btnConc").removeAttribute('disabled');
-		lblConcluir.classList.add("on");
-		btnReset.classList.add("on");
-	}else{
+		document.querySelectorAll(".lblSub").forEach((lblConcluir) => {
+			let concluirId = lblConcluir.parentElement.dataset.id;
+			if (concluirId === rifaId) {
+				lblConcluir.classList.add("on");
+				btnReset.classList.add("on");
+				return;
+			}
+		});
+	} else {
 		document.getElementById("btnConc").setAttribute('disabled', "true");
-		lblConcluir.classList.remove("on");
-		btnReset.classList.remove("on");
+		document.querySelectorAll(".lblSub").forEach((lblConcluir) => {
+			let concluirId = lblConcluir.parentElement.dataset.id;
+			if (concluirId === rifaId) {
+				lblConcluir.classList.remove("on");
+				btnReset.classList.remove("on");
+				return;
+			}
+		});
 	}
 }
 
 function modalcOpen(numEl) {
 	modalConfirm.classList.add("on");
-	numAtualEl = numEl
-	numAtual = numEl.value
+	numAtualEl = numEl;
+	numAtual = numEl.value;
 }
 function modalfOpen() {
 	modalFinish.classList.add("on");
@@ -33,10 +49,11 @@ function modalfOpen() {
 }
 
 function confirm() {
+
 	modalConfirm.classList.remove("on");
 	numsRifa.push(parseInt(numAtual));
 
-	rifaId = numAtualEl.parentElement.querySelector("#rifaId").dataset.id
+	rifaId = numAtualEl.parentElement.parentElement.dataset.id;
 
 	checkRifa();
 }
@@ -75,7 +92,51 @@ function requisitaCompraErro(error) {
 	console.log(error);
 }
 
+function carregaRifas() {
+	if (!fimCarregamentoRifas) {
+		fetch("/rifa", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify({
+					"pagina": pagina,
+					"quantidade": quantidade
+				})
+			})
+			.then(res => res.text())
+			.then((data) => {
+				if (data.length == 0) {
+					fimCarregamentoRifas = true;
+				}
+				pagina += 1;
+				const rifa = document.createElement("div");
+				rifa.innerHTML = data;
+				document.querySelector(".principal").insertAdjacentHTML("beforeend", data);
+
+				desabilitaNumeros()
+			})
+			.catch(error => console.log(error))
+	}
+}
+
+window.onscroll = () => {
+	if ((window.innerHeight + window.scrollY) === document.body.offsetHeight) {
+		carregaRifas();
+	}
+}
+
+function desabilitaNumeros() {
+	document.querySelectorAll(".numero").forEach((numero) => {
+		if (["alocado", "reservado"].includes(numero.dataset.state)) {
+			numero.disabled = true;
+		}
+	})
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+	carregaRifas();
+	
 	document.querySelectorAll(".modalForm").forEach((form) => {
 		form.addEventListener("submit", event => {
 			event.preventDefault();
@@ -88,7 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			fetch("/requisita-compra", {
 				method: "POST",
 				headers: {
-					"Access-Control-Allow-Origin": "*",
 					"Content-Type": "application/json"
 				},
 				body: JSON.stringify(data)
@@ -97,10 +157,4 @@ document.addEventListener("DOMContentLoaded", () => {
 			.catch(error => requisitaCompraErro(error))
 		});
 	});
-
-	document.querySelectorAll(".numero").forEach((numero) => {
-		if (["alocado", "reservado"].includes(numero.dataset.state)) {
-			numero.disabled = true;
-		}
-	})
 });
