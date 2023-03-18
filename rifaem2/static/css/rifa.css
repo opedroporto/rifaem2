@@ -18,15 +18,15 @@ body, html {
 
 form.rifaGrid {
     display: grid;
-    width: 83%;
-    gap: 1rem 0rem;
+    width: 90%;
+    gap: 0rem 0.2rem;
     grid-template-columns: repeat(auto-fit, minmax(2rem, 5rem));
     place-items: center;
-    row-gap: .8rem;
+    row-gap: 0.2rem;
 }
 
 form.rifaGrid input {
-    width: 80%;
+    width: 100%;
     border:none;
     aspect-ratio: 1 / 1;
     border-radius: 1.2rem;
@@ -107,4 +107,17 @@ button.resetNums:hover {
     box-shadow: 0px 0px 45px #002e06;
     background-size: 160%;
     letter-spacing: 0px;
+}
+ 
+
+/* NÚMEROS DAS RIFAS */
+
+.numero[data-state="alocado"] {
+    background: var(--numero-alocado-background)!important;
+    cursor: default !important;
+}
+
+.numero[data-state="reservado"] {
+    background: var(--numero-reservado-background)!important;
+    cursor: default !important;
 }

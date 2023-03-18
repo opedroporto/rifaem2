@@ -14,6 +14,8 @@
     --first-font-color: #fff;
     --hover-font-color: #53af59;
     --click-font-color: #235827;
+    --numero-alocado-background: #d3d3d3;
+    --numero-reservado-background: #545823;
 }
 
 html {

@@ -5,21 +5,48 @@ const Numero = Parse.Object.extend("Numero");
 const Pedido = Parse.Object.extend("Pedido");
 const GnEvent = Parse.Object.extend("GnEvent");
 
+
 Parse.Cloud.define("lista-rifas", async (req) => {
 	// verificacoes
 	if (req.user == null) throw "Usuário não autenticado";
 	if (req.user.id != "ongE3YwyDO") throw "Usuário não autenticado";
 	if (req.params.pagina == null) throw "Página inválida";
+	if (req.params.quantidade == null) throw "Quantidade inválida";
 
 	// rifas
 	const page = req.params.pagina;
 	const query = new Parse.Query(Rifa);
 	query.descending("createdAt");
-	query.limit(3);
-	query.skip(page * 3);
-	const rifas = await query.find({useMasterKey: true});
+	query.limit(req.params.quantidade);
+	query.skip(page * req.params.quantidade);
+
+	let rifas = await query.find({useMasterKey: true});
+	rifas = rifas.map(r => r.toJSON())
+
+	// numeros de cada rifa
+	for (let i = 0; i < rifas.length; i++) {
+		const query2 = new Parse.Query(Numero);
+
+		const rifa = new Rifa();
+		rifa.id = rifas[i].objectId;
+		query2.equalTo("rifa", rifa);
+		query2.addAscending("numeroRifa");
+		query2.select("numeroRifa", "nome", "status");
+		const numeros = await query2.find({useMasterKey: true});
+
+		const numerosJSON = numeros.map((n) => {
+			n = n.toJSON();
+			return {
+				"numeroRifa": n.numeroRifa,
+				"nome": n.nome,
+				"status": n.status
+			}
+		})
+
+		rifas[i].numeros = numerosJSON;
+	}
+
 	return rifas.map(function(r) {
-		r = r.toJSON();
 		return {
 			"id": r.objectId,
 			"nome": r.nome,
@@ -27,7 +54,8 @@ Parse.Cloud.define("lista-rifas", async (req) => {
 			"dataLancamento": r.dataLancamento.iso,
 			"dataEncerramento": r.dataEncerramento.iso,
 			"precoNumero": r.precoNumero,
-			"numeroMaximo": r.numeroMaximo
+			"numeroMaximo": r.numeroMaximo,
+			"numeros": r.numeros
 		}
 	});
 });
@@ -84,7 +112,7 @@ Parse.Cloud.define("pedido", async (req) => {
 		}
 	}
 	
-	// tempo de expiração
+	// tempo de expiração da cobrança
 	const tempoExpiracao = 600; // 10 min
 	const dataExpiracao = new Date();
 	dataExpiracao.setSeconds(dataExpiracao.getSeconds() + tempoExpiracao)
@@ -110,7 +138,7 @@ Parse.Cloud.define("pedido", async (req) => {
 	pedido.set("email", req.params.email);
 
 	pedido.set("txid", dadosCobranca.txid);
-	pedido.set("dataExpiracao", dataExpiracao.toISOString());
+	pedido.set("dataExpiracao", dataExpiracao);
 	pedido.set("qrcode", dadosQrCode.imagemQrcode);
 	pedido.set("copiaecola", dadosQrCode.qrcode);
 	pedido.set("dadosCobranca", dadosCobranca);
@@ -118,10 +146,26 @@ Parse.Cloud.define("pedido", async (req) => {
 	pedido.set("status", "pendente");
 
 	await pedido.save(null, {useMasterKey: true});
-	
+
+	// adiciona números reservados (db)
+	for (const numeroRequisitado of req.params.numerosRifa) {
+		const numero = new Numero();
+
+		numero.set("rifa", rifa);
+		numero.set("numeroRifa", numeroRequisitado);
+		numero.set("nome", req.params.nome);
+		numero.set("telefone", req.params.telefone);
+		numero.set("email", req.params.email);
+		numero.set("status", "reservado");
+		numero.set("dataExpiracao", dataExpiracao);
+		
+		await numero.save(null, {useMasterKey: true});
+	}
+
+	// retorna
 	return {
 		txid: dadosCobranca.txid,
-		dataExpiracao: dataExpiracao.toISOString(),
+		dataExpiracao: dataExpiracao,
 		qrcode: dadosQrCode.imagemQrcode,
 		copiaecola: dadosQrCode.qrcode
 	};
@@ -145,7 +189,6 @@ Parse.Cloud.define("pix", async (req) => {
 
 		await gnEvent.save(null, {useMasterKey: true});
 
-
 		// muda status do pedido para pago (db)
 		const query = new Parse.Query(Pedido);
 		query.equalTo("txid", e.txid);
@@ -160,29 +203,32 @@ Parse.Cloud.define("pix", async (req) => {
 
 		await pedido.save(null, {useMasterKey: true});
 
-		// adiciona números da rifa (db)
+		// muda status do números da rifa (db)
+		// reservado -> alocado
 		const query2 = new Parse.Query(Pedido);
 		query2.equalTo("txid", e.txid);
 		const pedidoDadosResposta = await query2.first({useMasterKey: true});
 		const pedidoDados = pedidoDadosResposta.toJSON();
 
 		for (const numeroRifa of pedidoDados.numerosRifa) {
-			const numero = new Numero();
-
+			// numero
 			const rifa = new Rifa();
 			rifa.id = pedidoDados.rifa.objectId;
 
-			numero.set("rifa", rifa);
-			numero.set("numeroRifa", numeroRifa);
-			numero.set("nome", pedidoDados.nome);
-			numero.set("telefone", pedidoDados.telefone);
-			numero.set("email", pedidoDados.email);
+			const query3 = new Parse.Query(Numero);
+			query3.equalTo("rifa", rifa);
+			query3.equalTo("numeroRifa", numeroRifa);
+
+			const numero = await query3.first({useMasterKey: true});
+			console.log(numero)
+			// muda status (reservado -> alocado)
+			numero.set("status", "alocado");
 			
-			console.log(numero);
-			const numeroSalvo = await numero.save(null, {useMasterKey: true});
-			console.log(numeroSalvo);
+			await numero.save(null, {useMasterKey: true});
 		}
+
 	}
+
 	return;
 });
 

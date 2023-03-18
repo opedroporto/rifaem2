@@ -54,6 +54,15 @@ function limpaNums() {
 	checkRifa();
 }
 
+function mostraPix() {
+	modalPix.classList.add("on");
+	modalFinish.classList.remove("on");
+}
+function modalCloseP() {
+	modalPix.classList.remove("on");
+}
+
+
 function mostraDadosPix(data) {
 	document.getElementById("imgPix").src = data.qrcode;
 	document.getElementById("pixChave").innerHTML = data.copiaecola;
@@ -66,32 +75,32 @@ function requisitaCompraErro(error) {
 	console.log(error);
 }
 
-document.querySelectorAll('.modalForm').forEach((form) => {
-	form.addEventListener("submit", event => {
-		event.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+	document.querySelectorAll(".modalForm").forEach((form) => {
+		form.addEventListener("submit", event => {
+			event.preventDefault();
 
-		const formData = new FormData(form);
-		const data = Object.fromEntries(formData);
-		data.numerosRifa = numsRifa;
-		data.rifa = rifaId;
+			const formData = new FormData(form);
+			const data = Object.fromEntries(formData);
+			data.numerosRifa = numsRifa;
+			data.rifa = rifaId;
 
-		fetch("/requisita-compra", {
-			method: "POST",
-			headers: {
-				"Access-Control-Allow-Origin": "*",
-				"Content-Type": "application/json"
-			},
-			body: JSON.stringify(data)
-		}).then(res => res.json())
-		.then(data => mostraDadosPix(data))
-		.catch(error => requisitaCompraErro(error))
+			fetch("/requisita-compra", {
+				method: "POST",
+				headers: {
+					"Access-Control-Allow-Origin": "*",
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(data)
+			}).then(res => res.json())
+			.then(data => mostraDadosPix(data))
+			.catch(error => requisitaCompraErro(error))
+		});
+	});
+
+	document.querySelectorAll(".numero").forEach((numero) => {
+		if (["alocado", "reservado"].includes(numero.dataset.state)) {
+			numero.disabled = true;
+		}
 	})
-})
-
-function mostraPix() {
-	modalPix.classList.add("on");
-	modalFinish.classList.remove("on");
-}
-function modalCloseP() {
-	modalPix.classList.remove("on");
-}
+});

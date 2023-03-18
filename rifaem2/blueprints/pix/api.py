@@ -8,13 +8,20 @@ headers = {
     "X-Parse-Session-Token": os.getenv("PIX_API_TOKEN"),
 }
 
-def carregaRifas(pagina=0):
-    url = os.getenv("PIX_API_URL") + "lista-rifas"
-    data = {"pagina": pagina}
-    resposta = requests.post(url, json=data, headers=headers)
-    resposta = resposta.json()
+def carregaRifas(pagina=0, quantidade=0):
+    try:
+        url = os.getenv("PIX_API_URL") + "lista-rifas"
+        data = {
+            "pagina": pagina,
+            "quantidade": quantidade
+        }
+        resposta = requests.post(url, json=data, headers=headers)
+        resposta = resposta.json()['result']
 
-    return resposta
+        return resposta
+        
+    except:
+        return {}
 
 def carregaRifa(rifaId):
     url = os.getenv("PIX_API_URL") + "rifa"
