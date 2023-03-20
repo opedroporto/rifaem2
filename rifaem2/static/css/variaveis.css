@@ -22,5 +22,5 @@ html {
     font-size: 62.5%;
 }
 html, body {
-	overflow: hidden;
+	overflow-x: hidden;
 }

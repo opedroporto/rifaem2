@@ -1,25 +1,10 @@
-{% extends "layout.html" %}
 
-	{% block links %}
-		<link rel="stylesheet" href="../static/css/variaveis.css">
-		<link rel="stylesheet" href="../static/css/headerOthers.css">
-		<link rel="stylesheet" href="../static/css/rifa.css">
-	{% endblock %}
-
-    {% block title %}
-        Rifa EM2
-    {% endblock %}
-
-    {% block body %}
-	
-		{% include "modalConfirm.html" %}
-		{% include "modalFinish.html" %}
-		{% include "modalPix.html" %}
+	{% include "modalConfirm.html" %}
+	{% include "modalFinish.html" %}
+	{% include "modalPix.html" %}
 		
-        <div class="principal">
-			<button type="button" class="resetNums" onclick="limpaNums()">Limpar números</button>
-        </div>
+    <div class="principal">
+		<button type="button" class="resetNums" onclick="limpaNums()">Limpar números</button>
+    </div>
 		
-		<script src="{{ url_for('static',filename='js/rifaFunctions.js') }}"></script>
-        
-    {% endblock %}
+	<script src="{{ url_for('static',filename='js/rifaFunctions.js') }}"></script>

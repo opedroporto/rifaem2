@@ -1,11 +1,12 @@
 html {	
     background-color: var(--first-font-color);
 }
-body, html {
-	overflow-y: auto !important;
-}
 
 /* RIFAS */
+
+.principal {
+    background: var(--first-font-color);
+}
 
 .rifa {
     display: flex;
