@@ -22,7 +22,7 @@
                                 <p style="background-color:darkgreen;">ID: {{ pedido.txid }}</p>
                                 <p>QR Code: <img style="width:300px;height:300px" src="{{ pedido.qrcode }}"><p>
                                 <p>Pix Copia e Cola: {{ pedido.copiaecola }}</p>
-                                <p>Satus: Pago / Pagamento pendente</p>
+                                <p>Satus: {{ pedido.status }}</p>
                             </div>
                         {% endfor %}
                     {% else %}
