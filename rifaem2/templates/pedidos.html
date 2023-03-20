@@ -3,6 +3,7 @@
             {% block links %}
                 <link rel="stylesheet" href="../static/css/variaveis.css">
                 <link rel="stylesheet" href="../static/css/headerOthers.css">
+				 <link rel="stylesheet" href="../static/css/pedidos.css">
             {% endblock %}
 
             {% block title %}
@@ -15,15 +16,23 @@
                 </style>
                 <main>
                     {% if pedidos is defined and pedidos|length > 0 %}
-                        <h1 style="font-size:56px;text-align:center;"> Pedidos: </h1>
+						<div class="pedidosTitle">
+							<hr>
+							<h1> Pedidos </h1>
+							<hr>
+						</div>
                         {% for pedido in pedidos %}
-                            <div style="padding:2rem;margin:2rem;background-color:green;border-radius:1rem;color:white;font-size:24px;">
-                                <p style="background-color:darkgreen;">Data: {{ pedido.dataPedido }}</p>
-                                <p style="background-color:darkgreen;">ID: {{ pedido.txid }}</p>
-                                <p>QR Code: <img style="width:300px;height:300px" src="{{ pedido.qrcode }}"><p>
-                                <p>Pix Copia e Cola: {{ pedido.copiaecola }}</p>
-                                <p>Satus: {{ pedido.status }}</p>
-                            </div>
+							<div class="outerPart">	
+								<div class="container">
+									<p>Data: <span> {{ pedido.dataPedido }}  </span> </p>
+									<p>ID:  <span> {{ pedido.txid }}  </span> </p>
+									<img src="{{ pedido.qrcode }}">
+									<p>Pix Copia e Cola: <span> {{ pedido.copiaecola }}  </span> </p>
+									<p>Satus:  <span class="minor"> {{ pedido.status }}  </span> </p>
+									<hr>
+								</div>
+							</div>
+							<hr class="outerHr">
                         {% endfor %}
                     {% else %}
                         <p style="text-align:center;">Não há nenhum pedido ainda.</p>
