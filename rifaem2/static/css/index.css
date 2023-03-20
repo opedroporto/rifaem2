@@ -2,7 +2,7 @@ html {
     background: linear-gradient(266deg, #036225 70%, #022a25);
 }
 html.on {
-	height: 100vh;
+	overflow-y: hidden;
 }
 
 /* MAIN */
@@ -179,7 +179,15 @@ button hr {
 }
 
 @media(max-width: 1080px) {
-
+	form.modalForm label {
+		font-size: 1.74rem;
+	}
+	input#btnEnviar {
+		font-size: 2rem;
+	}
+	.modalHead {
+		font-size: clamp(1.7rem, 1.5vw + .1rem, 2rem);
+	}
 	.rightInfo {
 		place-items: end;
 		grid-template-rows: 100%;
@@ -294,6 +302,9 @@ button hr {
 		position: relative;
 		place-items: center;
 	}
+	.rightGroup {
+		margin-right: unset;
+	}
 	.rightGroup button,
 	.contatoBar {
 		height: clamp(8.5rem, 10vw + 1rem, 10rem);
@@ -399,5 +410,5 @@ button hr {
 	}
 	hr {
 		width: 100%;
-	}
+	}	
 }

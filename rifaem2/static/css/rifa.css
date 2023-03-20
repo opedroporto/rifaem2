@@ -75,6 +75,7 @@ input#btnConc {
 .lblSub {
 	height: 5rem;
     width: 15%;	
+	min-width: 120px;
     background: #7f9584;
     border-radius: .3rem;
     display: grid;

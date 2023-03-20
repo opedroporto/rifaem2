@@ -16,6 +16,7 @@
 .modalBodyP {
     height: 27%;
     width: 30%;
+	min-width: 330px;
     border-radius: 2rem;
     padding: 2rem;
     background: var(--bg-linear-gradient);
@@ -96,6 +97,9 @@ input#btnConfirm,
 input#btnDecline {
     all: unset;
     width: 50%;
+	min-width: 200px;
+    max-height: 55px;
+    min-height: 55px;
     justify-self: center;
     border-radius: .5rem;
     text-align: center;
@@ -149,6 +153,8 @@ form.modalForm input {
 
 input#btnEnviar {
     height: 45%;
+	max-height: 58px;
+	min-height: 58px;
     place-self: center;
     width: 100%;
     border: none;
