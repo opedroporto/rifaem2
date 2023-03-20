@@ -81,6 +81,7 @@ function modalCloseP() {
 
 
 function mostraDadosPix(data) {
+	mostraPix();
 	document.getElementById("imgPix").src = data.qrcode;
 	document.getElementById("pixChave").innerHTML = data.copiaecola;
 	console.log(data.qrcode);
