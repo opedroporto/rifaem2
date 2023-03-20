@@ -24,6 +24,9 @@
                         {% for pedido in pedidos %}
 							<div class="outerPart">	
 								<div class="container">
+									<div class="numDisplay">
+										
+									</div>
 									<p>Data: <span> {{ pedido.dataPedido }}  </span> </p>
 									<p>ID:  <span> {{ pedido.txid }}  </span> </p>
 									<img src="{{ pedido.qrcode }}">
@@ -38,4 +41,5 @@
                         <p style="text-align:center;">Não há nenhum pedido ainda.</p>
                     {% endif %}
                 </main>
+				
             {% endblock %}
