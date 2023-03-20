@@ -45,6 +45,7 @@ hr {
 .rightSide {
     background: var(--first-font-color);
     display: grid;
+	height: calc(100vh - 15vh + 5px);
     grid-template-columns: 1fr 1fr;
 	transition: 0.4s;
 }

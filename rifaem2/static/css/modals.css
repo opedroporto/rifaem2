@@ -55,6 +55,7 @@ i.fa-solid.fa-times.fa-4x:hover {
 hr.modalHr {
     grid-column-end: 4;
     grid-column-start: 1;
+	width: 100%;
     border: none;
     height: 1px;
     background-color: #047a00a8;
@@ -107,6 +108,7 @@ input#btnDecline {
 input#btnConfirm {
 	color: #025217;
     margin-top: 2rem;
+	transition: 0.4s;
     background: #01bd43;
 }
 input#btnConfirm:hover {
@@ -117,6 +119,7 @@ input#btnConfirm:hover {
 
 input#btnDecline {
     background: #890e0ec7;
+	transition: 0.4s;
     color: #300000;
 }
 input#btnDecline:hover {
