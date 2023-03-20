@@ -3,6 +3,7 @@
 
 .principal {
     background: var(--first-font-color);
+	min-height: 1000px;
 }
 
 .rifa {
