@@ -1,8 +1,7 @@
 from flask import request, render_template, abort
 
-from .pix.api import pedido, carregaRifas, carregaRifa
-
-
+from .pix.api import pedido, carregaRifas, listaPedidos
+from rifaem2.ext.session import session
 
 def init_app(app):
     @app.route("/", methods=["GET"])
@@ -53,12 +52,27 @@ def init_app(app):
         resposta = pedido(dados)
         if 'code' in resposta and resposta['code'] != 200:
             abort(400, "Erro ao fazer processar pedido")
+
         
         try:
             dadosPix = {
                 "qrcode": resposta['result']['qrcode'],
                 "copiaecola": resposta['result']['copiaecola'],
             }
+
+            session.addPedido(resposta['result']['txid'])
+
             return dadosPix
         except:
             abort(400, "Erro ao fazer processar pedido")
+            
+
+    @app.route("/pedidos", methods=["GET"])
+    def pedidos():
+        pedidosTxid = session.pedidos()
+
+        if pedidosTxid:
+            pedidos = listaPedidos(pedidosTxid)
+            return render_template("pedidos.html", pedidos=pedidos)
+        
+        return render_template("pedidos.html")

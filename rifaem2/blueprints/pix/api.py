@@ -1,4 +1,5 @@
 import requests
+import json
 import os
 
 headers = {
@@ -22,18 +23,21 @@ def carregaRifas(pagina=0, quantidade=0):
         
     except:
         return {}
-
-def carregaRifa(rifaId):
-    url = os.getenv("PIX_API_URL") + "rifa"
-    data = {"id": rifaId}
+    
+def pedido(data):
+    url = os.getenv("PIX_API_URL") + "pedido"
     resposta = requests.post(url, json=data, headers=headers)
     resposta = resposta.json()
 
     return resposta
 
-def pedido(data):
-    url = os.getenv("PIX_API_URL") + "pedido"
+def listaPedidos(pedidosTxid):
+    url = os.getenv("PIX_API_URL") + "lista-pedidos"
+    data = {"pedidosTxid": []}
+    for txid in pedidosTxid:
+        data['pedidosTxid'].append(txid)
+
     resposta = requests.post(url, json=data, headers=headers)
-    resposta = resposta.json()
+    resposta = resposta.json()['result']
 
     return resposta

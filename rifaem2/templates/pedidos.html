@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+            {% block links %}
+                <link rel="stylesheet" href="../static/css/variaveis.css">
+                <link rel="stylesheet" href="../static/css/headerOthers.css">
+            {% endblock %}
+
+            {% block title %}
+                Pedidos - Rifa EM2
+            {% endblock %}
+
+            {% block body %}
+                <style>
+                    html { overflow-y: scroll; }
+                </style>
+                <main>
+                    {% if pedidos is defined and pedidos|length > 0 %}
+                        <h1 style="font-size:56px;text-align:center;"> Pedidos: </h1>
+                        {% for pedido in pedidos %}
+                            <div style="padding:2rem;margin:2rem;background-color:green;border-radius:1rem;color:white;font-size:24px;">
+                                <p style="background-color:darkgreen;">Data: {{ pedido.dataPedido }}</p>
+                                <p style="background-color:darkgreen;">ID: {{ pedido.txid }}</p>
+                                <p>QR Code: <img style="width:300px;height:300px" src="{{ pedido.qrcode }}"><p>
+                                <p>Pix Copia e Cola: {{ pedido.copiaecola }}</p>
+                                <p>Satus: Pago / Pagamento pendente</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="text-align:center;">Não há nenhum pedido ainda.</p>
+                    {% endif %}
+                </main>
+            {% endblock %}

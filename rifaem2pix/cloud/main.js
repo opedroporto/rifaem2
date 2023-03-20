@@ -232,6 +232,42 @@ Parse.Cloud.define("pix", async (req) => {
 	return;
 });
 
+Parse.Cloud.define("lista-pedidos", async (req) => {
+	if (req.user == null) throw "Usuário não autenticado";
+	if (req.user.id != "ongE3YwyDO") throw "Usuário não autenticado";
+	if (req.params.pedidosTxid == null) throw "pedidos inválidos";
+
+	const pedidosTxid = req.params.pedidosTxid;
+
+	// pedidos
+	let pedidos = [];
+	for (var i = 0; i < pedidosTxid.length; i++) {
+		let txid = pedidosTxid[i];
+		
+		const query = new Parse.Query(Pedido);
+		query.equalTo("txid", txid);
+		//query.ascending("createdAt");
+		//query.select("numeroRifa", "nome", "status");
+		const pedido = await query.find({useMasterKey: true});
+
+		const pedidoJSON = pedido.map((p) => {
+			p = p.toJSON();
+			return {
+				"txid": p.txid,
+				"dataPedido": p.createdAt,
+				"qrcode": p.qrcode,
+				"copiaecola": p.copiaecola,
+				"status": p.status
+			}
+		});
+		
+		pedidos.push(pedidoJSON[0])
+	}
+
+
+	return pedidos;
+});
+
 /*
 Parse.Cloud.define("config-webhook", async (req) => {
 	configWebhook(req.params.url)
