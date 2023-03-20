@@ -1,6 +1,9 @@
 html {	
     background: linear-gradient(266deg, #036225 70%, #022a25);
 }
+html.on {
+	height: 100vh;
+}
 
 /* MAIN */
 
@@ -45,7 +48,7 @@ hr {
 .rightSide {
     background: var(--first-font-color);
     display: grid;
-	height: calc(100vh - 15vh + 5px);
+	height: calc(100vh - 15vh + 7px);
     grid-template-columns: 1fr 1fr;
 	transition: 0.4s;
 }
@@ -287,7 +290,9 @@ button hr {
 		font-size: clamp(23rem, 50vw + .1rem, 40rem);
 	}
 	.rightInfo {
-		margin-bottom: min(3rem, 10%);
+		bottom: min(10rem, 20%);
+		position: relative;
+		place-items: center;
 	}
 	.rightGroup button,
 	.contatoBar {
@@ -345,6 +350,42 @@ button hr {
 		margin-top: 25rem;
 		align-self: center;
 	}
+	.leftSide {
+    min-width: 241px;
+	}
+	.leftTitle {
+		font-size: 3.2rem;
+		font-weight: 500;
+		position: relative;
+		bottom: -2rem;
+	}
+	li {
+		font-size: 4rem;
+	}
+	.description {
+		font-size: 3rem;
+	}
+	.description h1 {
+		font-weight: 600;
+	}
+	.description h2 {
+		font-weight: 800;
+		font-size: 3.6rem;
+	}
+	.description h3, .description h4 {
+		font-weight: bolder;
+		font-size: 2.8rem;
+	}
+	form.rifaGrid input {
+		width: 52px;
+		font-size: 2.5rem;
+		font-weight: bolder;
+	}
+	.lblSub {
+		height: 7rem;
+		width: 25%;
+		font-size: 2.6rem;
+	}
 }
 
 /* GALAXY FOLD >:( */
@@ -355,5 +396,8 @@ button hr {
 	h1.bigTitulo {
 		margin-top: clamp(-5rem, 10vw + .1rem, -6.5rem);
 		font-size: clamp(21rem, 50vw + .1rem, 40rem);
+	}
+	hr {
+		width: 100%;
 	}
 }
