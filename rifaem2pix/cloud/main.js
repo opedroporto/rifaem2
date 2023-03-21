@@ -256,6 +256,7 @@ Parse.Cloud.define("lista-pedidos", async (req) => {
 		let txid = pedidosTxid[i];
 		
 		const query = new Parse.Query(Pedido);
+		query.include("rifa");
 		query.equalTo("txid", txid);
 		//query.ascending("createdAt");
 		//query.select("numeroRifa", "nome", "status");
@@ -263,12 +264,19 @@ Parse.Cloud.define("lista-pedidos", async (req) => {
 
 		const pedidoJSON = pedido.map((p) => {
 			p = p.toJSON();
+
 			return {
 				"txid": p.txid,
 				"dataPedido": p.createdAt,
+				"dataExpiracao": p.dataExpiracao,
 				"qrcode": p.qrcode,
 				"copiaecola": p.copiaecola,
-				"status": p.status
+				"status": p.status,
+				"nome": p.nome,
+				"telefone": p.telefone,
+				"email": p.email,
+				"numerosRifa": p.numerosRifa,
+				"rifa": p.rifa
 			}
 		});
 		

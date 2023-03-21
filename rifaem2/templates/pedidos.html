@@ -22,10 +22,15 @@
 							<hr>
 						</div>
                         {% for pedido in pedidos %}
+                            <!-- comentário--> DÁ UMA OLHADA NOS DADOS AE, GUI: {{ pedido }}
 							<div class="outerPart">	
 								<div class="container">
-									<div class="numDisplay">
-										
+                                    <p>Rifa: {{ pedido.rifa.nome }}</p>
+									<div style="background-color:aqua;" class="numDisplay">
+                                        <p>Números:</p>
+                                        {% for numero in pedido.numerosRifa %}
+                                            <div>{{ numero }}</div>
+                                        {% endfor %}
 									</div>
 									<p>Data: <span> {{ pedido.dataPedido }}  </span> </p>
 									<p>ID:  <span> {{ pedido.txid }}  </span> </p>
