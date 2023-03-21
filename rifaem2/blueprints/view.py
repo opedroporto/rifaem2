@@ -10,9 +10,6 @@ def init_app(app):
 
     @app.route("/rifa", methods=["GET", "POST"])
     def rifa():
-        if request.method == "GET":
-            return render_template("rifa.html")
-
         if request.method == "POST":
             dados = request.get_json()
 

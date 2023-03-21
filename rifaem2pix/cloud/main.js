@@ -4,6 +4,7 @@ const Rifa = Parse.Object.extend("Rifa");
 const Numero = Parse.Object.extend("Numero");
 const Pedido = Parse.Object.extend("Pedido");
 const GnEvent = Parse.Object.extend("GnEvent");
+const File = Parse.Object.extend("File");
 
 
 Parse.Cloud.define("lista-rifas", async (req) => {
@@ -16,12 +17,20 @@ Parse.Cloud.define("lista-rifas", async (req) => {
 	// rifas
 	const page = req.params.pagina;
 	const query = new Parse.Query(Rifa);
+	query.include("imagem");
 	query.descending("createdAt");
 	query.limit(req.params.quantidade);
 	query.skip(page * req.params.quantidade);
 
 	let rifas = await query.find({useMasterKey: true});
+
 	rifas = rifas.map(r => r.toJSON())
+	
+	/*
+	const file = new File();
+	const imagemUrl = rifas[0].imagem.url;
+	console.log(imagemUrl);
+	*/
 
 	// numeros de cada rifa
 	for (let i = 0; i < rifas.length; i++) {
@@ -51,6 +60,8 @@ Parse.Cloud.define("lista-rifas", async (req) => {
 			"id": r.objectId,
 			"nome": r.nome,
 			"autor": r.autor,
+			"cor": r.cor,
+			"imagem": r.imagem.url,
 			"dataLancamento": r.dataLancamento.iso,
 			"dataEncerramento": r.dataEncerramento.iso,
 			"precoNumero": r.precoNumero,
@@ -220,7 +231,7 @@ Parse.Cloud.define("pix", async (req) => {
 			query3.equalTo("numeroRifa", numeroRifa);
 
 			const numero = await query3.first({useMasterKey: true});
-			console.log(numero)
+
 			// muda status (reservado -> alocado)
 			numero.set("status", "alocado");
 			

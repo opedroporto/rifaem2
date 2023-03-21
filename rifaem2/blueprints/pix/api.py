@@ -39,6 +39,6 @@ def listaPedidos(pedidosTxid):
 
     resposta = requests.post(url, json=data, headers=headers)
     resposta = resposta.json()['result']
-    resposta.reverse()
+    resposta.reverse() 
 
     return resposta
