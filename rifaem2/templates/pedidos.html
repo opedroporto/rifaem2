@@ -11,9 +11,7 @@
             {% endblock %}
 
             {% block body %}
-                <style>
-                    html { overflow-y: scroll; }
-                </style>
+                
                 <main>
                     {% if pedidos is defined and pedidos|length > 0 %}
 						<div class="pedidosTitle">
@@ -22,12 +20,13 @@
 							<hr>
 						</div>
                         {% for pedido in pedidos %}
-                            <!-- comentário--> DÁ UMA OLHADA NOS DADOS AE, GUI: {{ pedido }}
+                            <!-- comentário DÁ UMA OLHADA NOS DADOS AE, GUI: {{ pedido }}-->
 							<div class="outerPart">	
 								<div class="container">
-                                    <p>Rifa: {{ pedido.rifa.nome }}</p>
-									<div style="background-color:aqua;" class="numDisplay">
-                                        <p>Números:</p>
+                                    <p>Rifa: <span> {{ pedido.rifa.nome }} </span> </p>
+									<div class="numDisplay">
+										<h3> Números </h3>
+										<hr>
                                         {% for numero in pedido.numerosRifa %}
                                             <div>{{ numero }}</div>
                                         {% endfor %}
@@ -35,8 +34,9 @@
 									<p>Data: <span> {{ pedido.dataPedido }}  </span> </p>
 									<p>ID:  <span> {{ pedido.txid }}  </span> </p>
 									<img src="{{ pedido.qrcode }}">
-									<p>Pix Copia e Cola: <span> {{ pedido.copiaecola }}  </span> </p>
-									<p>Satus:  <span class="minor"> {{ pedido.status }}  </span> </p>
+									<p>Pix Copia e Cola: <span class="copiar" title="Copiar" data-position="{{ loop.index }}" onclick="copy(this)"> {{ pedido.copiaecola }}  </span> </p>
+									<i class="fa-solid fa-copy"> Copiar</i>
+									<p>Status:  <span class="minor"> {{ pedido.status }}  </span> </p>
 									<hr>
 								</div>
 							</div>
@@ -46,5 +46,36 @@
                         <p style="text-align:center;">Não há nenhum pedido ainda.</p>
                     {% endif %}
                 </main>
+				
+				<script>
+					const spanCopy = document.querySelectorAll(".copiar");
+					const copyIcon = document.querySelectorAll(".fa-solid.fa-copy");
+					
+					for(let i=0; i<spanCopy.length; i++){
+						spanCopy[i].addEventListener("mouseover", function(e) {
+							copyIcon[i].style.color = "#3aa15a";
+						});
+						spanCopy[i].addEventListener("mouseleave", function(e) {
+							copyIcon[i].style.color = "#00261e";
+						});
+					}
+					function copy(that){
+						var inp =document.createElement('input');
+						document.body.appendChild(inp);
+						inp.value = that.textContent;
+						inp.select();
+						document.execCommand('copy',false);
+						inp.remove();
+						
+						copyIcon[that.getAttribute("data-position") - 1].innerHTML = " Copiado!";
+						copyIcon[that.getAttribute("data-position") - 1].style.right = "-2%";
+						setTimeout(function(){
+							copyIcon[that.getAttribute("data-position") - 1].innerHTML = " Copiar";
+							copyIcon[that.getAttribute("data-position") - 1].style.right = "0";
+						}, 2000);
+							
+					};
+				
+				</script>
 				
             {% endblock %}
