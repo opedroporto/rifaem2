@@ -3,8 +3,13 @@
 	{% include "modalFinish.html" %}
 	{% include "modalPix.html" %}
 
-	<div class="principal">
-		<button type="button" class="resetNums" onclick="limpaNums()">Limpar números</button>
-	</div>
+	<section id="rifas">
+		<div class="principal">
+			{% if rifas %}
+				{% include "paginaRifa.html" %}
+			{% endif %}
+			<button type="button" class="resetNums" onclick="limpaNums()">Limpar números</button>
+		</div>
+	</section>
 		
 	<script src="{{ url_for('static',filename='js/rifaFunctions.js') }}"></script>
