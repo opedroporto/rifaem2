@@ -11,7 +11,7 @@ let numAtual;
 let rifaId;
 
 let pagina = 1;
-const quantidade = 3;
+const quantidade = 2;
 let fimCarregamentoRifas = false;
 
 function checkRifa() {
@@ -116,10 +116,10 @@ function carregaRifas() {
 			rifa.innerHTML = data;
 			document.querySelector(".principal").insertAdjacentHTML("beforeend", data);
 
-			desabilitaNumeros()
+			fimCarregamentoPaginaRifas();
+			desabilitaNumeros();
 		})
 		.catch(error => console.log(error))
-		fimCarregamentoPaginaRifas();
 	}
 }
 
@@ -130,11 +130,13 @@ window.onscroll = () => {
 }
 
 function inicioCarregamentoPaginaRifas() {
-
+	let animacaoCarregamentoEl = document.querySelector(".animacaoCarregamento")
+	animacaoCarregamentoEl.style.display = "flex";
 }
 
 function fimCarregamentoPaginaRifas() {
-
+	let animacaoCarregamentoEl = document.querySelector(".animacaoCarregamento")
+	animacaoCarregamentoEl.style.display = "none";
 }
 
 function desabilitaNumeros() {

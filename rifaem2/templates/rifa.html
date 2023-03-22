@@ -10,6 +10,7 @@
 			{% endif %}
 			<button type="button" class="resetNums" onclick="limpaNums()">Limpar números</button>
 		</div>
+		{% include "animacaoCarregamento.html" %}
 	</section>
 		
 	<script src="{{ url_for('static',filename='js/rifaFunctions.js') }}"></script>
