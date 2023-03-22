@@ -10,7 +10,7 @@ let numAtualEl;
 let numAtual;
 let rifaId;
 
-let pagina = 0;
+let pagina = 1;
 const quantidade = 3;
 let fimCarregamentoRifas = false;
 
@@ -148,7 +148,7 @@ function desabilitaNumeros() {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-	carregaRifas();
+	//carregaRifas();
 	
 	document.querySelectorAll(".modalForm").forEach((form) => {
 		form.addEventListener("submit", event => {

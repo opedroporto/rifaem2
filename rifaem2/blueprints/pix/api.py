@@ -1,5 +1,4 @@
 import requests
-import json
 import os
 
 headers = {
@@ -9,7 +8,8 @@ headers = {
     "X-Parse-Session-Token": os.getenv("PIX_API_TOKEN"),
 }
 
-def carregaRifas(pagina=0, quantidade=0):
+def carrega_rifas(pagina: int=0, quantidade: int=0):
+    """carrega rifas baseado no número da página e quantidade de rifas por página"""
     try:
         url = os.getenv("PIX_API_URL") + "lista-rifas"
         data = {
@@ -20,7 +20,6 @@ def carregaRifas(pagina=0, quantidade=0):
         resposta = resposta.json()['result']
 
         return resposta
-        
     except:
         return {}
     
@@ -31,7 +30,7 @@ def pedido(data):
 
     return resposta
 
-def listaPedidos(pedidosTxid):
+def lista_pedidos(pedidosTxid):
     url = os.getenv("PIX_API_URL") + "lista-pedidos"
     data = {"pedidosTxid": []}
     for txid in pedidosTxid:
@@ -39,6 +38,6 @@ def listaPedidos(pedidosTxid):
 
     resposta = requests.post(url, json=data, headers=headers)
     resposta = resposta.json()['result']
-    resposta.reverse() 
+    resposta.reverse()
 
     return resposta
