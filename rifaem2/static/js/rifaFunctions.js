@@ -11,8 +11,9 @@ let numAtual;
 let rifaId;
 
 let pagina = 1;
-const quantidade = 2;
+const quantidade = 3;
 let fimCarregamentoRifas = false;
+let carregandoRifas = false;
 
 function checkRifa() {
 	if (numsRifa.length != 0) {
@@ -94,7 +95,7 @@ function requisitaCompraErro(error) {
 }
 
 function carregaRifas() {
-	if (!fimCarregamentoRifas) {
+	if (!fimCarregamentoRifas && !carregandoRifas) {
 		inicioCarregamentoPaginaRifas();
 		fetch("/rifa", {
 			method: "POST",
@@ -124,17 +125,19 @@ function carregaRifas() {
 }
 
 window.onscroll = () => {
-	if ((window.innerHeight + window.scrollY) === document.body.offsetHeight) {
+	if (Math.round(window.innerHeight + window.scrollY) === document.body.offsetHeight) {
 		carregaRifas();
 	}
 }
 
 function inicioCarregamentoPaginaRifas() {
+	carregandoRifas = true;
 	let animacaoCarregamentoEl = document.querySelector(".animacaoCarregamento")
 	animacaoCarregamentoEl.style.display = "flex";
 }
 
 function fimCarregamentoPaginaRifas() {
+	carregandoRifas = false;
 	let animacaoCarregamentoEl = document.querySelector(".animacaoCarregamento")
 	animacaoCarregamentoEl.style.display = "none";
 }

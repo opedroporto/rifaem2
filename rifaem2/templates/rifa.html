@@ -5,12 +5,14 @@
 
 	<section id="rifas">
 		<div class="principal">
-			{% if rifas %}
-				{% include "paginaRifa.html" %}
-			{% endif %}
+			<div>
+				{% if rifas %}
+					{% include "paginaRifa.html" %}
+				{% endif %}
+			</div>
 			<button type="button" class="resetNums" onclick="limpaNums()">Limpar números</button>
+			{% include "animacaoCarregamento.html" %}
 		</div>
-		{% include "animacaoCarregamento.html" %}
 	</section>
 		
 	<script src="{{ url_for('static',filename='js/rifaFunctions.js') }}"></script>

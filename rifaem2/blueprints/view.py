@@ -7,7 +7,7 @@ def init_app(app):
     @app.route("/", methods=["GET"])
     def index():
         pagina = 0
-        quantidade = 2
+        quantidade = 3
 
         rifas = carrega_rifas(pagina, quantidade)
 
