@@ -5,7 +5,9 @@
     background: var(--first-font-color);
 	min-height: 1000px;
 }
-
+#rifas {
+    background-color: var(--first-font-color)
+}
 .rifa {
     display: flex;
     justify-content: center;
