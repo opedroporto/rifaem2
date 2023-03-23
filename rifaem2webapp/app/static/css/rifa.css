@@ -1,0 +1,150 @@
+
+/* RIFAS */
+
+#rifas {
+    background-color: var(--first-font-color)
+}
+.principal {
+    background: var(--first-font-color);
+	min-height: 1000px;
+}
+.rifa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+	gap: 5rem;
+}
+
+form.rifaGrid {
+    display: flex;
+    width: 83%;
+    flex-wrap: wrap;
+    gap: .8rem 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+form.rifaGrid input {
+    width: 38px;
+    border: none;
+    aspect-ratio: 1 / 1;
+    border-radius: 1.2rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    background: var(--bg-color);
+    color: var(--first-font-color);
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+form.rifaGrid input:hover {
+    background-color: var(--click-font-color);
+}
+
+.description {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.description h1 {
+    text-transform: uppercase;
+    color: var(--bg-color);
+    letter-spacing: .1rem;
+    font-weight: 400;
+    border-bottom: 1px solid;
+}
+.description h2 {
+    color: var(--bg-color);
+    letter-spacing: .1rem;
+    font-weight: 500;
+    font-size: 1.6rem;
+}
+.description h3 {
+    margin-bottom: .6rem;
+}
+.description h3, .description h4 {
+    color: var(--bg-color);
+    font-weight: bolder;
+    font-size: 1.44rem;
+}
+
+input#btnConc {
+    display: none;
+}
+
+.lblSub {
+	height: 5rem;
+    width: 15%;	
+	min-width: 120px;
+    background: #7f9584;
+    border-radius: .3rem;
+    display: grid;
+    place-items: center;
+    font-size: 1.6rem;
+    color: #183a0a;
+    font-weight: bolder;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+    cursor: no-drop;
+	transition: 0.4s;
+}
+.lblSub.on {
+	background: #319137;
+    color: #002a05;
+    box-shadow: inset 0px 0px 10px #3ceb5178;
+    cursor: pointer;
+}
+.lblSub.on:hover {
+    letter-spacing: 0.2rem;
+    box-shadow: inset 0px 0px 10px #066211e0;
+}
+.lblSub:last-of-type {
+	margin-bottom: 4rem;
+}
+
+button.resetNums {
+    position: fixed;
+    width: 200px;
+    aspect-ratio: 8 / 2.5;
+    bottom: 35px;
+    right: 30px;
+    background: var(--bg-linear-gradient);
+    border: 1px solid #0445097a;
+    color: #fff;
+    box-shadow: 0px 0px 30px #002805;
+    border-radius: 1rem;
+    transition: 0.4s;
+    font-size: 1.5rem;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+	opacity: 0;
+	pointer-events: none;
+    z-index: 1;
+}
+button.resetNums.on {
+	opacity: 1;
+	pointer-events: auto;
+	cursor: pointer;
+	transition: 0.4s;
+}
+button.resetNums:hover {
+    border: 1px solid #002805;
+    box-shadow: 0px 0px 35px #002e06;
+    background-size: 160%;
+    letter-spacing: 0px;
+}
+ 
+
+/* NÚMEROS DAS RIFAS */
+
+.numero[data-state="alocado"] {
+    background: var(--numero-alocado-background)!important;
+    cursor: default !important;
+}
+
+.numero[data-state="reservado"] {
+    background: var(--numero-reservado-background)!important;
+    cursor: default !important;
+}
