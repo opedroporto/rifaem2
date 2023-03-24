@@ -1,9 +1,10 @@
 from flask import request, render_template, abort
 
-from ..ext.session import session
-from .pix.api import pedido, carrega_rifas, lista_pedidos
+from ...ext.session import session
+from ..pix.api import pedido, carrega_rifas, lista_pedidos
 
 def init_app(app):
+    """ define as views """
     @app.route("/", methods=["GET"])
     def index():
         pagina = 0
@@ -55,7 +56,6 @@ def init_app(app):
         if 'code' in resposta and resposta['code'] != 200:
             abort(400, "Erro ao fazer processar pedido")
 
-        
         try:
             dados_pix = {
                 "qrcode": resposta['result']['qrcode'],
@@ -67,7 +67,6 @@ def init_app(app):
             return dados_pix
         except:
             abort(400, "Erro ao fazer processar pedido")
-            
 
     @app.route("/pedidos", methods=["GET"])
     def pedidos():
@@ -76,5 +75,5 @@ def init_app(app):
         if pedidos_txid:
             pedidos = lista_pedidos(pedidos_txid)
             return render_template("pedidos.html", pedidos=pedidos)
-        
+
         return render_template("pedidos.html")

@@ -4,8 +4,8 @@ from flask import Flask
 
 from .app.ext.session import session
 from .app.ext.csfr import csfr
-from .app.blueprints import view
-
+from .app.blueprints.util import util
+from .app.blueprints.view import view
 
 
 def create_app():
@@ -16,6 +16,7 @@ def create_app():
     app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
     app.config['WTF_CSRF_SECRET_KEY'] = os.getenv("WTF_CSRF_SECRET_KEY")
 
+    util.init_app(app)
     session.init_app(app)
     csfr.init_app(app)
     view.init_app(app)

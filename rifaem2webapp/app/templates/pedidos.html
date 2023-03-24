@@ -31,7 +31,7 @@
                                             <div>{{ numero }}</div>
                                         {% endfor %}
 									</div>
-									<p>Data: <span> {{ pedido.dataPedido }}  </span> </p>
+									<p>Data: <span> {{ formata_data(pedido.dataPedido, hora=True) }}  </span> </p>
 									<p>ID:  <span> {{ pedido.txid }}  </span> </p>
 									<img src="{{ pedido.qrcode }}">
 									<p>Pix Copia e Cola: <span class="copiar" title="Copiar" data-position="{{ loop.index }}" onclick="copy(this)"> {{ pedido.copiaecola }}  </span> </p>

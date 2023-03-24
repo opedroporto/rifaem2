@@ -5,8 +5,8 @@
 			<h1>{{ rifa.nome }}</h1>
 			<h2>Autor: {{ rifa.autor }}</h2>
 			<h3>Preço: {{ rifa.precoNumero }}</h3>
-			<h4>Data de lançamento: {{ rifa.dataLancamento }}</h4>
-			<h4>Data de Encerramento: {{ rifa.dataEncerramento }}</h4>
+			<h4>Data de lançamento: {{ formata_data(rifa.dataLancamento) }}</h4>
+			<h4>Data de Encerramento: {{ formata_data(rifa.dataEncerramento, hora=True) }}</h4>
 		</div>
 		<form class="rifaGrid">
 			
