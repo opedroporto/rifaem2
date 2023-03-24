@@ -28,7 +28,7 @@ git clone https://github.com/opedroporto/rifaem2
 Copie o arquivo de variáveis `.env` para a pasta `/rifaem2webapp`:
 
 ```sh
-mv [CAMINHO_PARA_SEU_ARQUIVO].env rifaem2/rifaem2webapp
+mv [CAMINHO_PARA_SEU_ARQUIVO].env rifaem2/rifaem2webapp/
 ```
 
 Vá para o diretório baixado:
@@ -66,14 +66,19 @@ Fique à vontade para modificar qualquer arquivo do projeto e adaptá-lo às sua
 └── rifaem2webapp
     ├── Dockerfile
     ├── __init__.py
-    ├── app
+    ├── application
     │   ├── __init__.py
     │   ├── blueprints
     │   │   ├── __init__.py
     │   │   ├── pix
     │   │   │   ├── __init__.py
     │   │   │   └── api.py
-    │   │   └── view.py
+    │   │   ├── util
+    │   │   │   ├── __init__.py
+    │   │   │   └── util.py
+    │   │   └── view
+    │   │       ├── __init__.py
+    │   │       └── view.py
     │   ├── ext
     │   │   ├── __init__.py
     │   │   ├── csfr
@@ -107,7 +112,7 @@ Fique à vontade para modificar qualquer arquivo do projeto e adaptá-lo às sua
     │       ├── modalPix.html
     │       ├── paginaRifa.html
     │       ├── pedidos.html
-    │       └── rifa.html
+    │       └── rifaSection.html
     ├── requirements.txt
     └── wsgi.py
 ```
