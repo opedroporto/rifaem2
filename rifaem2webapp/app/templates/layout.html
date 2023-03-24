@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-	<link rel="shortcut icon" href="../static/imagens/logoIcone.png" type="image/x-icon" />
-	{% block links %}
-	
-	{% endblock %}
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+        <link rel="shortcut icon" href="../static/imagens/logoIcone.png" type="image/x-icon" />
+        {% block links %}
+        
+        {% endblock %}
 
-    <title>{% block title %}{% endblock %}</title>
-</head>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
     <body>
         <header>
             <div class="logo">
@@ -49,6 +49,9 @@
 
         <script src="https://kit.fontawesome.com/75b9b9272c.js" crossorigin="anonymous"></script>
         <script src="../static/js/menuBurguer.js"></script>
-
+        
+        <script type="text/javascript">
+            var csrf_token = "{{ csrf_token() }}";
+        </script>
     </body>
 </html>

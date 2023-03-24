@@ -85,8 +85,6 @@ function mostraDadosPix(data) {
 	mostraPix();
 	document.getElementById("imgPix").src = data.qrcode;
 	document.getElementById("pixChave").innerHTML = data.copiaecola;
-	console.log(data.qrcode);
-	console.log(data.copiaecola);
 }
 
 function requisitaCompraErro(error) {
@@ -100,7 +98,8 @@ function carregaRifas() {
 		fetch("/rifa", {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json"
+				"Content-Type": "application/json",
+				'X-CSRFToken': csrf_token
 			},
 			body: JSON.stringify({
 				"pagina": pagina,
@@ -158,16 +157,17 @@ document.addEventListener("DOMContentLoaded", () => {
 	document.querySelectorAll(".modalForm").forEach((form) => {
 		form.addEventListener("submit", event => {
 			event.preventDefault();
-
+			
 			const formData = new FormData(form);
 			const data = Object.fromEntries(formData);
 			data.numerosRifa = numsRifa;
 			data.rifa = rifaId;
-
+			
 			fetch("/requisita-compra", {
 				method: "POST",
 				headers: {
-					"Content-Type": "application/json"
+					"Content-Type": "application/json",
+					'X-CSRFToken': csrf_token
 				},
 				body: JSON.stringify(data)
 			}).then(res => res.json())
