@@ -1,7 +1,7 @@
 from flask import request, render_template, abort
 
 from ...ext.session import session
-from ..pix.api import pedido, carrega_rifas, lista_pedidos
+from ...blueprints.pix.api import pedido, carrega_rifas, lista_pedidos
 
 def init_app(app):
     """ define as views """
