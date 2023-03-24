@@ -1,3 +1,4 @@
-*.vscode
-*.env
-flask_session
+*/.vscode
+*/.env
+*/flask_session
+*/__pycache__
