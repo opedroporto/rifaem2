@@ -6,6 +6,7 @@
 
 - [Instalação](#instalacao)
 - [Como usar](#uso)
+- [Estrutura dos arquivos](#estrutura)
 - [Suporte](#suporte)
 
 <a name="instalacao"/>
@@ -43,6 +44,74 @@ docker compose up
 Acesse a aplicação em [http://localhost](http://localhost) :white_check_mark:
 
 Fique à vontade para modificar qualquer arquivo do projeto e adaptá-lo às suas necessidades.
+
+<a name="estrutura"/>
+
+## Estrutura dos arquivos
+
+```
+├── README.md
+├── docker-compose.yml
+├── nginx.conf
+├── rifaem2parseserver
+│   ├── cloud
+│   │   ├── main.js
+│   │   ├── package.json
+│   │   ├── pix.js
+│   │   └── producao-443302-rifaem2.p12
+│   ├── dbqueries
+│   │   └── indexParaExpiracaodoNumeroAlocado.js
+│   └── public
+│       └── index.html
+└── rifaem2webapp
+    ├── Dockerfile
+    ├── __init__.py
+    ├── app
+    │   ├── __init__.py
+    │   ├── blueprints
+    │   │   ├── __init__.py
+    │   │   ├── pix
+    │   │   │   ├── __init__.py
+    │   │   │   └── api.py
+    │   │   └── view.py
+    │   ├── ext
+    │   │   ├── __init__.py
+    │   │   ├── csfr
+    │   │   │   ├── __init__.py
+    │   │   │   └── csfr.py
+    │   │   └── session
+    │   │       ├── __init__.py
+    │   │       └── session.py
+    │   ├── static
+    │   │   ├── css
+    │   │   │   ├── animacaoCarregamento.css
+    │   │   │   ├── headerIndex.css
+    │   │   │   ├── headerOthers.css
+    │   │   │   ├── index.css
+    │   │   │   ├── modals.css
+    │   │   │   ├── pedidos.css
+    │   │   │   ├── rifa.css
+    │   │   │   └── variaveis.css
+    │   │   ├── imagens
+    │   │   │   ├── LogoCompleto.png
+    │   │   │   └── logoIcone.png
+    │   │   └── js
+    │   │       ├── menuBurguer.js
+    │   │       └── rifaFunctions.js
+    │   └── templates
+    │       ├── animacaoCarregamento.html
+    │       ├── index.html
+    │       ├── layout.html
+    │       ├── modalConfirm.html
+    │       ├── modalFinish.html
+    │       ├── modalPix.html
+    │       ├── paginaRifa.html
+    │       ├── pedidos.html
+    │       └── rifa.html
+    ├── requirements.txt
+    └── wsgi.py
+```
+
 
 <a name="suporte"/>
 
