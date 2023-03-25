@@ -4,3 +4,4 @@ Flask-Session
 Flask-WTF
 requests
 python-dateutil
+python-dotenv
