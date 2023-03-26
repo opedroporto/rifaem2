@@ -14,20 +14,25 @@
     align-items: center;
     position: relative;
     flex-direction: column;
-	gap: 5rem;
+	padding-block: 5rem;
 }
 
 form.rifaGrid {
     display: flex;
-    width: 83%;
+    justify-content: center;
+    align-items: center;
+    margin-block: 2.5rem;
+}
+.slides {
+    display: flex;
+    width: 989px;
     flex-wrap: wrap;
     gap: .8rem 1rem;
     justify-content: center;
     align-items: center;
 }
-
-form.rifaGrid input {
-    width: 38px;
+form.rifaGrid .slides input {
+    width: 40px;
     border: none;
     aspect-ratio: 1 / 1;
     border-radius: 1.2rem;
@@ -39,32 +44,69 @@ form.rifaGrid input {
     transition: 0.4s;
 }
 
-form.rifaGrid input:hover {
+form.rifaGrid .slides input:hover {
     background-color: var(--click-font-color);
 }
 
 .description {
+	display: grid;
+	place-items: center;
     margin-top: 4rem;
     text-align: center;
+	z-index: 1;
 }
 
-.description h1 {
+.rifaOutline {
+    display: grid;
+	overflow: hidden;
+    place-items: center;
+	z-index: 2;
+    border: 5px solid var(--bg-color);
+    border-radius: 0rem 0rem 1rem 1rem;
+	max-width: 990px;
+    width: 990px;
+    border-top: none;
+    border-image-slice: 12;
+}
+
+.descInfo {
+	grid-column: 1 / 1;
+    box-shadow: 50px 0px 50px 45px #fff, -50px 0px 50px 40px #fff;
+    background: #fff;
+    height: 118px;
+    grid-row: 1 / 1;
+}
+.rifaImg {
+	height: 120px;
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+    width: 1000px;
+    border-radius: 1rem 1rem 0 0;
+    overflow: hidden;
+}
+.rifaImg img {
+	height: unset;
+	max-width: 100%;
+	min-width: 1000px;
+}
+
+.description .descInfo h1 {
     text-transform: uppercase;
     color: var(--bg-color);
     letter-spacing: .1rem;
     font-weight: 400;
     border-bottom: 1px solid;
 }
-.description h2 {
+.description .descInfo h2 {
     color: var(--bg-color);
     letter-spacing: .1rem;
     font-weight: 500;
     font-size: 1.6rem;
 }
-.description h3 {
+.description .descInfo h3 {
     margin-bottom: .6rem;
 }
-.description h3, .description h4 {
+.description .descInfo h3, .description .descInfo h4 {
     color: var(--bg-color);
     font-weight: bolder;
     font-size: 1.44rem;
@@ -72,6 +114,39 @@ form.rifaGrid input:hover {
 
 input#btnConc {
     display: none;
+}
+.subBtn {
+    width: 990px;
+    justify-self: start;
+    display: grid;
+    place-items: center;
+    height: 100px;
+	position: relative;
+}
+.backLbl,
+.forwardsLbl {
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    font-size: 3rem;
+}
+.backLbl {
+	left: 5rem;
+	color: #7f9584;
+}
+.forwardsLbl {
+	right: 5rem;
+    color: var(--bg-color);
+	cursor: pointer;
+}
+
+#forwards:checked + .slides {
+	margin-left: -100%;
+}
+#back:checked + .slides {
+	margin-left: 0%;
 }
 
 .lblSub {
@@ -101,7 +176,7 @@ input#btnConc {
     box-shadow: inset 0px 0px 10px #066211e0;
 }
 .lblSub:last-of-type {
-	margin-bottom: 4rem;
+	margin-bottom: 3rem;
 }
 
 button.resetNums {

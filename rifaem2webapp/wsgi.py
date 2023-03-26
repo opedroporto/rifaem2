@@ -20,6 +20,8 @@ def create_app():
     session.init_app(app)
     csfr.init_app(app)
     view.init_app(app)
+    
+    app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 
     return app
 

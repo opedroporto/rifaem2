@@ -1,39 +1,70 @@
 {% for rifa in rifas %}
-	<div class="rifa" data-id="{{ rifa.id }}" style="background-color: {{ rifa.cor }};border-radius:3rem;border:2px solid #024e25">
-		<div style="width:99%;margin-top: 4rem;text-align: center;padding: 2rem;border: 1px solid #024e25; border-radius: 1rem; background-color: white;" class="description">
-			<img style="width:100%;height:400px;" src="{{ rifa.imagem }}"/>	
-			<h1>{{ rifa.nome }}</h1>
-			<h2>Autor: {{ rifa.autor }}</h2>
-			<h3>Preço: {{ rifa.precoNumero }}</h3>
-			<h4>Data de lançamento: {{ formata_data(rifa.dataLancamento) }}</h4>
-			<h4>Data de Encerramento: {{ formata_data(rifa.dataEncerramento, hora=True) }}</h4>
-		</div>
-		<form class="rifaGrid">
-			
-			{# renderiza números #}
-			{% set numeros = rifa.numeros %}
-			{% for j in range(1, (rifa.numeroMaximo + 1)) %}
+	<div class="rifa" data-id="{{ rifa.id }}">	
+			<div class="description">
+				<div class="rifaImg">
+					<img src="{{ rifa.imagem }}"/>	
+				</div>
+				<div class="descInfo">
+					<h1>{{ rifa.nome }}</h1>
+					<h2>Autor: {{ rifa.autor }}</h2>
+					<h3>Preço: {{ rifa.precoNumero }}</h3>
+					<h4>Data de lançamento: {{ formata_data(rifa.dataLancamento) }}</h4>
+					<h4>Data de Encerramento: {{ formata_data(rifa.dataEncerramento, hora=True) }}</h4>
+				</div>
+			</div>
+			<div class="rifaOutline" style="border-image: url({{ rifa.imagem }}); border-image-slice: 12;">
+			<form class="rifaGrid">
+				
+				{# renderiza números #}
+				{% set numeros = rifa.numeros %}
+				{% set determinador = namespace(value=1) %}
+				{% set numLimite = namespace(value=100) %}
+				{% set loopR = namespace(value=1) %}
+				
+				<input type="radio" style="display: none;" id="back" class="slideBack" checked>
+				<input type="radio" style="display: none;" id="forwards" class="slideForwards">
+				
+				{% for numerosR in range(0, (loopR.value + 1)) %}
+					
+					<div class="slides">
+					
+						{% for j in range(determinador.value, (rifa.numeroMaximo + 1)) %}
+							
+							{% set determinador.value = determinador.value + 1 %}
+							{% set numeroEspecial = {} %}
+							{% for numero in numeros %}
+								{% if numero.numeroRifa == j %}
+									{% set numeroEspecial = numeroEspecial.update(numero) %}
+								{% endif %}
+							{% endfor %}
 
-				{# verifica se número é especial (reservado ou alocado) #}
-				{% set numeroEspecial = {} %}
-				{%for numero in numeros %}
-					{% if numero.numeroRifa == j %}
-						{% set numeroEspecial = numeroEspecial.update(numero) %}
+							{# renderiza número #}
+							{% if numeroEspecial != {} %}
+								<input class="numero" style="background-color: {{ rifa.cor }};" type="button" data-state="{{ numeroEspecial.status }}" data-nome="{{ numeroEspecial.nome }}" value="{{ j }}">
+							{% else %}
+								<input class="numero" style="background-color: {{ rifa.cor }};" type="button" data-state="free" onclick="modalcOpen(this)" value="{{ j }}">
+							{% endif %}
+
+							{% if j == numLimite.value %}
+								{% set numLimite.value = numLimite.value + 100 %}
+								{% set loopR.value = loopR.value + 1 %}
+								{% break %}
+							{% endif %}
+						{% endfor %}
+					</div>		
+					{% if determinador.value == j %}
+						{% break %}
 					{% endif %}
+					
 				{% endfor %}
 
-				{# renderiza número #}
-				{% if numeroEspecial != {} %}
-					<input class="numero" type="button" data-state="{{ numeroEspecial.status }}" data-nome="{{ numeroEspecial.nome }}" value="{{ j }}">
-				{% else %}
-					<input class="numero" type="button" data-state="free" onclick="modalcOpen(this)" value="{{ j }}">
-				{% endif %}
-
-			{% endfor %}
-
-			<input type="button" name="btnConc" id="btnConc" onclick="modalfOpen()" disabled="true">
-		</form>
-		
-		<label class="lblSub" for="btnConc">Concluir</label>
+				<input type="button" name="btnConc" id="btnConc" onclick="modalfOpen()" disabled="true">
+			</form>
+			<div class="subBtn">
+				<label for="back" class="backLbl"><i class="fa-solid fa-arrow-left"></i></label>
+				<label for="forwards" class="forwardsLbl"><i class="fa-solid fa-arrow-right"></i></label>
+				<label class="lblSub" for="btnConc">Concluir</label>
+			</div>
+		</div>
 	</div>
 {% endfor %}
