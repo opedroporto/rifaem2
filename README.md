@@ -1,4 +1,4 @@
-# Aplicativo Web de Rifas Virtuais
+# Aplicativo Web de Rifas Virtuais (README.md DESATUALIZADO)
 
 É um aplicativo web que possibilita pessoas a participarem de rifas, comprando números de rifas e realizando pagamentos por PIX no próprio website.
 
