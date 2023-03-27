@@ -101,7 +101,7 @@ function modalClose() {
 
 // modal Final
 document.querySelectorAll(".lblSub").forEach((lblSub) => {
-	lblSub.addEventListener("click", (lblSub) => {
+	lblSub.addEventListener("click", () => {
 		if (lblSub.classList.contains("on")) {
 			modalfOpen();
 		}
