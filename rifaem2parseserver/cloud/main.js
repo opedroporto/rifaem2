@@ -154,7 +154,7 @@ Parse.Cloud.define("pedido", async (req) => {
 	pedido.set("copiaecola", dadosQrCode.qrcode);
 	pedido.set("dadosCobranca", dadosCobranca);
 	pedido.set("dadosQrCode", dadosQrCode);
-	pedido.set("status", "pendente");
+	pedido.set("status", "não pago");
 
 	await pedido.save(null, {useMasterKey: true});
 
