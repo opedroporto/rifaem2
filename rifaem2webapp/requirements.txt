@@ -4,5 +4,5 @@ Flask-Session
 Flask-WTF
 requests
 python-dateutil
-python-dotenvregex
+python-dotenv
 regex
