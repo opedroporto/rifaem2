@@ -1,178 +1,117 @@
 const modalConfirm = document.querySelector(".modalBg");
 const modalFinish = document.querySelector(".modalBgF");
 const modalPix = document.querySelector(".modalbgPix");
-const modalbtnClose = document.getElementById("btnClose");
-//const lblConcluir = document.querySelector(".lblSub");
+//const modalbtnClose = document.getElementById("btnClose");
 const btnReset = document.querySelector(".resetNums");
 
 const numsRifa = [];
 let numAtualEl;
 let numAtual;
+
+let rifaEl;
 let rifaId;
 
-let pagina = 1;
-const quantidade = 3;
-let fimCarregamentoRifas = false;
-let carregandoRifas = false;
-
+// ativa ou desativa botão concluir da rifa atual
 function checkRifa() {
+	// botão concluir da rifa atual
+	btnConcluir = rifaEl.querySelector(".lblSub");
+
+	// ativa botão concluir
 	if (numsRifa.length != 0) {
-		document.getElementById("btnConc").removeAttribute('disabled');
-		document.querySelectorAll(".lblSub").forEach((lblConcluir) => {
-			let concluirId = lblConcluir.parentElement.dataset.id;
-			if (concluirId === rifaId) {
-				lblConcluir.classList.add("on");
-				btnReset.classList.add("on");
-				return;
-			}
-		});
-	} else {
-		document.getElementById("btnConc").setAttribute('disabled', "true");
-		document.querySelectorAll(".lblSub").forEach((lblConcluir) => {
-			let concluirId = lblConcluir.parentElement.dataset.id;
-			if (concluirId === rifaId) {
-				lblConcluir.classList.remove("on");
-				btnReset.classList.remove("on");
-				return;
-			}
-		});
+		btnConcluir.classList.add("on");
+		btnReset.classList.add("on");
+	}
+
+	// desativa botão
+	else {
+		btnConcluir.classList.remove("on");
+		btnReset.classList.remove("on");
 	}
 }
 
+// confirma número escolhido
+function confirm() {
+	modalConfirm.classList.remove("on");
+	numsRifa.push(parseInt(numAtual));
+
+	rifaEl = numAtualEl.closest('.rifa');
+	rifaId = numAtualEl.closest('.rifa').dataset.id;
+
+	checkRifa();
+
+	desabilitaOutrasRifas();
+}
+
+// limpa números
+function limpaNums() {
+	resetaRifaAtual();
+}
+
+// reseta rifa atual
+function resetaRifaAtual() {
+	numsRifa.length = 0;
+	
+	checkRifa();
+
+	numAtualEl = undefined;
+	numAtual = undefined;
+	
+	rifaEl = undefined;
+	rifaId = undefined;
+	
+	habilitaTodasRifas();
+}
+
+// desabilita rifas não escolhidas
+function desabilitaOutrasRifas() {
+	// cada rifa
+	document.querySelectorAll(".rifa").forEach((rifa) => {
+		// se for outra rifa
+		if (rifa.dataset.id !== rifaId) {
+			// cada número
+			rifa.querySelectorAll(".numero").forEach((numero) => {
+				numero.disabled = true;
+			})
+		}
+	})
+}
+
+// habilita todas rifas
+function habilitaTodasRifas() {
+	// cada rifa
+    document.querySelectorAll(".rifa").forEach((rifa) => {
+		// cada número
+		rifa.querySelectorAll(".numero").forEach((numero) => {
+			numero.disabled = false;
+		})
+    })
+}
+
+// modal Confirm
 function modalcOpen(numEl) {
 	modalConfirm.classList.add("on");
 	numAtualEl = numEl;
 	numAtual = numEl.value;
-}
-function modalfOpen() {
-	modalFinish.classList.add("on");
-	document.getElementById("numerosRifa").value = numsRifa;
-}
-
-function confirm() {
-
-	modalConfirm.classList.remove("on");
-	numsRifa.push(parseInt(numAtual));
-
-	rifaId = numAtualEl.parentElement.parentElement.dataset.id;
-
-	checkRifa();
 }
 
 function modalClose() {
 	modalConfirm.classList.remove("on");
 	checkRifa()
 }
+
+// modal Final
+document.querySelectorAll(".lblSub").forEach((lblSub) => {
+	lblSub.addEventListener("click", (lblSub) => {
+		if (lblSub.classList.contains("on")) {
+			modalfOpen();
+		}
+	});
+})
+function modalfOpen() {
+	modalFinish.classList.add("on");
+	document.getElementById("numerosRifa").value = numsRifa;
+}
+
 function modalCloseF() {
 	modalFinish.classList.remove("on");
 }
-
-function limpaNums() {
-	numsRifa.length = 0;
-	checkRifa();
-}
-
-function mostraPix() {
-	modalPix.classList.add("on");
-	modalFinish.classList.remove("on");
-}
-function modalCloseP() {
-	modalPix.classList.remove("on");
-}
-
-
-function mostraDadosPix(data) {
-	mostraPix();
-	document.getElementById("imgPix").src = data.qrcode;
-	document.getElementById("pixChave").innerHTML = data.copiaecola;
-}
-
-function requisitaCompraErro(error) {
-	console.log("Erro ao tentar comprar");
-	console.log(error);
-}
-
-function carregaRifas() {
-	if (!fimCarregamentoRifas && !carregandoRifas) {
-		inicioCarregamentoPaginaRifas();
-		fetch("/rifa", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				'X-CSRFToken': csrf_token
-			},
-			body: JSON.stringify({
-				"pagina": pagina,
-				"quantidade": quantidade
-			})
-		})
-		.then(res => res.text())
-		.then((data) => {
-			if (data.length == 0) {
-				fimCarregamentoRifas = true;
-			}
-			pagina += 1;
-			const rifa = document.createElement("div");
-			rifa.innerHTML = data;
-			document.querySelector(".principal").insertAdjacentHTML("beforeend", data);
-
-			fimCarregamentoPaginaRifas();
-			desabilitaNumeros();
-		})
-		.catch(error => console.log(error))
-	}
-}
-
-window.onscroll = () => {
-	if (Math.round(window.innerHeight + window.scrollY) === document.body.offsetHeight) {
-		carregaRifas();
-	}
-}
-
-function inicioCarregamentoPaginaRifas() {
-	carregandoRifas = true;
-	let animacaoCarregamentoEl = document.querySelector(".animacaoCarregamento")
-	animacaoCarregamentoEl.style.display = "flex";
-}
-
-function fimCarregamentoPaginaRifas() {
-	carregandoRifas = false;
-	let animacaoCarregamentoEl = document.querySelector(".animacaoCarregamento")
-	animacaoCarregamentoEl.style.display = "none";
-}
-
-function desabilitaNumeros() {
-	document.querySelectorAll(".numero").forEach((numero) => {
-		if (["alocado", "reservado"].includes(numero.dataset.state)) {
-			numero.disabled = true;
-		}
-	})
-}
-
-
-
-document.addEventListener("DOMContentLoaded", () => {
-	//carregaRifas();
-	
-	document.querySelectorAll(".modalForm").forEach((form) => {
-		form.addEventListener("submit", event => {
-			event.preventDefault();
-			
-			const formData = new FormData(form);
-			const data = Object.fromEntries(formData);
-			data.numerosRifa = numsRifa;
-			data.rifa = rifaId;
-			
-			fetch("/requisita-compra", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					'X-CSRFToken': csrf_token
-				},
-				body: JSON.stringify(data)
-			}).then(res => res.json())
-			.then(data => mostraDadosPix(data))
-			.catch(error => requisitaCompraErro(error))
-		});
-	});
-});
