@@ -64,16 +64,19 @@ function resetaRifaAtual() {
 
 // desabilita rifas não escolhidas
 function desabilitaOutrasRifas() {
-	// cada rifa
-	document.querySelectorAll(".rifa").forEach((rifa) => {
-		// se for outra rifa
-		if (rifa.dataset.id !== rifaId) {
-			// cada número
-			rifa.querySelectorAll(".numero").forEach((numero) => {
-				numero.disabled = true;
-			})
-		}
-	})
+	// se há rifa selecionada
+	if (rifaId) {
+		// cada rifa
+		document.querySelectorAll(".rifa").forEach((rifa) => {
+			// se for outra rifa
+			if (rifa.dataset.id !== rifaId) {
+				// cada número
+				rifa.querySelectorAll(".numero").forEach((numero) => {
+					numero.disabled = true;
+				})
+			}
+		})
+	}
 }
 
 // habilita todas rifas
