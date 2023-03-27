@@ -1,7 +1,40 @@
+import re
+
 from flask import request, render_template, abort
 
 from ...ext.session import session
 from ...blueprints.pix.api import pedido, carrega_rifas, lista_pedidos
+
+def valida_dados_requisita_compra(dados):
+    try:
+        if dados['rifa'] is None:
+            return false
+        if dados['numerosRifa'] is None:
+            return false
+        if dados['nome'] is None:
+            return false
+        if dados['telefone'] is None:
+            return false
+        if dados['email'] is None:
+            return false
+    except:
+        return false
+
+    if not (0 < len(dados['rifa']) < 801):
+        return False
+
+    if not re.fullmatch(r'[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$', dados['email']):
+        return False
+    if not (0 < len(dados['nome']) < 256):
+        return False
+    if not re.fullmatch(r'^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$', dados['telefone']):
+        return False
+
+    for num in dados['numerosRifa']:
+        if not isinstance(num, int):
+            return False
+
+    return True
 
 def init_app(app):
     """ define as views """
@@ -38,19 +71,9 @@ def init_app(app):
     def requisita_compra():
         dados = request.get_json()
 
-        try:
-            if dados['rifa'] is None:
-                abort(400, "Entrada(s) inválida(s)")
-            if dados['numerosRifa'] is None:
-                abort(400, "Entrada(s) inválida(s)")
-            if dados['nome'] is None:
-                abort(400, "Entrada(s) inválida(s)")
-            if dados['telefone'] is None:
-                abort(400, "Entrada(s) inválida(s)")
-            if dados['email'] is None:
-                abort(400, "Entrada(s) inválida(s)")
-        except:
+        if not valida_dados_requisita_compra(dados):
             abort(400, "Entrada(s) inválida(s)")
+
 
         resposta = pedido(dados)
         if 'code' in resposta and resposta['code'] != 200:

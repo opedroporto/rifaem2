@@ -10,16 +10,16 @@
 		</div>
 		<hr class="modalHr">
 		<div class="modalContentF">
-			<form class="modalForm" action="/requisita-compra" method="post">
+			<form class="modalForm" method="post">
 				<input type="text" value="" name="numerosRifa" id="numerosRifa">
 				<label for="nome">Escreva seu nome: </label>
-				<input type="text" name="nome" id="nome" required>
+				<input type="text" name="nome" id="nome" placeholder="Nome" minlength="1" maxlength="255" autocomplete="off" required>
 				
 				<label for="phone">Escreva seu telefone: </label>
-				<input type="tel" name="telefone" id="phone" required>
+				<input type="tel" name="telefone" id="phone" placeholder="(XX) XXXXX-XXXX" pattern="^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$" autocomplete="off" required>
 
 				<label for="email">Escreva seu email: </label>
-				<input type="email" name="email" id="email" required>
+				<input type="email" name="email" id="email" placeholder="email@domínio.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" autocomplete="off" required>
 				
 				<input type="submit" name="btnEnviar" id="btnEnviar" value="Finalizar">
 			</form>
