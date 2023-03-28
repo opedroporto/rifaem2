@@ -9,30 +9,28 @@
 	min-height: 1000px;
 }
 .rifa {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
     position: relative;
-    flex-direction: column;
-	padding-block: 5rem;
+    height: 100vh;
 }
 
 form.rifaGrid {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-block: 2.5rem;
+    padding-inline: 1.5rem;
 }
 .slides {
     display: flex;
-    width: 989px;
     flex-wrap: wrap;
     gap: .8rem 1rem;
     justify-content: center;
     align-items: center;
+    padding: 2rem;
 }
 form.rifaGrid .slides input {
-    width: 40px;
+    width: 42px;
     border: none;
     aspect-ratio: 1 / 1;
     border-radius: 1.2rem;
@@ -50,44 +48,16 @@ form.rifaGrid .slides input:hover {
 
 .description {
 	display: grid;
-	place-items: center;
-    margin-top: 4rem;
-    text-align: center;
-	z-index: 1;
-}
-
-.rifaOutline {
-    display: grid;
-	overflow: hidden;
     place-items: center;
-	z-index: 2;
-    border: 5px solid var(--bg-color);
-    border-radius: 0rem 0rem 1rem 1rem;
-	max-width: 990px;
-    width: 990px;
-    border-top: none;
-    border-image-slice: 12;
+    min-width: 235px;
+    text-align: center;
+}
+.principal .rifa:first-of-type .description {
+    box-shadow: inset 0px 40px 40px -10px #003619;
 }
 
 .descInfo {
-	grid-column: 1 / 1;
-    box-shadow: 50px 0px 50px 45px #fff, -50px 0px 50px 40px #fff;
-    background: #fff;
     height: 118px;
-    grid-row: 1 / 1;
-}
-.rifaImg {
-	height: 120px;
-    grid-column: 1 / 1;
-    grid-row: 1 / 1;
-    width: 1000px;
-    border-radius: 1rem 1rem 0 0;
-    overflow: hidden;
-}
-.rifaImg img {
-	height: unset;
-	max-width: 100%;
-	min-width: 1000px;
 }
 
 .description .descInfo h1 {
@@ -116,37 +86,11 @@ input#btnConc {
     display: none;
 }
 .subBtn {
-    width: 990px;
-    justify-self: start;
     display: grid;
-    place-items: center;
     height: 100px;
-	position: relative;
-}
-.backLbl,
-.forwardsLbl {
     position: absolute;
-    width: 50px;
-    height: 30px;
-    display: grid;
-    place-items: center;
-    font-size: 3rem;
-}
-.backLbl {
-	left: 5rem;
-	color: #7f9584;
-}
-.forwardsLbl {
-	right: 5rem;
-    color: var(--bg-color);
-	cursor: pointer;
-}
-
-#forwards:checked + .slides {
-	margin-left: -100%;
-}
-#back:checked + .slides {
-	margin-left: 0%;
+    bottom: 1rem;
+    left: 13rem;
 }
 
 .lblSub {

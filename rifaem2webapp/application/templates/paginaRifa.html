@@ -1,9 +1,6 @@
 {% for rifa in rifas %}
 	<div class="rifa" data-id="{{ rifa.id }}">	
-			<div class="description">
-				<div class="rifaImg">
-					<img src="{{ rifa.imagem }}"/>	
-				</div>
+			<div class="description" style="background-image: url('{{ rifa.imagem }}'); background-size: cover;" >
 				<div class="descInfo">
 					<h1>{{ rifa.nome }}</h1>
 					<h2>Autor: {{ rifa.autor }}</h2>
@@ -12,13 +9,12 @@
 					<h4>Data de Encerramento: {{ formata_data(rifa.dataEncerramento, hora=True) }}</h4>
 				</div>
 			</div>
-			<div class="rifaOutline" style="border-image: url({{ rifa.imagem }}); border-image-slice: 12;">
 			<form class="rifaGrid">
 				
 				{# renderiza números #}
 				{% set numeros = rifa.numeros %}
 				{% set determinador = namespace(value=1) %}
-				{% set numLimite = namespace(value=100) %}
+				{% set numLimite = namespace(value=300) %}
 				{% set loopR = namespace(value=1) %}
 				
 				<input type="radio" style="display: none;" id="back" class="slideBack" checked>
@@ -46,7 +42,7 @@
 							{% endif %}
 
 							{% if j == numLimite.value %}
-								{% set numLimite.value = numLimite.value + 100 %}
+								{% set numLimite.value = numLimite.value + 300 %}
 								{% set loopR.value = loopR.value + 1 %}
 								{% break %}
 							{% endif %}
@@ -61,10 +57,7 @@
 				<!--input type="button" name="btnConc" id="btnConc" onclick="modalfOpen()" disabled="true"-->
 			</form>
 			<div class="subBtn">
-				<label for="back" class="backLbl"><i class="fa-solid fa-arrow-left"></i></label>
-				<label for="forwards" class="forwardsLbl"><i class="fa-solid fa-arrow-right"></i></label>
 				<label class="lblSub" for="btnConc" onclick="modalfOpen(this)">Concluir</label>
 			</div>
-		</div>
 	</div>
 {% endfor %}
