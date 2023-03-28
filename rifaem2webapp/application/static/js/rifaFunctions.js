@@ -103,16 +103,11 @@ function modalClose() {
 }
 
 // modal Final
-document.querySelectorAll(".lblSub").forEach((lblSub) => {
-	lblSub.addEventListener("click", () => {
-		if (lblSub.classList.contains("on")) {
-			modalfOpen();
-		}
-	});
-})
-function modalfOpen() {
-	modalFinish.classList.add("on");
-	document.getElementById("numerosRifa").value = numsRifa;
+function modalfOpen(btnConcluirAtual) {
+	if (btnConcluirAtual.classList.contains("on")) {
+		modalFinish.classList.add("on");
+		document.getElementById("numerosRifa").value = numsRifa;
+	}
 }
 
 function modalCloseF() {
