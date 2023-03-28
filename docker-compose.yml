@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+    rifaem2webapp:
+        container_name: rifaem2webapp
+        env_file:
+            - rifaem2webapp/.env
+        build:
+            context: rifaem2webapp
+        ports:
+          - "5000"
+
+    nginx:
+        container_name: nginx
+        image: nginx:latest
+        depends_on:
+            - rifaem2webapp
+
+        volumes:
+            # nginx config
+            - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+            
+            # arquivos certbot
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
+        ports:
+            - "80:80"
+            - "443:443"
+
+        # recarrega Nginx a cada 6horas
+        command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+
+    certbot:
+        container_name: certbot
+        image: certbot/certbot:latest
+        depends_on:
+            - nginx
+
+        # arquivos certbot
+        volumes:
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
+
+        # renova certificado a cada 12 horas
+        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
