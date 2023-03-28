@@ -1,7 +1,7 @@
 import datetime
 
 from dateutil import parser
-from zoneinfo import ZoneInfo
+from backports.zoneinfo import ZoneInfo
 
 
 def init_app(app):
