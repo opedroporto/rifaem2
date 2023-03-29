@@ -1,9 +1,17 @@
 import re
 
 from flask import request, render_template, abort
+from flask_wtf import FlaskForm
+from wtforms import StringField
+from wtforms.validators import DataRequired
 
 from ...ext.session import session
 from ...blueprints.pix.api import pedido, carrega_rifas, lista_pedidos
+
+class RequisitaCompraForm(FlaskForm):
+    name = StringField('nome', validators=[DataRequired()])
+    phone = StringField('telefone', validators=[DataRequired()])
+    email = StringField('email', validators=[DataRequired()])
 
 def valida_dados_requisita_compra(dados):
     try:
@@ -45,7 +53,8 @@ def init_app(app):
 
         rifas = carrega_rifas(pagina, quantidade)
 
-        return render_template("index.html", rifas=rifas)
+        form = RequisitaCompraForm();
+        return render_template("index.html", rifas=rifas, form=form)
 
     @app.route("/rifa", methods=["GET", "POST"])
     def rifa():

@@ -19,14 +19,14 @@
 			<form class="rifaGrid">
 				
 				{% set numeros = rifa.numeros %}
-				{% set numLimite = namespace(value=100) %}
+				{% set numLimite = namespace(value=300) %}
 				
 				{# calcula quantidade de slides #}
 				{% set quantidadeSlides = [] %}
-				{% if rifa.numeroMaximo < numLimite.value %}
+				{% if rifa.numeroMaximo <= numLimite.value %}
 					{% set temp = quantidadeSlides.append(1) %}
 				{% else %}
-					{% set temp = quantidadeSlides.append(rifa.numeroMaximo // numLimite.value) %}
+					{% set temp = quantidadeSlides.append(rifa.numeroMaximo // numLimite.value + 1) %}
 				{% endif %}
 
 				<input type="radio" style="display: none;" id="back" class="slideBack" checked>
@@ -37,8 +37,17 @@
 					<div class="slides">
 						{% set numeroEspecial = {} %}
 						
+						{# define comeco e fim de cada slide #}
+						{% set comecoSlide = (numLimite.value * slideAtual) + 1 %}
+						{% set fimSlide = (numLimite.value * slideAtual) + numLimite.value + 1 %}
+
 						{# cada slide #}
-						{% for j in range((numLimite.value * slideAtual) + 1, (numLimite.value * slideAtual) + numLimite.value + 1) %}
+						{% for j in range(comecoSlide, fimSlide) %}
+
+						    {# fim do slide se slide for menor que o padrão #}
+							{% if j > rifa.numeroMaximo %}
+								{% break %}							
+							{% endif %}
 
 							{# define se há número especial #}
 							{% set numeroEspecial = {} %}
@@ -54,6 +63,7 @@
 							{% else %}
 								<input class="numero" style="background-color: {{ rifa.cor }};" type="button" data-state="free" onclick="modalcOpen(this)" value="{{ j }}">
 							{% endif %}
+
 						{% endfor %}
 					</div>
 					
