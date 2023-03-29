@@ -9,24 +9,33 @@
 					<h4>Data de Encerramento: {{ formata_data(rifa.dataEncerramento, hora=True) }}</h4>
 				</div>
 			</div>
+
+			{# renderiza números #}
 			<form class="rifaGrid">
 				
-				{# renderiza números #}
 				{% set numeros = rifa.numeros %}
-				{% set determinador = namespace(value=1) %}
-				{% set numLimite = namespace(value=300) %}
-				{% set loopR = namespace(value=1) %}
+				{% set numLimite = namespace(value=100) %}
 				
+				{# calcula quantidade de slides #}
+				{% set quantidadeSlides = [] %}
+				{% if rifa.numeroMaximo < numLimite.value %}
+					{% set temp = quantidadeSlides.append(1) %}
+				{% else %}
+					{% set temp = quantidadeSlides.append(rifa.numeroMaximo // numLimite.value) %}
+				{% endif %}
+
 				<input type="radio" style="display: none;" id="back" class="slideBack" checked>
 				<input type="radio" style="display: none;" id="forwards" class="slideForwards">
 				
-				{% for numerosR in range(0, (loopR.value + 1)) %}
-					
+				{# cada slide #}
+				{% for slideAtual in range(0, quantidadeSlides[0]) %}
 					<div class="slides">
-					
-						{% for j in range(determinador.value, (rifa.numeroMaximo + 1)) %}
-							
-							{% set determinador.value = determinador.value + 1 %}
+						{% set numeroEspecial = {} %}
+						
+						{# cada slide #}
+						{% for j in range((numLimite.value * slideAtual) + 1, (numLimite.value * slideAtual) + numLimite.value + 1) %}
+
+							{# define se há número especial #}
 							{% set numeroEspecial = {} %}
 							{% for numero in numeros %}
 								{% if numero.numeroRifa == j %}
@@ -40,17 +49,8 @@
 							{% else %}
 								<input class="numero" style="background-color: {{ rifa.cor }};" type="button" data-state="free" onclick="modalcOpen(this)" value="{{ j }}">
 							{% endif %}
-
-							{% if j == numLimite.value %}
-								{% set numLimite.value = numLimite.value + 300 %}
-								{% set loopR.value = loopR.value + 1 %}
-								{% break %}
-							{% endif %}
 						{% endfor %}
-					</div>		
-					{% if determinador.value == j %}
-						{% break %}
-					{% endif %}
+					</div>
 					
 				{% endfor %}
 
