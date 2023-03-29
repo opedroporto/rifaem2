@@ -14,20 +14,23 @@
 					<h4>Data de Encerramento: {{ formata_data(rifa.dataEncerramento, hora=True) }}</h4>
 				</div>
 			</div>
+			
+			{# define variável numeros #}
+			{% set numeros = rifa.numeros %}
+
+			{# define limite de números por slide #}
+			{% set numLimite = namespace(value=300) %}
+
+			{# calcula quantidade de slides #}
+			{% set quantidadeSlides = [] %}
+			{% if rifa.numeroMaximo <= numLimite.value %}
+				{% set temp = quantidadeSlides.append(1) %}
+			{% else %}
+				{% set temp = quantidadeSlides.append(rifa.numeroMaximo // numLimite.value + 1) %}
+			{% endif %}
 
 			{# renderiza números #}
-			<form class="rifaGrid">
-				
-				{% set numeros = rifa.numeros %}
-				{% set numLimite = namespace(value=300) %}
-				
-				{# calcula quantidade de slides #}
-				{% set quantidadeSlides = [] %}
-				{% if rifa.numeroMaximo <= numLimite.value %}
-					{% set temp = quantidadeSlides.append(1) %}
-				{% else %}
-					{% set temp = quantidadeSlides.append(rifa.numeroMaximo // numLimite.value + 1) %}
-				{% endif %}
+			<form class="rifaGrid" style="width: {{ 100 * quantidadeSlides[0] }}%">
 
 				<input type="radio" style="display: none;" id="back" class="slideBack" checked>
 				<input type="radio" style="display: none;" id="forwards" class="slideForwards">

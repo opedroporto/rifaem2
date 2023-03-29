@@ -9,9 +9,9 @@ from ...ext.session import session
 from ...blueprints.pix.api import pedido, carrega_rifas, lista_pedidos
 
 class RequisitaCompraForm(FlaskForm):
-    name = StringField('nome', validators=[DataRequired()])
-    phone = StringField('telefone', validators=[DataRequired()])
-    email = StringField('email', validators=[DataRequired()])
+    nome = StringField('Insira seu nome:', validators=[DataRequired()])
+    telefone = StringField('Insira seu telefone:', validators=[DataRequired()])
+    email = StringField('Insira seu e-mail:', validators=[DataRequired()])
 
 def valida_dados_requisita_compra(dados):
     try:
