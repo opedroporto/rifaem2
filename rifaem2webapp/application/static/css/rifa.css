@@ -11,12 +11,16 @@
 .rifa {
     display: grid;
     grid-template-columns: 1fr 3fr;
+	grid-template-rows: 20%;
+	grid-template-areas: "foto desc"
+						 "foto rifa";
     position: relative;
     height: 100vh;
 }
 
 form.rifaGrid {
     display: flex;
+	grid-area: rifa;
     justify-content: center;
     align-items: center;
     padding-inline: 1.5rem;
@@ -24,13 +28,13 @@ form.rifaGrid {
 .slides {
     display: flex;
     flex-wrap: wrap;
-    gap: .8rem 1rem;
+    gap: .4rem .5rem;
     justify-content: center;
     align-items: center;
     padding: 2rem;
 }
 form.rifaGrid .slides input {
-    width: 42px;
+    width: 38px;
     border: none;
     aspect-ratio: 1 / 1;
     border-radius: 1.2rem;
@@ -48,6 +52,7 @@ form.rifaGrid .slides input:hover {
 
 .description {
 	display: grid;
+	grid-area: foto;
     place-items: center;
     min-width: 235px;
     text-align: center;
@@ -59,25 +64,33 @@ form.rifaGrid .slides input:hover {
 .descInfo {
     height: 118px;
 }
-
-.description .descInfo h1 {
+.descOutline {
+    display: flex;
+	grid-area: desc;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    grid-area: desc;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 10%, var(--bg-color) 30%, var(--bg-color) 70%, rgba(255,255,255,0) 90%);
+}
+.descInfo h1 {
     text-transform: uppercase;
-    color: var(--bg-color);
+    color: #fff;
     letter-spacing: .1rem;
     font-weight: 400;
     border-bottom: 1px solid;
 }
-.description .descInfo h2 {
-    color: var(--bg-color);
+.descInfo h2 {
+    color: #fff;
     letter-spacing: .1rem;
     font-weight: 500;
     font-size: 1.6rem;
 }
-.description .descInfo h3 {
+.descInfo h3 {
     margin-bottom: .6rem;
 }
-.description .descInfo h3, .description .descInfo h4 {
-    color: var(--bg-color);
+.descInfo h3, .descInfo h4 {
+    color: #fff;
     font-weight: bolder;
     font-size: 1.44rem;
 }

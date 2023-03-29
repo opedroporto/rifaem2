@@ -1,6 +1,11 @@
 {% for rifa in rifas %}
 	<div class="rifa" data-id="{{ rifa.id }}">	
 			<div class="description" style="background-image: url('{{ rifa.imagem }}'); background-size: cover;" >
+				<div class="subBtn">
+					<label class="lblSub" for="btnConc" onclick="modalfOpen(this)">Concluir</label>
+				</div>
+			</div>
+			<div class="descOutline">
 				<div class="descInfo">
 					<h1>{{ rifa.nome }}</h1>
 					<h2>Autor: {{ rifa.autor }}</h2>
@@ -56,8 +61,5 @@
 
 				<!--input type="button" name="btnConc" id="btnConc" onclick="modalfOpen()" disabled="true"-->
 			</form>
-			<div class="subBtn">
-				<label class="lblSub" for="btnConc" onclick="modalfOpen(this)">Concluir</label>
-			</div>
 	</div>
 {% endfor %}
