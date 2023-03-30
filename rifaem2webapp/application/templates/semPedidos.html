@@ -1,12 +1,18 @@
 <link rel="stylesheet" href="../static/css/semPedidos.css">
 
-<div class="centerContainer">
-    <img src="">
-    <h1>Não há nenhum pedido ainda!</h1>
-    <h2>É necessário comprar alguma cota de rifa para ver seus pedidos.</h2>
-    <div>
-        <a href="{{ url_for('index') }}{{'#rifas'}}">
-            <button class="btnVerRifas">VER RIFAS</button>
-        </a>
+<div class="bgContainer">
+    <div class="centerContainer">
+        
+        <svg id="svgCarrinho" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 701.34 973.74">
+            <path class="a" d="M792,1277.93c-12.65-9.82-29.36-15.22-47-15.22H387.27L277.05,953.77H189.33v16.39H265.5L375.72,1279.1H744.93c28.24,0,51.21,17,51.21,37.9s-23,37.9-51.21,37.9H381.34v16.38H463a42.21,42.21,0,1,0,51.55,0H648.21a42.2,42.2,0,1,0,51.55,0h45.17c17.67,0,34.38-5.4,47-15.22,13.26-10.29,20.57-24.16,20.57-39.06S805.22,1288.22,792,1277.93ZM488.78,1430.48a25.82,25.82,0,1,1,25.82-25.81A25.84,25.84,0,0,1,488.78,1430.48Zm185.2,0a25.82,25.82,0,1,1,25.81-25.81A25.84,25.84,0,0,1,674,1430.48Z" transform="translate(-189.33 -473.13)"/><path class="a" d="M628.64,862.39l-72-210L346,724.66l72,210ZM548.44,669.1l63.72,185.75L426.42,918.57,362.7,732.82Z" transform="translate(-189.33 -473.13)"/><rect class="a" x="385.87" y="731.91" width="47.94" height="47.94" transform="translate(-412.44 -299.24) rotate(-18.94)"/><rect class="a" x="443.64" y="712.09" width="47.94" height="47.94" transform="translate(-402.88 -281.56) rotate(-18.94)"/><rect class="a" x="501.41" y="692.27" width="47.94" height="47.94" transform="translate(-393.32 -263.89) rotate(-18.94)"/><rect class="a" x="405.69" y="789.68" width="47.94" height="47.94" transform="translate(-430.11 -289.68) rotate(-18.94)"/><rect class="a" x="463.46" y="769.86" width="47.94" height="47.94" transform="translate(-420.55 -272.01) rotate(-18.94)"/><rect class="a" x="521.23" y="750.04" width="47.94" height="47.94" transform="translate(-410.99 -254.33) rotate(-18.94)"/><rect class="a" x="425.51" y="847.46" width="47.94" height="47.94" transform="translate(-447.78 -280.12) rotate(-18.94)"/><rect class="a" x="483.28" y="827.64" width="47.94" height="47.94" transform="translate(-438.23 -262.45) rotate(-18.94)"/><rect class="a" x="541.05" y="807.82" width="47.94" height="47.94" transform="translate(-428.67 -244.77) rotate(-18.94)"/><path class="a" d="M890.67,553.85,683.18,473.13,602.7,680l207.49,80.72ZM619.46,673.14l71.2-183,183,71.19-71.2,183Z" transform="translate(-189.33 -473.13)"/><rect class="a" x="687.82" y="514.2" width="47.94" height="47.94" transform="translate(-237.16 533.28) rotate(-68.74)"/><rect class="a" x="744.74" y="536.34" width="47.94" height="47.94" transform="translate(-221.52 600.44) rotate(-68.74)"/><rect class="a" x="801.66" y="558.49" width="47.94" height="47.94" transform="translate(-205.87 667.6) rotate(-68.74)"/><rect class="a" x="665.67" y="571.12" width="47.94" height="47.94" transform="translate(-304.33 548.92) rotate(-68.74)"/><rect class="a" x="722.59" y="593.27" width="47.94" height="47.94" transform="translate(-288.68 616.09) rotate(-68.74)"/><rect class="a" x="779.52" y="615.41" width="47.94" height="47.94" transform="translate(-273.03 683.25) rotate(-68.74)"/><rect class="a" x="643.53" y="628.04" width="47.94" height="47.94" transform="translate(-371.49 564.57) rotate(-68.74)"/><rect class="a" x="700.45" y="650.19" width="47.94" height="47.94" transform="translate(-355.85 631.73) rotate(-68.74)"/><rect class="a" x="757.37" y="672.33" width="47.94" height="47.94" transform="translate(-340.2 698.9) rotate(-68.74)"/><polygon class="a" points="340.15 760.17 346.41 760.17 437.81 760.17 444.07 760.17 449.44 702.83 334.78 702.83 340.15 760.17"/><polygon class="a" points="456.59 760.17 462.85 760.17 554.25 760.17 569.83 706.86 571.01 702.83 463.26 702.83 456.59 760.17"/><polygon class="a" points="464.21 694.61 573.41 694.61 574.64 690.42 594.62 622.04 596.15 616.8 473.25 616.8 464.21 694.61"/><polygon class="a" points="310.97 616.8 188.07 616.8 189.6 622.04 209.59 690.42 210.81 694.61 320.01 694.61 310.97 616.8"/><polygon class="a" points="213.21 702.83 214.39 706.86 229.97 760.17 321.37 760.17 327.63 760.17 320.97 702.83 213.21 702.83"/><polygon class="a" points="298.52 509.72 289.44 509.72 156.78 509.72 183.34 600.61 184.94 606.09 309.72 606.09 298.52 509.72"/><polygon class="a" points="458.5 606.09 467.53 509.72 458.44 509.72 325.78 509.72 316.7 509.72 325.72 606.09 458.5 606.09"/><polygon class="a" points="485.7 509.72 474.5 606.09 599.28 606.09 600.88 600.61 627.44 509.72 494.78 509.72 485.7 509.72"/><polygon class="a" points="326.73 616.8 334.01 694.61 450.21 694.61 457.5 616.8 326.73 616.8"/><path class="a" d="M825.27,953.77H300l5,14.8,4.82,14.28,84.49,250.45,2.22,6.59,2.17,6.43H764.24l2.17-6.43,2.22-6.59,84.49-250.45,4.81-14.28,5-14.8H825.27Zm9.67,29.08L756.11,1233.3l-2.08,6.59H408.85l-2.07-6.59L327.94,982.85l-4.5-14.28h516Z" transform="translate(-189.33 -473.13)"/>
+        </svg>
+
+        <h1>Não há nenhum pedido ainda!</h1>
+        <h2>É necessário comprar alguma cota de rifa para ver seus pedidos.</h2>
+        <div>
+            <a href="{{ url_for('index') }}{{'#rifas'}}">
+                <button class="btnVerRifas">ACESSAR RIFAS</button>
+            </a>
+        </div>
     </div>
 </div>

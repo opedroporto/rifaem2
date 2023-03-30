@@ -1,9 +1,3 @@
-:root {
-    --lado-quadrado: 5em;
-    --borda-quadrado: 0.4em;
-    --cor-quadrado: #ccc;
-}
-
 @keyframes quadrado {
     0% {
         top: 0%;
