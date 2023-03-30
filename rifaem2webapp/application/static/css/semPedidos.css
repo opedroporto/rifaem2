@@ -1,5 +1,6 @@
 .centerContainer {
     display: flex;
+	height: clamp(250px, 60vw, 500px);
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -29,6 +30,7 @@
 }
 #svgCarrinho {
     width: 50%;
+	min-height: 200px;
 }
 #svgCarrinho .a {
     fill: var(--bg-color);
