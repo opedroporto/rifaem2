@@ -30,6 +30,7 @@ def converte_string_para_data(data_str):
 def converte_fuso_horario_br(data):
     return data.astimezone(ZoneInfo("America/Sao_Paulo"))
 
+
 def pedido_esta_pendente(dataPedido):
     dataPedido = converte_string_para_data(dataPedido)
     dataPedido = converte_fuso_horario_br(dataPedido)

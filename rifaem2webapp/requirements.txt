@@ -8,3 +8,4 @@ python-dotenv
 regex
 backports.zoneinfo
 tzdata
+email_validator

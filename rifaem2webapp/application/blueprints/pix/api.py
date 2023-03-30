@@ -23,7 +23,7 @@ def carrega_rifas(pagina: int=0, quantidade: int=0):
     except:
         return {}
     
-def pedido(data):
+def faz_pedido(data):
     url = os.getenv("PIX_API_URL") + "pedido"
     resposta = requests.post(url, json=data, headers=headers)
     resposta = resposta.json()

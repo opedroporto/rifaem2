@@ -151,6 +151,16 @@ form.modalForm input {
     padding-inline: .8rem;
 }
 
+form.modalForm input {border:0;outline:0;}
+form.modalForm input:focus {outline:none!important;}
+
+form.modalForm input:valid {
+    border: green 1px solid;
+}
+form.modalForm input:invalid {
+    border: red 1px solid;
+}
+
 input#btnEnviar {
     height: 45%;
 	max-height: 58px;
