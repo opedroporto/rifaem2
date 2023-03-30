@@ -3,6 +3,8 @@ const modalFinish = document.querySelector(".modalBgF");
 const modalPix = document.querySelector(".modalbgPix");
 //const modalbtnClose = document.getElementById("btnClose");
 const btnReset = document.querySelector(".resetNums");
+const backArrow = document.querySelectorAll(".backLabel");
+const forwardsArrow = document.querySelectorAll(".forwardsLabel");
 
 const numsRifa = [];
 let numAtualEl;
@@ -129,8 +131,40 @@ const mascaraTelefone = (value) => {
 }
 */
 
+function checaSetas(){
+	const rifas = document.querySelectorAll(".rifas");
+	for(let n=0; n < rifas.length; n++) {
+		const slides = rifas.querySelectorAll(".slides");
+		if(slides[n].length > 1) {
+			backArrow[n].style.display = "none";
+			forwardsArrow[n].style.display = "grid";
+		}
+		else{
+			backArrow[n].style.display = "none";
+			forwardsArrow[n].style.display = "none";
+		}
+		console.log(slides);
+		console.log(rifas);
+	}
+};
+
+window.addEventListener('load', checaSetas);
+const nodeAlvo = document.querySelector(".principal");
+const observador = new MutationObserver((mutations) => {
+	mutations.forEach((mutation) => {
+		window.addEventListener('load', checaSetas);
+	});
+});
+const configObservador = { childList: true, subtree: true };
+
+observador.observe(nodeAlvo, configObservador);
+
+
+
+
 // máscara telefone
 
 $(":input").inputmask();
 
 $("#telefone").inputmask({"mask": "(99) 99999-9999", "Regex": "^\(?\d{2}\)?[\s-]?[\s9]?\d{4}-?\d{4}$"});
+

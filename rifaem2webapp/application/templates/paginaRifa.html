@@ -28,16 +28,18 @@
 			{% else %}
 				{% set temp = quantidadeSlides.append(rifa.numeroMaximo // numLimite.value + 1) %}
 			{% endif %}
-
+				<label for="back" class="backLabel"><i class="fa-solid fa-chevron-left"></i></label>
+				<label for="forwards" class="forwardsLabel"><i class="fa-solid fa-chevron-right"></i></label>
 			{# renderiza números #}
-			<form class="rifaGrid" style="width: {{ 100 * quantidadeSlides[0] }}%">
+			<form class="rifaGrid" style="width: {{ 98 * quantidadeSlides[0] }}%">
 
-				<input type="radio" style="display: none;" id="back" class="slideBack" checked>
+				<input type="radio" style="display: none;" id="back" class="slideBack">
 				<input type="radio" style="display: none;" id="forwards" class="slideForwards">
+				
 				
 				{# cada slide #}
 				{% for slideAtual in range(0, quantidadeSlides[0]) %}
-					<div class="slides">
+					<div class="slides" style="width: calc(100% - .{{ quantidadeSlides[0] }}%);">
 						{% set numeroEspecial = {} %}
 						
 						{# define comeco e fim de cada slide #}
