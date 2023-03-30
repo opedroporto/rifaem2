@@ -1,3 +1,7 @@
+"""
+    Definição dos forms
+"""
+
 from flask_wtf import FlaskForm
 from wtforms import StringField, TelField, EmailField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, Regexp

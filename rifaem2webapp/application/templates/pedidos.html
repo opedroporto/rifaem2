@@ -3,7 +3,7 @@
             {% block links %}
                 <link rel="stylesheet" href="../static/css/variaveis.css">
                 <link rel="stylesheet" href="../static/css/headerOthers.css">
-				 <link rel="stylesheet" href="../static/css/pedidos.css">
+				<link rel="stylesheet" href="../static/css/pedidos.css">
             {% endblock %}
 
             {% block title %}
@@ -47,7 +47,7 @@
 							<hr class="outerHr">
                         {% endfor %}
                     {% else %}
-                        <p style="text-align:center;">Não há nenhum pedido ainda.</p>
+						{% include 'semPedidos.html' %}
                     {% endif %}
                 </main>
 				
