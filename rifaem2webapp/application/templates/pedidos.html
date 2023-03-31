@@ -35,7 +35,7 @@
 									<p>ID:  <span> {{ pedido.txid }}  </span> </p>
 									<img src="{{ pedido.qrcode }}">
 									<p>Pix Copia e Cola: <span class="copiar" title="Copiar" data-position="{{ loop.index }}" onclick="copy(this)"> {{ pedido.copiaecola }}  </span> </p>
-									<i class="fa-solid fa-copy"> Copiar</i>
+									<i class="fa-solid fa-copy" style="cursor: pointer;" onclick="copy(this.previousElementSibling.firstElementChild)"> Copiar</i>
 									{% if pedido.status|upper == "PAGO" %}
 										<p>Status:  <span class="minor status"> {{ pedido.status }}  </span> </p>
 									{% elif pedido_esta_pendente(pedido.dataPedido) %}
@@ -81,18 +81,19 @@
 						});
 						spanCopy[i].addEventListener("mouseleave", function(e) {
 							if(outerPart[i].getAttribute("data-status") === "NP"){
-								copyIcon[i].style.color = "#260000";
+								copyIcon[i].style.color = "";
 							}
 							else if(outerPart[i].getAttribute("data-status") === "P"){
-								copyIcon[i].style.color = "rgb(58 62 1)";
+								copyIcon[i].style.color = "";
 							}
 							else{
-								copyIcon[i].style.color = "#00261e";
+								copyIcon[i].style.color = "";
 							}
 						});
 						
 					}
 					function copy(that){
+						console.log(this, that)
 						var inp =document.createElement('input');
 						document.body.appendChild(inp);
 						inp.value = that.textContent;
