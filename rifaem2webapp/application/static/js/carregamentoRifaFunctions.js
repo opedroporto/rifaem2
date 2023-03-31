@@ -47,6 +47,7 @@ function carregaRifas() {
 			document.querySelector(".principal").insertAdjacentHTML("beforeend", data);
 
 			fimCarregamentoPaginaRifas();
+			checaSetas();
 			desabilitaNumeros();
 			desabilitaOutrasRifas();
 		})
@@ -81,7 +82,7 @@ function desabilitaNumeros() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-	//carregaRifas();
+	checaSetas();
 	
 	document.querySelectorAll(".modalForm").forEach((form) => {
 		form.addEventListener("submit", event => {

@@ -5,8 +5,9 @@
 from flask import request, render_template, abort
 
 from ...ext.session import session
+from ...ext.form.form import RequisitaCompraForm
+from ...ext.email import email
 from ...blueprints.pix.api import faz_pedido, carrega_rifas, lista_pedidos
-from ...blueprints.form.form import RequisitaCompraForm
 
 
 def init_app(app):
@@ -50,7 +51,6 @@ def init_app(app):
     @app.route("/requisita-compra", methods=["POST"])
     def requisita_compra():
         dados = request.get_json()
-
         form = RequisitaCompraForm()
 
         # FORM VÁLIDO
@@ -65,6 +65,7 @@ def init_app(app):
                 }
 
                 session.addPedido(resposta['result']['txid'])
+                email.enviar()
 
                 return dados_pix
             # erro

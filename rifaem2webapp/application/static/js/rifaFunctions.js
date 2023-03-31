@@ -131,23 +131,27 @@ const mascaraTelefone = (value) => {
 }
 */
 
-function checaSetas(){
-	const rifas = document.querySelectorAll(".rifas");
-	for(let n=0; n < rifas.length; n++) {
-		const slides = rifas.querySelectorAll(".slides");
-		if(slides[n].length > 1) {
-			backArrow[n].style.display = "none";
-			forwardsArrow[n].style.display = "grid";
+function checaSetas() {
+	// cada rifa
+	document.querySelectorAll(".rifa").forEach((rifa) => {
+		// define variaveis
+		let quantidadeSlides = rifa.querySelectorAll(".slides").length;
+		let backArrowEl = rifa.querySelector(".backLabel");
+		let forwardsArrowEl = rifa.querySelector(".forwardsLabel");
+
+		// modifica setas
+		if (quantidadeSlides > 1) {
+			backArrowEl.style.display = "none";
+			forwardsArrowEl.style.display = "grid";
 		}
-		else{
-			backArrow[n].style.display = "none";
-			forwardsArrow[n].style.display = "none";
+		else {
+			backArrowEl.style.display = "none";
+			forwardsArrowEl.style.display = "none";
 		}
-		console.log(slides);
-		console.log(rifas);
-	}
+	});
 };
 
+/*
 window.addEventListener('load', checaSetas);
 const nodeAlvo = document.querySelector(".principal");
 const observador = new MutationObserver((mutations) => {
@@ -158,8 +162,7 @@ const observador = new MutationObserver((mutations) => {
 const configObservador = { childList: true, subtree: true };
 
 observador.observe(nodeAlvo, configObservador);
-
-
+*/
 
 
 // máscara telefone
