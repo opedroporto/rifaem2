@@ -37,9 +37,9 @@
 									<p>Pix Copia e Cola: <span class="copiar" title="Copiar" data-position="{{ loop.index }}" onclick="copy(this)"> {{ pedido.copiaecola }}  </span> </p>
 									<i class="fa-solid fa-copy"> Copiar</i>
 									{% if pedido_esta_pendente(pedido.dataPedido) %}
-										<p>Status:  <span class="minor"> PENDENTE  </span> </p>
+										<p>Status:  <span class="minor status"> PENDENTE  </span> </p>
 									{% else %}
-									    <p>Status:  <span class="minor"> {{ pedido.status }}  </span> </p>
+									    <p>Status:  <span class="minor status"> {{ pedido.status }}  </span> </p>
 									{% endif %}
 									<hr>
 								</div>
@@ -52,16 +52,43 @@
                 </main>
 				
 				<script>
+					const status = document.querySelectorAll(".status");
+					const outerPart = document.querySelectorAll(".outerPart");
 					const spanCopy = document.querySelectorAll(".copiar");
 					const copyIcon = document.querySelectorAll(".fa-solid.fa-copy");
-					
+
 					for(let i=0; i<spanCopy.length; i++){
+					
+						if(status[i].textContent === " não pago  "){
+							outerPart[i].setAttribute("data-status", "NP");
+						}
+						if(status[i].textContent === " PENDENTE  "){
+							outerPart[i].setAttribute("data-status", "P");
+						}
+					
 						spanCopy[i].addEventListener("mouseover", function(e) {
-							copyIcon[i].style.color = "#3aa15a";
+							if(outerPart[i].getAttribute("data-status") === "NP"){
+								copyIcon[i].style.color = "#a13a3a";
+							}
+							else if(outerPart[i].getAttribute("data-status") === "P"){
+								copyIcon[i].style.color = "#dfbb3b";
+							}
+							else{
+								copyIcon[i].style.color = "#3aa15a";
+							}
 						});
 						spanCopy[i].addEventListener("mouseleave", function(e) {
-							copyIcon[i].style.color = "#00261e";
+							if(outerPart[i].getAttribute("data-status") === "NP"){
+								copyIcon[i].style.color = "#260000";
+							}
+							else if(outerPart[i].getAttribute("data-status") === "P"){
+								copyIcon[i].style.color = "rgb(58 62 1)";
+							}
+							else{
+								copyIcon[i].style.color = "#00261e";
+							}
 						});
+						
 					}
 					function copy(that){
 						var inp =document.createElement('input');

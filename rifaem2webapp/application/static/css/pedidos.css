@@ -268,3 +268,63 @@ i.fa-solid.fa-copy {
 		bottom: -15%;
 	}
 }
+
+/*MUDANDO AS CORES*/
+
+/*VERMELHO*/
+.outerPart[data-status="NP"]{
+	border: 10px solid #5c2121;
+}
+.outerPart[data-status="NP"] .container {
+	background: #5a1b1b;
+}
+.outerPart[data-status="NP"] .container p {
+	color: #320a0a;
+}
+.outerPart[data-status="NP"] .container span {
+	color: #a13a3a;
+}
+.outerPart[data-status="NP"] .container span.copiar:hover {
+	color: #bd4646;
+}
+.outerPart[data-status="NP"] .container .numDisplay div {
+	color: #a13a3a;
+}
+.outerPart[data-status="NP"] .container hr {
+	background: #a13a3a;
+}
+.outerPart[data-status="NP"] .container img {
+	border: 10px dotted #8cd5ce;
+}
+.outerPart[data-status="NP"] .container i.fa-solid.fa-copy {
+	color: #260000;
+}
+
+/*AMARELO*/
+.outerPart[data-status="P"]{
+	border: 10px solid #8f8b22;
+}
+.outerPart[data-status="P"] .container {
+	background: #8f8812;
+}
+.outerPart[data-status="P"] .container p {
+	color: #504c00;
+}
+.outerPart[data-status="P"] .container span {
+	color: #dfbb3b;
+}
+.outerPart[data-status="P"] .container span.copiar:hover {
+	color: #f3ce49;
+}
+.outerPart[data-status="P"] .container .numDisplay div {
+	color: #dfbb3b;
+}
+.outerPart[data-status="P"] .container hr {
+	background: #dfbb3b;
+}
+.outerPart[data-status="P"] .container img {
+	border: 10px dotted #533eff9c;
+}
+.outerPart[data-status="P"] .container i.fa-solid.fa-copy {
+	color: rgb(58 62 1);
+}

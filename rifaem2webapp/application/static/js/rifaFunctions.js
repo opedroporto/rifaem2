@@ -151,20 +151,29 @@ function checaSetas() {
 	});
 };
 
-const det = 1;
+let det = 1;
+let valor = 100;
 
-function rifaForward(t) {
-	det++;
-	const pai = t.parentNode;
-	pai.classList.add("on");
-	let labelB = t.parentNode.parentNode.querySelector('.backLabel');
-	labelB.style.display = "grid";
-	if(pai.classList.contains("on") && pai.querySelectorAll(".slides").length > det){
-		let valor += 100;
-		document.documentElement.style.setProperty('--margin-slide', valor + "%");
-	}
-	console.log(t, pai, labelB);
+
+for(let h = 0; h < forwardsArrow.length; h++){
+	forwardsArrow[h].addEventListener("click", function() {
+		det++;
+		this.style.setProperty('data-click', 'clicado');
+	
+		const pai = this.parentNode;
+		pai.classList.add("on");
+			
+		let labelB = this.parentNode.parentNode.querySelector('.backLabel');
+		labelB.style.display = "grid";
+			
+		if(pai.classList.contains("on") && pai.querySelectorAll(".slides").length > det){
+			document.documentElement.style.setProperty('--margin-slide', valor + "%");
+			valor + 100;
+		}
+		console.log(this, pai, labelB);	
+	})
 }
+	
 
 /*
 window.addEventListener('load', checaSetas);
