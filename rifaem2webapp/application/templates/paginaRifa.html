@@ -64,9 +64,19 @@
 
 							{# renderiza número #}
 							{% if numeroEspecial != {} %}
-								<input class="numero" style="background-color: {{ rifa.cor }};" type="button" data-state="{{ numeroEspecial.status }}" data-nome="{{ numeroEspecial.nome }}" value="{{ j }}">
+								<div class="tooltip">
+									<span class="tooltips">
+										<p> {{ numeroEspecial.status }} </p>
+									</span>
+									<input class="numero" style="background-color: {{ rifa.cor }};" type="button" data-state="{{ numeroEspecial.status }}" data-nome="{{ numeroEspecial.nome }}" value="{{ j }}">
+								</div>
 							{% else %}
-								<input class="numero" style="background-color: {{ rifa.cor }};" type="button" data-state="free" onclick="modalcOpen(this)" value="{{ j }}">
+								<div class="tooltip">
+									<span class="tooltips">
+										<p> disponível </p>
+									</span>
+									<input class="numero" style="background-color: {{ rifa.cor }};" type="button" data-state="free" onclick="modalcOpen(this)" value="{{ j }}">
+								</div>
 							{% endif %}
 
 						{% endfor %}

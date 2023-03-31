@@ -84,6 +84,6 @@ def init_app(app):
 
         if pedidos_txid:
             pedidos = lista_pedidos(pedidos_txid)
-            return render_template("pedidos.html", pedidos=pedidos),
+            return render_template("pedidos.html", pedidos=pedidos)
 
         return render_template("pedidos.html")

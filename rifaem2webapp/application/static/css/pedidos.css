@@ -302,10 +302,11 @@ i.fa-solid.fa-copy {
 
 /*AMARELO*/
 .outerPart[data-status="P"]{
-	border: 10px solid #8f8b22;
+	border: 10px solid #817d1b;
+    filter: hue-rotate(320deg);
 }
 .outerPart[data-status="P"] .container {
-	background: #8f8812;
+	background: #857e12;
 }
 .outerPart[data-status="P"] .container p {
 	color: #504c00;
@@ -323,7 +324,7 @@ i.fa-solid.fa-copy {
 	background: #dfbb3b;
 }
 .outerPart[data-status="P"] .container img {
-	border: 10px dotted #533eff9c;
+	border: 10px dotted #2b1e939c;
 }
 .outerPart[data-status="P"] .container i.fa-solid.fa-copy {
 	color: rgb(58 62 1);
