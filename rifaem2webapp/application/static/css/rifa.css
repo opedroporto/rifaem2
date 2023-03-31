@@ -1,6 +1,10 @@
 
 /* RIFAS */
 
+:root {
+	--margin-slide: 100%;
+}
+
 #rifas {
     background-color: var(--first-font-color)
 }
@@ -23,6 +27,7 @@ form.rifaGrid {
     display: flex;
 	position: relative;
 	grid-area: rifa;
+	column-gap: 1.3rem;
     justify-content: center;
     align-items: center;
     padding-inline: 1.5rem;
