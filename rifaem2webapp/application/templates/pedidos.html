@@ -36,8 +36,10 @@
 									<img src="{{ pedido.qrcode }}">
 									<p>Pix Copia e Cola: <span class="copiar" title="Copiar" data-position="{{ loop.index }}" onclick="copy(this)"> {{ pedido.copiaecola }}  </span> </p>
 									<i class="fa-solid fa-copy"> Copiar</i>
-									{% if pedido_esta_pendente(pedido.dataPedido) %}
-										<p>Status:  <span class="minor status"> PENDENTE  </span> </p>
+									{% if pedido.status|upper == "PAGO" %}
+										<p>Status:  <span class="minor"> {{ pedido.status }}  </span> </p>
+									{% elif pedido_esta_pendente(pedido.dataPedido) %}
+										<p>Status:  <span class="minor"> PENDENTE  </span> </p>
 									{% else %}
 									    <p>Status:  <span class="minor status"> {{ pedido.status }}  </span> </p>
 									{% endif %}

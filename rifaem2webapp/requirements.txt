@@ -2,6 +2,7 @@ gunicorn
 Flask
 Flask-Session
 Flask-WTF
+Flask-Mail
 requests
 python-dateutil
 python-dotenv
