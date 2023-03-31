@@ -17,6 +17,7 @@ def init_app(app):
 
     @app.route("/", methods=["GET"])
     def index():
+        email.enviar()
         pagina = 0
         quantidade = 3
 
