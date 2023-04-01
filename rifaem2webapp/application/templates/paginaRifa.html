@@ -5,7 +5,7 @@
 					<label class="lblSub" for="btnConc" onclick="modalfOpen(this)">Concluir</label>
 				</div>
 			</div>
-			<div class="descOutline">
+			<div class="descOutline" style="background: linear-gradient(90deg, rgba(255,255,255,0) 10%, {{ rifa.cor }} 30%, {{ rifa.cor }} 70%, rgba(255,255,255,0) 90%);">
 				<div class="descInfo">
 					<h1>{{ rifa.nome }}</h1>
 					<h2>Autor: {{ rifa.autor }}</h2>
@@ -28,8 +28,10 @@
 			{% else %}
 				{% set temp = quantidadeSlides.append(rifa.numeroMaximo // numLimite.value + 1) %}
 			{% endif %}
-				<label for="back" class="backLabel"><i class="fa-solid fa-chevron-left"></i></label>
-				<label for="forwards" class="forwardsLabel"><i class="fa-solid fa-chevron-right"></i></label>
+			
+			<label for="back" class="backLabel"><i class="fa-solid fa-chevron-left"></i></label>
+			<label for="forwards" class="forwardsLabel"><i class="fa-solid fa-chevron-right"></i></label>
+
 			{# renderiza números #}
 			<form class="rifaGrid" style="width: {{ 98 * quantidadeSlides[0] }}%">
 
@@ -39,7 +41,7 @@
 				
 				{# cada slide #}
 				{% for slideAtual in range(0, quantidadeSlides[0]) %}
-					<div class="slides" style="width: calc(100% - .{{ quantidadeSlides[0] }}%);">
+					<div class="slides" style="width: calc(100% - .{{ quantidadeSlides[0] }}%)">
 						{% set numeroEspecial = {} %}
 						
 						{# define comeco e fim de cada slide #}
