@@ -180,6 +180,15 @@ i.fa-solid.fa-copy {
     right: 0;
     bottom: 40%;
 }
+i.fa-solid.fa-copy:hover {
+    position: absolute;
+    grid-area: copia;
+    font-size: clamp(1rem, 2vw + .1rem, 1.4rem);
+    color: #3aa15a;
+	transition: color 0.4s;
+    right: 0;
+    bottom: 40%;
+}
 
 @media(max-width: 974px) {
 	.container p:nth-of-type(4) {
@@ -299,6 +308,9 @@ i.fa-solid.fa-copy {
 .outerPart[data-status="NP"] .container i.fa-solid.fa-copy {
 	color: #260000;
 }
+.outerPart[data-status="NP"] .container i.fa-solid.fa-copy:hover {
+	color: #a13a3a;
+}
 
 /*AMARELO*/
 .outerPart[data-status="P"]{
@@ -328,4 +340,7 @@ i.fa-solid.fa-copy {
 }
 .outerPart[data-status="P"] .container i.fa-solid.fa-copy {
 	color: rgb(58 62 1);
+}
+.outerPart[data-status="P"] .container i.fa-solid.fa-copy:hover {
+	color: #dfbb3b;
 }
