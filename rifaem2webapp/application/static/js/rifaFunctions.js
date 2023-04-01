@@ -3,8 +3,6 @@ const modalFinish = document.querySelector(".modalBgF");
 const modalPix = document.querySelector(".modalbgPix");
 //const modalbtnClose = document.getElementById("btnClose");
 const btnReset = document.querySelector(".resetNums");
-const backArrow = document.querySelectorAll(".backLabel");
-const forwardsArrow = document.querySelectorAll(".forwardsLabel");
 
 const numsRifa = [];
 let numAtualEl;
@@ -116,6 +114,18 @@ function modalCloseF() {
 	modalFinish.classList.remove("on");
 }
 
+function checaTamanho() {
+	const rifaGrid = document.querySelectorAll(".rifaGrid");
+	
+	for(let i=0; i < rifaGrid.length; i++){
+		const slidesNum = rifaGrid[i].querySelectorAll(".slides").length;
+		
+		if(slidesNum == 1){
+			rifaGrid[i].style.overflowX = "hidden";
+		}
+	}
+}
+
 /*
 const digitaTelefone = (event) => {
 	let input = event.target
@@ -130,26 +140,6 @@ const mascaraTelefone = (value) => {
 	return value
 }
 */
-
-function checaSetas() {
-	// cada rifa
-	document.querySelectorAll(".rifa").forEach((rifa) => {
-		// define variaveis
-		let quantidadeSlides = rifa.querySelectorAll(".slides").length;
-		let backArrowEl = rifa.querySelector(".backLabel");
-		let forwardsArrowEl = rifa.querySelector(".forwardsLabel");
-
-		// modifica setas
-		if (quantidadeSlides > 1) {
-			backArrowEl.style.display = "none";
-			forwardsArrowEl.style.display = "grid";
-		}
-		else {
-			backArrowEl.style.display = "none";
-			forwardsArrowEl.style.display = "none";
-		}
-	});
-};
 
 // máscara telefone
 
