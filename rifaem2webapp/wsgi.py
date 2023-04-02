@@ -4,7 +4,6 @@ from flask import Flask
 
 from application.ext.session import session
 from application.ext.csfr import csfr
-from application.ext.email import email
 from application.blueprints.util import util
 from application.blueprints.view import view
 
@@ -20,7 +19,6 @@ def create_app():
     util.init_app(app)
     session.init_app(app)
     csfr.init_app(app)
-    email.init_app(app)
     view.init_app(app)
 
     return app

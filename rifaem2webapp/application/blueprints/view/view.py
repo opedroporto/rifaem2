@@ -6,7 +6,7 @@ from flask import request, render_template, abort
 
 from ...ext.session import session
 from ...ext.form.form import RequisitaCompraForm
-from ...ext.email import email
+from ...ext.email.email import Email
 from ...blueprints.pix.api import faz_pedido, carrega_rifas, lista_pedidos
 
 
@@ -14,10 +14,11 @@ def init_app(app):
     """
         Definição das views
     """
+    email = Email()
+    email.init_app(app)
 
     @app.route("/", methods=["GET"])
     def index():
-        email.enviar()
         pagina = 0
         quantidade = 3
 
@@ -65,9 +66,9 @@ def init_app(app):
                     "copiaecola": resposta['result']['copiaecola'],
                 }
 
+                # SUCESSO
                 session.addPedido(resposta['result']['txid'])
-                email.enviar()
-
+                email.enviar("portopdr@gmail.com", dados)
                 return dados_pix
             # erro
             except NameError:
