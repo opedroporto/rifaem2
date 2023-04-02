@@ -1,10 +1,6 @@
 
 /* RIFAS */
 
-:root {
-	--margin-slide: 100%;
-}
-
 #rifas {
     background-color: var(--first-font-color)
 }
@@ -14,33 +10,53 @@
 }
 .rifa {
     display: grid;
-    grid-template-columns: 1.058fr 2% 3fr 2%;
+    grid-template-columns: 1fr 3fr;
     grid-template-rows: 20%;
     grid-template-areas:
-        "foto desc desc desc"
-        "foto back rifa forwards";
+        "foto desc"
+        "foto rifa";
     position: relative;
     height: 100vh;
 }
 
 form.rifaGrid {
     display: flex;
-	position: relative;
-	grid-area: rifa;
-	column-gap: 1.3rem;
-    justify-content: center;
-    align-items: center;
-    padding-inline: 1.5rem;
+    position: relative;
+    grid-area: rifa;
+    column-gap: 1.3rem;
+    justify-content: flex-start;
+    overflow-x: scroll;
+    align-items: start;
+    padding-top: 5rem;
+    padding-inline: 1rem;
+	scroll-snap-type: x mandatory;
 }
+form.rifaGrid::-webkit-scrollbar {
+    width: 1em;
+    height: 1.9rem;
+}
+form.rifaGrid::-webkit-scrollbar-track {
+    margin-inline: 2rem;
+}
+
+form.rifaGrid::-webkit-scrollbar-thumb {
+    border-radius: 1rem 1rem 0 0;
+    border-bottom: 10px solid #fff;
+	background-color: var(--bg-color);
+}
+
 .slides {
     display: flex;
+	scroll-snap-align: start;
     flex-wrap: wrap;
-    gap: .4rem .6rem;
+	padding-left: .8rem;
+    min-width: 99%;
+    gap: .4rem .5rem;
     justify-content: center;
     align-items: center;
 }
 form.rifaGrid .slides input {
-    width: 38px;
+    width: 41px;
     border: none;
     aspect-ratio: 1 / 1;
     border-radius: 1.2rem;
@@ -109,13 +125,13 @@ input#btnConc {
     height: 100px;
     position: absolute;
     bottom: 1rem;
-    left: 13rem;
+    left: 11.1rem;
 }
 
 .lblSub {
 	height: 5rem;
-    width: 15%;	
-	min-width: 120px;
+    width: 20%;
+    min-width: 160px;
     background: #7f9584;
     border-radius: .3rem;
     display: grid;
@@ -173,23 +189,6 @@ button.resetNums:hover {
     background-size: 160%;
     letter-spacing: 0px;
 }
-label[for="back"] {
-    grid-area: back;
-}
-label[for="forwards"]{
-	grid-area: forwards;
-}
-
-label[for="forwards"],
-label[for="back"] {
-	font-size: 2rem;
-    display: grid;
-    place-items: center;
-    position: relative;
-    background-color: #fff;
-    z-index: 4;
-	color: var(--bg-color);
-}
 
 .tooltip {
 	position: relative;
@@ -207,7 +206,7 @@ span.tooltips {
 	font-size: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
-    top: -50px;
+    top: -47px;
     color: #fff;
     text-align: center;
     padding: 1rem;
