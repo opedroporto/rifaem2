@@ -11,7 +11,7 @@
 .rifa {
     display: grid;
     grid-template-columns: 1fr 3fr;
-    grid-template-rows: 20%;
+    grid-template-rows: 20% 80%;
     grid-template-areas:
         "foto desc"
         "foto rifa";
@@ -26,37 +26,40 @@ form.rifaGrid {
     column-gap: 1.3rem;
     justify-content: flex-start;
     overflow-x: scroll;
+    overflow-y: hidden;
     align-items: start;
     padding-top: 5rem;
+    margin-bottom: 1.4rem;
     padding-inline: 1rem;
-	scroll-snap-type: x mandatory;
+    scroll-snap-type: x mandatory;
 }
 form.rifaGrid::-webkit-scrollbar {
     width: 1em;
-    height: 1.9rem;
+    height: 1rem;
 }
 form.rifaGrid::-webkit-scrollbar-track {
     margin-inline: 2rem;
 }
 
 form.rifaGrid::-webkit-scrollbar-thumb {
-    border-radius: 1rem 1rem 0 0;
-    border-bottom: 10px solid #fff;
+    border-radius: 1rem;
 	background-color: var(--bg-color);
 }
 
 .slides {
     display: flex;
-	scroll-snap-align: start;
+    scroll-snap-align: start;
     flex-wrap: wrap;
-	padding-left: .8rem;
+    padding-left: .8rem;
+    overflow: hidden;
     min-width: 99%;
     gap: .4rem .5rem;
     justify-content: center;
+    padding-inline: 1rem;
     align-items: center;
 }
 form.rifaGrid .slides input {
-    width: 41px;
+    width: clamp(3.7rem, 3vw + .28rem, 4.1rem);
     border: none;
     aspect-ratio: 1 / 1;
     border-radius: 1.2rem;
@@ -125,7 +128,7 @@ input#btnConc {
     height: 100px;
     position: absolute;
     bottom: 1rem;
-    left: 11.1rem;
+    justify-self: center;
 }
 
 .lblSub {
@@ -242,4 +245,58 @@ span.tooltips::before {
 .numero[data-state="reservado"] {
     background: var(--numero-reservado-background)!important;
     cursor: default !important;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 80rem){
+	.description {
+		min-width: calc(243px + 4rem);
+	}
+}
+
+@media (max-width: 1033px){
+	.rifa {
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 20% 80%;
+		grid-template-areas:
+			"foto foto"
+			"rifa rifa";
+		position: relative;
+		height: 100vh;
+	}
+	.descOutline {
+		display: none;
+	}
+	form.rifaGrid .slides input {
+		width: clamp(4.4rem, 3vw + .28rem, 4.6rem);
+	}
+	.subBtn {
+		top: 12rem;
+		bottom: unset;
+	}
+}
+@media (max-width: 884px){
+	form.rifaGrid .slides input {
+		width: clamp(3.8rem, 4vw + .1rem, 4.2rem);
+	}
+}
+@media (max-width: 678px){
+	.rifa {
+		grid-template-rows: 15% 85%;
+	}
+	.subBtn {
+		top: 7rem;
+	}
+	.slides {
+		gap: .4rem .55rem;
+	}
+	form.rifaGrid {
+		padding-top: 3.5rem;
+		overflow-y: scroll;
+	}
+	.description {
+		min-width: 100%;
+	}
 }
