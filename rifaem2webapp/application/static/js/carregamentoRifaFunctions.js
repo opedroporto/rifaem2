@@ -83,6 +83,7 @@ function desabilitaNumeros() {
 
 document.addEventListener("DOMContentLoaded", () => {
 	checaTamanho();
+
 	document.querySelectorAll(".modalForm").forEach((form) => {
 		form.addEventListener("submit", event => {
 			event.preventDefault();
@@ -91,7 +92,9 @@ document.addEventListener("DOMContentLoaded", () => {
 			const data = Object.fromEntries(formData);
 			data.numerosRifa = numsRifa;
 			data.rifa = rifaId;
-			
+			//let nomeRifa = rifaEl.querySelector(".nomeRifa").innerHTML;
+			//data.nomeRifa = nomeRifa;
+
 			fetch("/requisita-compra", {
 				method: "POST",
 				headers: {

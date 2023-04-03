@@ -1,0 +1,11 @@
+<h1>Nova mensagem de um usuário!</h1>
+
+<h2> Dados do usuário:</h2>
+<p>E-mail: {{ dados.email }}</p>
+<p>Nome: {{ dados.nome }}</p>
+<p>Telefone: {{ dados.telefone }}</p>
+
+<h2>Mensagem:</h2>
+{% autoescape false %}
+    <p>{{ dados.mensagem }}</P>
+{% endautoescape %}

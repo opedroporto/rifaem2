@@ -71,33 +71,21 @@ Parse.Cloud.define("lista-rifas", async (req) => {
 	});
 });
 
-/*
-Parse.Cloud.define("rifa", async (req) => {
+
+Parse.Cloud.define("nome-rifa", async (req) => {
 	// verificacoes
 	if (req.user == null) throw "Usuário não autenticado";
 	if (req.user.id != "ongE3YwyDO") throw "Usuário não autenticado";
 	if (req.params.id == null) throw "Rifa inválida";
 
 	// rifa
-	const rifa = new Rifa();
-	rifa.id = req.params.id;
-
-	// numeros da rifa
-	const query = new Parse.Query(Numero);
-	query.equalTo("rifa", rifa);
-	query.select("numeroRifa", "nome", "status");
-	const numerosDados = await query.find({useMasterKey: true});
-
-	return numerosDados.map(function(p) {
-		p = p.toJSON();
-		return {
-			"numeroRifa": p.numeroRifa,
-			"nome": p.nome,
-			"status": p.status
-		}
-	});
+	const query = new Parse.Query(Rifa);
+	query.equalTo("objectId", req.params.id);
+	const rifaDados = await query.first({useMasterKey: true});
+	const nome = rifaDados.toJSON().nome;
+	return nome;
 });
-*/
+
 
 Parse.Cloud.define("pedido", async (req) => {
 	// verificacoes

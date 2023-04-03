@@ -144,6 +144,5 @@ const mascaraTelefone = (value) => {
 // máscara telefone
 
 $(":input").inputmask();
-
 $("#telefone").inputmask({"mask": "(99) 99999-9999", "Regex": "^\(?\d{2}\)?[\s-]?[\s9]?\d{4}-?\d{4}$"});
 

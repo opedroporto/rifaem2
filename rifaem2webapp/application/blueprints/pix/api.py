@@ -41,3 +41,12 @@ def lista_pedidos(pedidosTxid):
     resposta.reverse()
 
     return resposta
+
+def nome_rifa(id):
+    url = os.getenv("PIX_API_URL") + "nome-rifa"
+    data = {"id": id}
+
+    resposta = requests.post(url, json=data, headers=headers)
+    nome = resposta.json()['result']
+
+    return nome

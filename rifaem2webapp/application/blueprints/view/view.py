@@ -2,10 +2,10 @@
     Definição das views
 """
 
-from flask import request, render_template, abort
+from flask import request, render_template, abort, redirect, url_for
 
 from ...ext.session import session
-from ...ext.form.form import RequisitaCompraForm
+from ...ext.form.form import RequisitaCompraForm, EnviaMensagemForm
 from ...ext.email.email import Email
 from ...blueprints.pix.api import faz_pedido, carrega_rifas, lista_pedidos
 
@@ -68,7 +68,7 @@ def init_app(app):
 
                 # SUCESSO
                 session.addPedido(resposta['result']['txid'])
-                email.enviar("portopdr@gmail.com", dados)
+                email.envia_pedido_efetuado(dados['email'], dados)
                 return dados_pix
             # erro
             except NameError:
@@ -89,3 +89,34 @@ def init_app(app):
             return render_template("pedidos.html", pedidos=pedidos)
 
         return render_template("pedidos.html")
+
+    @app.route("/sobre", methods=["GET"])
+    def sobre():
+        form = EnviaMensagemForm()
+        return render_template("sobre.html", form=form)
+        
+    @app.route("/envia-mensagem", methods=["POST"])
+    def envia_mensagem():
+        dado = request.form.to_dict()
+        form = EnviaMensagemForm()
+
+        # FORM VÁLIDO
+        if form.validate():
+            try:
+                email.envia_mensagem_do_usuario({
+                    'email': dado['email'],
+                    'nome': dado['nome'],
+                    'telefone': dado['telefone'],
+                    'mensagem': dado['mensagem']
+                })
+
+                # renderiza página sobre
+                return redirect(url_for("sobre"))
+            # erro
+            except NameError:
+                return abort(422, "Erro ao processar o pedido")
+            except KeyError:
+                return abort(422, "Erro ao processar o pedido")
+        
+        # FORM INVÁLIDO
+        return abort(400, "Erro ao processar o pedido")
