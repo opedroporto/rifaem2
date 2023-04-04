@@ -1,15 +1,18 @@
 {% for rifa in rifas %}
 	<div class="rifa" data-id="{{ rifa.id }}">	
-			<div class="description" style="background-image: url('{{ rifa.imagem }}'); background-size: cover;" >
-				<div class="subBtn">
-					<label class="lblSub" for="btnConc" onclick="modalfOpen(this)">Concluir</label>
+			
+			<button type="button" class="lblSub" onclick="modalfOpen(this)">Concluir</button>
+			
+			<div class="descOutline">
+				<h2 class="preco">R$ {{ rifa.precoNumero }}</h3>
+				<h1 class="nomeRifa">{{ rifa.nome }}</h1>
+				<div class="imgDiv">
+					<hr>
+					<img src="{{ rifa.imagem }}" alt="Imagem da rifa">
+					<i class="fa-solid fa-chevron-right"></i><hr class="last">
 				</div>
-			</div>
-			<div class="descOutline" style="background: linear-gradient(90deg, rgba(255,255,255,0) 10%, {{ rifa.cor }} 30%, {{ rifa.cor }} 70%, rgba(255,255,255,0) 90%);">
 				<div class="descInfo">
-					<h1 class="nomeRifa">{{ rifa.nome }}</h1>
 					<h2>Autor: {{ rifa.autor }}</h2>
-					<h3>Preço: {{ rifa.precoNumero }}</h3>
 					<h4>Data de lançamento: {{ formata_data(rifa.dataLancamento) }}</h4>
 					<h4>Data de Encerramento: {{ formata_data(rifa.dataEncerramento, hora=True) }}</h4>
 				</div>
@@ -18,69 +21,43 @@
 			{# define variável numeros #}
 			{% set numeros = rifa.numeros %}
 
-			{# define limite de números por slide #}
-			{% set numLimite = namespace(value=300) %}
-
-			{# calcula quantidade de slides #}
-			{% set quantidadeSlides = [] %}
-			{% if rifa.numeroMaximo <= numLimite.value %}
-				{% set temp = quantidadeSlides.append(1) %}
-			{% else %}
-				{% set temp = quantidadeSlides.append(rifa.numeroMaximo // numLimite.value + 1) %}
-			{% endif %}
-
 			{# renderiza números #}
 
-			<form class="rifaGrid" style="width: 100%;">
-				
-				{# cada slide #}
-				{% for slideAtual in range(0, quantidadeSlides[0]) %}
-
-						<div class="slides" style="width: 100%">
-						{% set numeroEspecial = {} %}
+			<form class="rifaGrid">
+				<div class="expandRifa">
+					<h2>Clique para expandir rifa</h2>
+					<i class="fa-solid fa-chevron-down"></i>
+				</div>
+				{% set numeroEspecial = {} %}
 						
-						{# define comeco e fim de cada slide #}
-						{% set comecoSlide = (numLimite.value * slideAtual) + 1 %}
-						{% set fimSlide = (numLimite.value * slideAtual) + numLimite.value + 1 %}
+				{# define se há número especial #}
+				
 
-						{# cada slide #}
-						{% for j in range(comecoSlide, fimSlide) %}
+				{% for j in range(0, (rifa.numeroMaximo + 1)) %}
+					{% set numeroEspecial = {} %}		
+					{% for numero in numeros %}
+						{% if numero.numeroRifa == j %}
+							{% set numeroEspecial = numeroEspecial.update(numero) %}
+						{% endif %}
+					{% endfor %}
 
-						    {# fim do slide se slide for menor que o padrão #}
-							{% if j > rifa.numeroMaximo %}
-								{% break %}							
-							{% endif %}
-
-							{# define se há número especial #}
-							{% set numeroEspecial = {} %}
-							{% for numero in numeros %}
-								{% if numero.numeroRifa == j %}
-									{% set numeroEspecial = numeroEspecial.update(numero) %}
-								{% endif %}
-							{% endfor %}
-
-							{# renderiza número #}
-							{% if numeroEspecial != {} %}
-								<div class="tooltip">
-									<span class="tooltips">
-										<p> {{ numeroEspecial.status }} </p>
-									</span>
-									<input class="numero" style="background-color: {{ rifa.cor }};" type="button" data-state="{{ numeroEspecial.status }}" data-nome="{{ numeroEspecial.nome }}" value="{{ j }}">
-								</div>
-							{% else %}
-								<div class="tooltip">
-									<span class="tooltips">
-										<p> disponível </p>
-									</span>
-									<input class="numero" style="background-color: {{ rifa.cor }};" type="button" data-state="free" onclick="modalcOpen(this)" value="{{ j }}">
-								</div>
-							{% endif %}
-
-						{% endfor %}
-					</div>
-					
+					{# renderiza número #}
+					{% if numeroEspecial != {} %}
+						<div class="tooltip">
+							<span class="tooltips">
+								<p> {{ numeroEspecial.status }} </p>
+							</span>
+							<input class="numero" style="background-color: {{ rifa.cor }};" type="button" data-state="{{ numeroEspecial.status }}" data-nome="{{ numeroEspecial.nome }}" value="{{ j }}">
+						</div>
+					{% else %}
+						<div class="tooltip">
+							<span class="tooltips">
+								<p> disponível </p>
+							</span>
+							<input class="numero" style="background-color: {{ rifa.cor }};" type="button" data-state="free" onclick="modalcOpen(this)" value="{{ j }}">
+						</div>
+					{% endif %}
 				{% endfor %}
-
 				<!--input type="button" name="btnConc" id="btnConc" onclick="modalfOpen()" disabled="true"-->
 			</form>
 	</div>
