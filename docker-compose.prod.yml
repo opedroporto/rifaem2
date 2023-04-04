@@ -2,18 +2,24 @@ version: "3"
 
 services:
     rifaem2webapp:
+        container_name: rifaem2webapp
         env_file:
             - rifaem2webapp/.env
         build:
             context: rifaem2webapp
         ports:
-          - "5000:5000"
+          - "5000"
 
     nginx:
-        image: nginx:stable
-        volumes:
-            - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
+        container_name: nginx
+        image: nginx:latest
         depends_on:
             - rifaem2webapp
+        volumes:
+            # nginx config
+            - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
         ports:
-            - "80:80"   
+            - "80:80"
+
+        # recarrega Nginx a cada 6horas
+        command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"

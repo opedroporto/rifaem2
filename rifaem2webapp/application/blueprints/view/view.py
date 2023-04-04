@@ -120,3 +120,7 @@ def init_app(app):
         
         # FORM INVÁLIDO
         return abort(400, "Erro ao processar o pedido")
+
+    @app.errorhandler(404)
+    def page_not_found(e):
+        return render_template('404.html'), 404
