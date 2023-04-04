@@ -121,7 +121,7 @@ def init_app(app):
         # FORM INVÁLIDO
         return abort(400, "Erro ao processar o pedido")
 
-    @app.route("/gnevent/txid/<txid>", method=["POST"])
+    @app.route("/gnevent/txid/<txid>", methods=["POST"])
     def recebe_txid(txid):
         print(f"pago:{txid}")
         return 200
