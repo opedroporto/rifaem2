@@ -170,14 +170,18 @@ Parse.Cloud.define("pedido", async (req) => {
 	};
 });
 
+/*
 Parse.Cloud.define("webhook", async (req) => {
 	if (req.user == null) throw "Usuário inválido";
 	if (req.user.id != "xERDS5p2Jq") throw "Usuário inválido";
 	return "Olá do webhook!";
 });
+*/
 
-// TOOD: authenticar
 Parse.Cloud.define("pix", async (req) => {
+	if (req.user == null) throw "Usuário inválido";
+	if (req.user.id != "xERDS5p2Jq") throw "Usuário inválido";
+
 	for (const e of req.params.pix) {
 		
 		// gera evento da Gerencianet (db)
@@ -225,6 +229,19 @@ Parse.Cloud.define("pix", async (req) => {
 			
 			await numero.save(null, {useMasterKey: true});
 		}
+
+		// http request
+		Parse.Cloud.httpRequest({
+			url: "https://rifado2.com/gnevent/txid/" + e.txid,
+			method: 'POST',
+			headers: {
+				"Parse-Auth-Token": "123"
+			}
+		}).then(function(httpResponse) {
+			console.log(httpResponse.text);
+		}, function(httpResponse) {
+			console.error('Request failed with response code ' + httpResponse.status);
+		});
 
 	}
 
