@@ -3,19 +3,28 @@
 """
 
 from flask import request, render_template, abort, redirect, url_for
+from flask_sock import Sock
 
 from ...ext.session import session
 from ...ext.form.form import RequisitaCompraForm, EnviaMensagemForm
 from ...ext.email.email import Email
+from ...ext.csrf.csrf import Csrf
 from ...blueprints.pix.api import faz_pedido, carrega_rifas, lista_pedidos
 
+pagos_txid = []
 
 def init_app(app):
     """
         Definição das views
     """
+    csrf = Csrf()
+    csrf = csrf.init_app(app)
+
     email = Email()
     email.init_app(app)
+
+    sock = Sock(app)
+    sock.init_app(app)
 
     @app.route("/", methods=["GET"])
     def index():
@@ -64,11 +73,12 @@ def init_app(app):
                 dados_pix = {
                     "qrcode": resposta['result']['qrcode'],
                     "copiaecola": resposta['result']['copiaecola'],
+                    "txid": resposta['result']['txid'],
                 }
 
                 # SUCESSO
                 session.addPedido(resposta['result']['txid'])
-                email.envia_pedido_efetuado(dados['email'], dados)
+                #email.envia_pedido_efetuado(dados['email'], dados)
                 return dados_pix
             # erro
             except NameError:
@@ -122,9 +132,38 @@ def init_app(app):
         return abort(400, "Erro ao processar o pedido")
 
     @app.route("/gnevent/txid/<txid>", methods=["POST"])
+    @csrf.exempt
     def recebe_txid(txid):
-        print(f"pago:{txid}")
-        return 200
+        # autentica
+        if 'Parse-Auth-Token' in request.headers:
+            print(request.__dict__)
+            print(request.headers)
+            token = request.headers['Parse-Auth-Token']
+            if token != "123":
+                abort(400, "Usuário inválido")
+        else:
+            abort(400, "Usuário inválido")
+
+        # envia e-mail
+        pass
+        
+        # muda tela (Websocket)
+        pagos_txid.append(txid)
+
+        return '', 200
+
+    @sock.route("/websocket")
+    def websocket(ws):
+        while True:
+            #txid = ws.receive()
+            # TODO: detectar mudança em pagos_txid
+            # TODO: detectar pedido exato (devolver txid no parse server)
+            if session.pedidos()[-1] in pagos_txid:
+                ws.send(session.pedidos()[-1] + " pago!")
+                pagos_txid.remove(session.pedidos()[-1])
+
+            #text = ws.receive()
+            #ws.send(text[::-1])
 
     @app.errorhandler(404)
     def page_not_found(e):

@@ -3,18 +3,36 @@ const quantidade = 3;
 let fimCarregamentoRifas = false;
 let carregandoRifas = false;
 
-function mostraPix() {
+function mostraPix(data) {
 	modalPix.classList.add("on");
 	modalFinish.classList.remove("on");
+
+	document.getElementById("imgPix").src = data.qrcode;
+	document.getElementById("pixChave").innerHTML = data.copiaecola;
+
+	// websocket
+	let socket = new WebSocket("ws://" + window.location.host + "/websocket");
+	socket.onopen = function(e) {
+		alert("conexão com webscoket!");
+		alert("enviando " + data.txid + "...");
+        socket.send(data.txid);
+	}
+	socket.onmessage = function(event) {
+		let txid = event.data
+		alert(txid + " pago!");
+	}
+	/*
+	socket.onerror = function(error) {
+		alert(error);
+	}
+	*/
 }
 function modalCloseP() {
 	modalPix.classList.remove("on");
 }
 
 function mostraDadosPix(data) {
-	mostraPix();
-	document.getElementById("imgPix").src = data.qrcode;
-	document.getElementById("pixChave").innerHTML = data.copiaecola;
+	mostraPix(data);
 }
 
 function requisitaCompraErro(error) {
