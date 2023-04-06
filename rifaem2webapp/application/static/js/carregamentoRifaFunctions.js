@@ -1,7 +1,8 @@
-let pagina = 1;
+var pagina = 1;
 const quantidade = 3;
-let fimCarregamentoRifas = false;
-let carregandoRifas = false;
+var fimCarregamentoRifas = false;
+var carregandoRifas = false;
+var fetchIntervalo = 5000; // 5 seconds.
 
 function mostraPix(data) {
 	modalPix.classList.add("on");
@@ -10,6 +11,28 @@ function mostraPix(data) {
 	document.getElementById("imgPix").src = data.qrcode;
 	document.getElementById("pixChave").innerHTML = data.copiaecola;
 
+	setInterval(function() {
+		fetch("/txid", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				'X-CSRFToken': csrf_token
+			},
+			body: {"txid": data.txid}
+		})
+		.then(function (response) {
+			console.log(response)
+			return response.text();
+		})
+		.then(function (data) {
+			console.log(data);
+		})
+		.catch(function (err) {
+			console.log('error: ' + err);
+		});
+	}, fetchIntervalo);
+
+	/*
 	// websocket
 	let socket = new WebSocket("ws://" + window.location.host + "/websocket");
 	socket.onopen = function(e) {
@@ -21,7 +44,6 @@ function mostraPix(data) {
 		let txid = event.data
 		alert(txid + " pago!");
 	}
-	/*
 	socket.onerror = function(error) {
 		alert(error);
 	}

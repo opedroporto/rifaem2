@@ -147,11 +147,14 @@ def init_app(app):
         # envia e-mail
         pass
         
+        print("adicionando a pagos_txid")
+        
         # muda tela (Websocket)
         pagos_txid.append(txid)
 
         return '', 200
 
+    '''
     @sock.route("/websocket")
     def websocket(ws):
         while True:
@@ -164,6 +167,14 @@ def init_app(app):
 
             #text = ws.receive()
             #ws.send(text[::-1])
+    '''
+    @app.route("/txid", methods=["POST"])
+    def txid():
+        print(session.pedidos()[-1], pagos_txid)
+        if session.pedidos()[-1] in pagos_txid:
+            pagos_txid.remove(session.pedidos()[-1])
+            return '', 200
+        return '', 402
 
     @app.errorhandler(404)
     def page_not_found(e):
