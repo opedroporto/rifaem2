@@ -1,9 +1,18 @@
+import os
+import pymongo
+
 from flask import session
 from flask_session import Session
 
 
 def init_app(app):
-    app.config["SESSION_TYPE"] = "filesystem"
+
+    client = pymongo.MongoClient(os.getenv("MONGODB_URI"))
+    app.config["SESSION_TYPE"] = "mongodb"
+    app.config["SESSION_MONGODB"] = client
+    app.config["SESSION_MONGODB_DB"] = os.getenv("MONGODB_DATABASE")
+    app.config["SESSION_MONGODB_COLLECT"] = os.getenv("MONGODB_COLLECTION")
+
     Session(app)
 
 def addSessionVar(key, value):

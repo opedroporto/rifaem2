@@ -5,7 +5,6 @@ import os
 
 from flask import request, render_template, abort, redirect, url_for, Response
 from flask_sse import sse
-from flask_sock import Sock
 
 from ...ext.session import session
 from ...ext.form.form import RequisitaCompraForm, EnviaMensagemForm
@@ -22,9 +21,6 @@ def init_app(app):
 
     email = Email()
     email.init_app(app)
-
-    sock = Sock(app)
-    sock.init_app(app)
 
     app.config["REDIS_URL"] = "redis://redis"
     app.register_blueprint(sse, url_prefix="/stream")
@@ -152,43 +148,6 @@ def init_app(app):
         sse.publish(txid, type="message")
 
         return "", 200
-
-    '''
-    @sock.route("/websocket")
-    def websocket(ws):
-        while True:
-            #txid = ws.receive()
-            # TODO: detectar mudança em pagos_txid
-            # TODO: detectar pedido exato (devolver txid no parse server)
-            if session.pedidos()[-1] in pagos_txid:
-                ws.send(session.pedidos()[-1] + " pago!")
-                pagos_txid.remove(session.pedidos()[-1])
-
-            #text = ws.receive()
-            #ws.send(text[::-1])
-    '''
-    
-    '''
-    @app.route("/txid", methods=["POST"])
-    def txid():
-        print(session.pedidos()[-1], pagos_txid)
-        if session.pedidos()[-1] in pagos_txid:
-            pagos_txid.remove(session.pedidos()[-1])
-            return '', 200
-        return '', 402
-    '''
-
-    '''
-    def stream():
-        print("stream")
-        def event_stream():
-            while True:
-                if session.pedidos()[-1] in pagos_txid:
-                    sse.publish(f"Your TXID: {txid}", type="message")
-                    yield "Pedido pago!"
-        return Response(event_stream(), mimetype="text/event-stream")
-    '''
-    
 
     @app.errorhandler(404)
     def page_not_found(e):

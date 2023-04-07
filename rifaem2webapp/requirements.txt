@@ -3,7 +3,7 @@ Flask
 Flask-Session
 Flask-WTF
 Flask-Mail
-flask-sock
+Flask-SSE
 requests
 python-dateutil
 python-dotenv
@@ -11,4 +11,4 @@ regex
 backports.zoneinfo
 tzdata
 email_validator
-Flask-SSE
+pymongo==3.0.3
