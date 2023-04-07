@@ -10,6 +10,14 @@ services:
         ports:
           - "5000"
 
+    redis:
+        container_name: redis
+        image: redis:latest
+        depends_on:
+            - rifaem2webapp
+        ports:
+          - "6379:6379"
+
     nginx:
         container_name: nginx
         image: nginx:latest

@@ -2,10 +2,12 @@ var pagina = 1;
 const quantidade = 3;
 var fimCarregamentoRifas = false;
 var carregandoRifas = false;
-var fetchIntervalo = 5000; // 5 seconds.
+
+function mostraPagamentoConfirmado() {
+	alert("Pagamento Confirmado!");
+}
 
 function mostraPix(data) {
-	let txidAtual = data.txid;
 
 	modalPix.classList.add("on");
 	modalFinish.classList.remove("on");
@@ -15,67 +17,17 @@ function mostraPix(data) {
 
 	// SSE
 	var source = new EventSource("/stream");
-	/*
-	source.addEventListener("open", (e) => {
-		alert("open")
-	});
-	*/
-	/*
-	source.onmessage = function (event) {
-		alert(event.data);
-	};
-	*/
 	source.addEventListener("message", function(event) {
 		let txidRecebido = event.data;
 		let txidAtual = data.txid;
 
 		if (txidRecebido == txidAtual) {
-			alert("PAGAMENTO CONFIRMADO!");
+			source.close();
+			mostraPagamentoConfirmado();
 		}
 	}, false);
-	
-
-	/*
-	// MULTIPLE REQUESTS
-	setInterval(function() {
-		fetch("/txid", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-				'X-CSRFToken': csrf_token
-			},
-			body: {"txid": data.txid}
-		})
-		.then(function (response) {
-			console.log(response)
-			return response.text();
-		})
-		.then(function (data) {
-			console.log(data);
-		})
-		.catch(function (err) {
-			console.log('error: ' + err);
-		});
-	}, fetchIntervalo);
-	*/
-
-	/*
-	// WEBSOCKET
-	let socket = new WebSocket("ws://" + window.location.host + "/websocket");
-	socket.onopen = function(e) {
-		alert("conexão com webscoket!");
-		alert("enviando " + data.txid + "...");
-        socket.send(data.txid);
-	}
-	socket.onmessage = function(event) {
-		let txid = event.data
-		alert(txid + " pago!");
-	}
-	socket.onerror = function(error) {
-		alert(error);
-	}
-	*/
 }
+
 function modalCloseP() {
 	modalPix.classList.remove("on");
 }
@@ -118,7 +70,7 @@ function carregaRifas() {
 			desabilitaNumeros();
 			desabilitaOutrasRifas();
 		})
-		.catch(error => console.log(error))
+		//.catch(error => console.log(error))
 	}
 }
 
