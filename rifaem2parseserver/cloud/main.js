@@ -235,7 +235,7 @@ Parse.Cloud.define("pix", async (req) => {
 			url: "https://rifado2.com/gnevent/txid/" + e.txid,
 			method: 'POST',
 			headers: {
-				"Parse-Auth-Token": "123"
+				"Parse-Auth-Token": process.env.PARSE_AUTH_TOKEN
 			}
 		}).then(function(httpResponse) {
 			console.log(httpResponse.text);

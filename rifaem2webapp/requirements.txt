@@ -11,3 +11,4 @@ regex
 backports.zoneinfo
 tzdata
 email_validator
+Flask-SSE

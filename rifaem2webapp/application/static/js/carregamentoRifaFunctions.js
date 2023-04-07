@@ -5,12 +5,38 @@ var carregandoRifas = false;
 var fetchIntervalo = 5000; // 5 seconds.
 
 function mostraPix(data) {
+	let txidAtual = data.txid;
+
 	modalPix.classList.add("on");
 	modalFinish.classList.remove("on");
 
 	document.getElementById("imgPix").src = data.qrcode;
 	document.getElementById("pixChave").innerHTML = data.copiaecola;
 
+	// SSE
+	var source = new EventSource("/stream");
+	/*
+	source.addEventListener("open", (e) => {
+		alert("open")
+	});
+	*/
+	/*
+	source.onmessage = function (event) {
+		alert(event.data);
+	};
+	*/
+	source.addEventListener("message", function(event) {
+		let txidRecebido = event.data;
+		let txidAtual = data.txid;
+
+		if (txidRecebido == txidAtual) {
+			alert("PAGAMENTO CONFIRMADO!");
+		}
+	}, false);
+	
+
+	/*
+	// MULTIPLE REQUESTS
 	setInterval(function() {
 		fetch("/txid", {
 			method: "POST",
@@ -31,9 +57,10 @@ function mostraPix(data) {
 			console.log('error: ' + err);
 		});
 	}, fetchIntervalo);
+	*/
 
 	/*
-	// websocket
+	// WEBSOCKET
 	let socket = new WebSocket("ws://" + window.location.host + "/websocket");
 	socket.onopen = function(e) {
 		alert("conexão com webscoket!");

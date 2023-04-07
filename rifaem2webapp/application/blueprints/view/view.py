@@ -2,7 +2,8 @@
     Definição das views
 """
 
-from flask import request, render_template, abort, redirect, url_for
+from flask import request, render_template, abort, redirect, url_for, Response
+from flask_sse import sse
 from flask_sock import Sock
 
 from ...ext.session import session
@@ -10,8 +11,6 @@ from ...ext.form.form import RequisitaCompraForm, EnviaMensagemForm
 from ...ext.email.email import Email
 from ...ext.csrf.csrf import Csrf
 from ...blueprints.pix.api import faz_pedido, carrega_rifas, lista_pedidos
-
-pagos_txid = []
 
 def init_app(app):
     """
@@ -25,6 +24,9 @@ def init_app(app):
 
     sock = Sock(app)
     sock.init_app(app)
+
+    app.config["REDIS_URL"] = "redis://localhost"
+    app.register_blueprint(sse, url_prefix="/stream")
 
     @app.route("/", methods=["GET"])
     def index():
@@ -136,23 +138,19 @@ def init_app(app):
     def recebe_txid(txid):
         # autentica
         if 'Parse-Auth-Token' in request.headers:
-            print(request.__dict__)
-            print(request.headers)
             token = request.headers['Parse-Auth-Token']
-            if token != "123":
+            if token != os.getenv("PARSE_AUTH_TOKEN"):
                 abort(400, "Usuário inválido")
         else:
             abort(400, "Usuário inválido")
 
         # envia e-mail
         pass
-        
-        print("adicionando a pagos_txid")
-        
-        # muda tela (Websocket)
-        pagos_txid.append(txid)
 
-        return '', 200
+        # Atualiza tela (envia evento com SSE)
+        sse.publish(txid, type="message")
+
+        return "", 200
 
     '''
     @sock.route("/websocket")
@@ -168,6 +166,8 @@ def init_app(app):
             #text = ws.receive()
             #ws.send(text[::-1])
     '''
+    
+    '''
     @app.route("/txid", methods=["POST"])
     def txid():
         print(session.pedidos()[-1], pagos_txid)
@@ -175,6 +175,19 @@ def init_app(app):
             pagos_txid.remove(session.pedidos()[-1])
             return '', 200
         return '', 402
+    '''
+
+    '''
+    def stream():
+        print("stream")
+        def event_stream():
+            while True:
+                if session.pedidos()[-1] in pagos_txid:
+                    sse.publish(f"Your TXID: {txid}", type="message")
+                    yield "Pedido pago!"
+        return Response(event_stream(), mimetype="text/event-stream")
+    '''
+    
 
     @app.errorhandler(404)
     def page_not_found(e):
