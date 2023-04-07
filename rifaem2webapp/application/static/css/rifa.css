@@ -51,7 +51,7 @@ form.rifaGrid input:hover {
 
 .expandRifa {
     position: absolute;
-    bottom: 0;
+    bottom: -5%;
     width: 100%;
     height: 150px;
     background: linear-gradient(to top, #fff 42%, transparent);
