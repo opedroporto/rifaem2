@@ -1,6 +1,7 @@
 """
     Definição das views
 """
+import os
 
 from flask import request, render_template, abort, redirect, url_for, Response
 from flask_sse import sse
@@ -25,7 +26,7 @@ def init_app(app):
     sock = Sock(app)
     sock.init_app(app)
 
-    app.config["REDIS_URL"] = "redis://localhost"
+    app.config["REDIS_URL"] = "redis://redis"
     app.register_blueprint(sse, url_prefix="/stream")
 
     @app.route("/", methods=["GET"])
