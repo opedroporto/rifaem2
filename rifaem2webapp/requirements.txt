@@ -3,6 +3,7 @@ Flask
 Flask-Session
 Flask-WTF
 Flask-Mail
+flask-sock
 requests
 python-dateutil
 python-dotenv
