@@ -14,20 +14,24 @@
 .modalBody,
 .modalBodyF,
 .modalBodyP {
-    height: 27%;
-    width: 30%;
-	min-width: 330px;
+    height: 30%;
+    width: 33%;
+    min-width: 350px;
+    min-height: 236px;
     border-radius: 2rem;
-    padding: 2rem;
-    background: var(--bg-linear-gradient);
+    background: #ebebeb;
     display: grid;
-    grid-template-columns: 1fr 5rem;
-    grid-template-rows: 1fr 1rem 2fr;
+    grid-template-rows: 25% 45% 30%;
 }
 .modalBodyF {
 	height: 45%;
     width: 20%;
 	grid-template-rows: 5rem 1rem 2fr;
+}
+
+.modalBodyF .modalHead i.fa-solid.fa-times {
+    font-size: 3.4rem;
+    margin-top: .1rem;
 }
 .modalBodyP {
 	height: 70%;
@@ -35,13 +39,25 @@
 	grid-template-rows: 5rem 1rem 1fr;
 }
 .modalHead {
+    padding: 2.4rem;
     display: flex;
-    grid-column-start: 1;
     align-items: center;
-	color: #56e55f;
+    color: var(--bg-color);
     font-size: 1.5rem;
     justify-content: space-between;
-    grid-column-end: 4;
+	border-bottom: 1px solid #024e2538;
+}
+
+.footer {
+    border-radius: 0 0 2rem 2rem;
+    padding: 1rem 2rem 1.5rem 2rem;
+    display: grid;
+	background: linear-gradient(to top, #024e254a, transparent);
+    align-items: center;
+    justify-content: end;
+    grid-template-columns: 3.2fr 1fr;
+    grid-template-areas: "nao sim";
+    gap: .5rem;
 }
 
 i.fa-solid.fa-times {
@@ -50,22 +66,14 @@ i.fa-solid.fa-times {
 	transition: 0.4s;
 }
 i.fa-solid.fa-times.fa-4x:hover {
-    color: #2fbb37;
+    color: var(--click-font-color);
 }
 
-hr.modalHr {
-    grid-column-end: 4;
-    grid-column-start: 1;
-	width: 100%;
-    border: none;
-    height: 1px;
-    background-color: #047a00a8;
-}
 .modalContent, .modalContentF {
-    grid-column-end: 4;
-    grid-column-start: 1;
     display: grid;
-    gap: 1rem;
+    padding-inline: 2.4rem;
+	color: var(--bg-color);
+    padding-top: .8rem;
 }
 .modalContentPix {
     height: 100%;
@@ -74,8 +82,6 @@ hr.modalHr {
     flex-direction: column;
     place-items: center;
     row-gap: 2rem;
-    grid-column-start: 1;
-    grid-column-end: 4;
 }
 
 h2#pixChave {
@@ -95,42 +101,33 @@ h2#pixChave {
 }
 input#btnConfirm,
 input#btnDecline {
-    all: unset;
-    width: 50%;
-	min-width: 200px;
-    max-height: 55px;
-    min-height: 55px;
+    grid-area: sim;
+    width: 100px;
+    padding: .6rem;
+    height: 34px;
+	font-weight: bolder;
+    border: none;
     justify-self: center;
     border-radius: .5rem;
-    text-align: center;
-    font-size: 1.6rem;
-    font-weight: 600;
-    letter-spacing: 1px; 
-    text-transform: uppercase;
-    cursor: pointer;
+	cursor: pointer;
 }
 input#btnConfirm {
-	color: #025217;
-    margin-top: 2rem;
+	background: var(--bg-color);
+    color: #fff;
 	transition: 0.4s;
-    background: #01bd43;
 }
 input#btnConfirm:hover {
-    letter-spacing: .2rem;
-    background: #0ad152;
-    box-shadow: inset 0px 0px 20px #39e148;
+   background: var(--click-font-color);
 }
 
 input#btnDecline {
-    background: #890e0ec7;
-	transition: 0.4s;
-    color: #300000;
+    justify-self: end;
+    grid-area: nao;
+	background: unset;
 }
 input#btnDecline:hover {
-    letter-spacing: .2rem;
-    color: #2c0000;
-    background: #8d0c0cd9;
-    box-shadow: inset 0px 0px 15px #9f0a0abf;
+    border: 2px solid #89232357;
+    color: #892323;
 }
 
 form.modalForm {
@@ -138,17 +135,18 @@ form.modalForm {
     width: 100%;
     display: grid;
     row-gap: .7rem;
-    grid-template-rows: 5% 11% 5% 11% 5% 11% 45%;
+    grid-template-rows: 5% 11% 5% 11% 5% 11% 35%;
 }
 form.modalForm label {
     font-size: 1.24rem;
-	color: #70ef78;
+	color: var(--bg-color);
     font-weight: bold;
 }
 form.modalForm input {
     border: 1px solid #898989;
     border-radius: .4rem;
     padding-inline: .8rem;
+	background: #26741324;
 }
 
 form.modalForm input {border:0;outline:0;}
@@ -168,7 +166,7 @@ input#btnEnviar {
     place-self: center;
     width: 100%;
     border: none;
-    color: #0f2813;
+    color: #97fb9b8c;
     font-weight: bold;
     letter-spacing: 1px;
     font-size: 1.5rem;
@@ -176,11 +174,11 @@ input#btnEnviar {
     text-transform: uppercase;
     cursor: pointer;
 	transition: 0.4s;
-    background: #3aa333;
+    background: var(--bg-linear-gradient);
 }
 input#btnEnviar:hover {
     letter-spacing: .2rem;
-    background: #1cb336;
+	color: #97fb9bc7;
 }
 
 #numerosRifa {
