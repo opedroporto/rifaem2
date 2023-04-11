@@ -17,6 +17,7 @@ bp = Blueprint("views_blueprint", __name__)
 def init_app(app):
     @bp.route("/", methods=["GET"])
     def index():
+
         rifas = carrega_rifas(pagina=0, quantidade=3)
         
         requisita_compra_form = RequisitaCompraForm()

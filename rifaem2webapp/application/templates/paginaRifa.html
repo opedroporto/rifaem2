@@ -33,7 +33,7 @@
 				{# define se há número especial #}
 				
 
-				{% for j in range(0, (rifa.numeroMaximo + 1)) %}
+				{% for j in range(1, (rifa.numeroMaximo + 1)) %}
 					{% set numeroEspecial = {} %}		
 					{% for numero in numeros %}
 						{% if numero.numeroRifa == j %}
