@@ -4,6 +4,7 @@ const modalPix = document.querySelector(".modalbgPix");
 //const modalbtnClose = document.getElementById("btnClose");
 const btnReset = document.querySelector(".resetNums");
 
+const showNumsEl = document.querySelector(".showNums");
 const numsRifa = [];
 let numAtualEl;
 let numAtual;
@@ -34,8 +35,10 @@ function confirm() {
 	modalConfirm.classList.remove("on");
 	numsRifa.push(parseInt(numAtual));
 
-	rifaEl = numAtualEl.closest('.rifa');
-	rifaId = numAtualEl.closest('.rifa').dataset.id;
+	rifaEl = numAtualEl.closest(".rifa");
+	rifaId = numAtualEl.closest(".rifa").dataset.id;
+
+	showNumsEl.insertAdjacentText("beforeend", numAtual);
 
 	checkRifa();
 
@@ -45,6 +48,7 @@ function confirm() {
 // limpa números
 function limpaNums() {
 	resetaRifaAtual();
+	showNumsEl.innerHTML = "";
 }
 
 // reseta rifa atual
