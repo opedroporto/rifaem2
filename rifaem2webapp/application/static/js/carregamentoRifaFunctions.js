@@ -22,8 +22,8 @@ function mostraPix(data) {
 		let txidAtual = data.txid;
 
 		if (txidRecebido == txidAtual) {
-			source.close();
 			mostraPagamentoConfirmado();
+			source.close();
 		}
 	}, false);
 }

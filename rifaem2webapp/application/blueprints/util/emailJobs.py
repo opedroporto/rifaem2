@@ -1,0 +1,60 @@
+import os
+
+from threading import Thread
+from flask import render_template, copy_current_request_context
+from flask_mail import Message
+
+from ...ext.email import mail
+from ...blueprints.pixapi.resources import nome_rifa
+
+def async_envia_pedido_efetuado(destinatario, dados):
+    @copy_current_request_context
+    def envia_pedido_efetuado(detinatario, dados):
+        dados['nomeRifa'] = nome_rifa(dados['rifa'])
+    
+        msg = Message('[Rifado2] Pedido Efetuado com Sucesso!',
+            sender = os.getenv("EMAIL_USERNAME"),
+            recipients = [destinatario]
+        )
+        
+        msg.html = render_template("pedidoEfetuadoEmail.html", dados=dados)
+
+        mail.send(msg)
+
+    thr = Thread(target=envia_pedido_efetuado, args=[destinatario, dados])
+    thr.start()
+
+def async_envia_pedido_confirmado(destinatario, dados):
+    @copy_current_request_context
+    def envia_pedido_efetuado(detinatario, dados):
+
+        msg = Message('[Rifado2] Pedido Confirmado com Sucesso!',
+            sender = os.getenv("EMAIL_USERNAME"),
+            recipients = [destinatario]
+        )
+        
+        msg.html = render_template("pedidoConfirmadoEmail.html", dados=dados)
+
+        mail.send(msg)
+
+    thr = Thread(target=envia_pedido_efetuado, args=[destinatario, dados])
+    thr.start()
+
+def async_envia_mensagem_do_usuario(dados):
+    @copy_current_request_context
+    def envia_mensagem_do_usuario(dados):
+        recipients = os.getenv("EMAIL_RECIPIENTS").split(" ")
+        msg = Message('[Rifado2] Mensagem de um usuário recebida!',
+            sender = os.getenv("EMAIL_USERNAME"),
+            recipients = recipients
+        )
+
+        # substitui \n por <br>
+        dados['mensagem'] = dados['mensagem'].replace('\n', '<br>')
+
+        msg.html = render_template("mensagemUsuarioEmail.html", dados=dados)
+
+        mail.send(msg)
+
+    thr = Thread(target=envia_mensagem_do_usuario, args=[dados])
+    thr.start()

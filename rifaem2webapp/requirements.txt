@@ -4,6 +4,8 @@ Flask-Session
 Flask-WTF
 Flask-Mail
 Flask-SSE
+Flask-RQ2
+Flask-Executor
 requests
 python-dateutil
 python-dotenv
