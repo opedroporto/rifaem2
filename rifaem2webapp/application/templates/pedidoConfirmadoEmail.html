@@ -1,0 +1,16 @@
+<h1>E-mail de confirmação de pagamento!</h1>
+
+<p>Olá, {{ dados.nome }}!</p>
+<p>Seu pagamento acaba de ser confirmado.</p>
+
+<p>Obrigado por comprar na Rifado2. Boa sorte!</p>
+<br>
+
+<h3>Detalhes do seu pedido:</h3>
+<p>Rifa: {{ dados.nomeRifa }}</P>
+<p>Números:</P>
+<ul>
+    {% for numero in dados.numerosRifa %}
+        <li>{{ numero }}</li>
+    {% endfor %}
+</ul>

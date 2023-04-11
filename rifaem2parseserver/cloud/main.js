@@ -86,7 +86,6 @@ Parse.Cloud.define("nome-rifa", async (req) => {
 	return nome;
 });
 
-
 Parse.Cloud.define("pedido", async (req) => {
 	// verificacoes
 	if (req.user == null) throw "Usuário não autenticado";
@@ -169,14 +168,6 @@ Parse.Cloud.define("pedido", async (req) => {
 		copiaecola: dadosQrCode.qrcode
 	};
 });
-
-/*
-Parse.Cloud.define("webhook", async (req) => {
-	if (req.user == null) throw "Usuário inválido";
-	if (req.user.id != "xERDS5p2Jq") throw "Usuário inválido";
-	return "Olá do webhook!";
-});
-*/
 
 Parse.Cloud.define("pix", async (req) => {
 	if (req.user == null) throw "Usuário inválido";
@@ -292,6 +283,27 @@ Parse.Cloud.define("lista-pedidos", async (req) => {
 	return pedidos;
 });
 
+Parse.Cloud.define("get-pedido-comprador", async (req) => {
+	// verificacoes
+	if (req.user == null) throw "Usuário não autenticado";
+	if (req.user.id != "ongE3YwyDO") throw "Usuário não autenticado";
+	if (req.params.txid == null) throw "TXID inválido";
+
+	// pedido
+	const query = new Parse.Query(Pedido);
+	query.equalTo("txid", req.params.txid);
+	query.include("rifa");
+	const pedido = await query.first({useMasterKey: true});
+	const pedidoJSON = pedido.toJSON();
+
+	// dados comprador
+	return {
+		"nome": pedidoJSON.nome,
+		"telefone": pedidoJSON.telefone,
+		"email": pedidoJSON.email,
+		"nomeRifa": pedidoJSON.rifa.nome
+	};
+})
 /*
 Parse.Cloud.define("config-webhook", async (req) => {
 	configWebhook(req.params.url)
