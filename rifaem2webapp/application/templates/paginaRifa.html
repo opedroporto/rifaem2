@@ -9,12 +9,13 @@
 				<div class="imgDiv">
 					<hr>
 					<img src="{{ rifa.imagem }}" alt="Imagem da rifa">
-					<i class="fa-solid fa-chevron-right"></i><hr class="last">
-				</div>
-				<div class="descInfo">
-					<h2>Autor: {{ rifa.autor }}</h2>
-					<h4>Data de lançamento: {{ formata_data(rifa.dataLancamento) }}</h4>
-					<h4>Data de Encerramento: {{ formata_data(rifa.dataEncerramento, hora=True) }}</h4>
+					<i class="fa-solid fa-chevron-right" onclick="slideDescription(this)"></i><hr class="last">
+				
+					<div class="descInfo">
+						<h2>Autor: {{ rifa.autor }}</h2>
+						<h4>Data de lançamento: {{ formata_data(rifa.dataLancamento) }}</h4>
+						<h4>Data de Encerramento: {{ formata_data(rifa.dataEncerramento, hora=True) }}</h4>
+					</div>
 				</div>
 			</div>
 			
@@ -25,8 +26,8 @@
 
 			<form class="rifaGrid">
 				<div class="expandRifa">
-					<h2>Clique para expandir rifa</h2>
-					<i class="fa-solid fa-chevron-down"></i>
+					<h2 onclick="expandir(this)">Clique para expandir rifa</h2>
+					<i class="fa-solid fa-chevron-down" onclick="expandir(this)"></i>
 				</div>
 				{% set numeroEspecial = {} %}
 						

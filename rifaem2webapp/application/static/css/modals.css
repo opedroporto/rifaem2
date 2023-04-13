@@ -153,10 +153,10 @@ form.modalForm input {border:0;outline:0;}
 form.modalForm input:focus {outline:none!important;}
 
 form.modalForm input:valid {
-    border: green 1px solid;
+    border: var(--bg-color) 1px solid;
 }
 form.modalForm input:invalid {
-    border: red 1px solid;
+    border: #6e020299 1px solid;
 }
 
 input#btnEnviar {

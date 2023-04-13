@@ -38,7 +38,10 @@ function confirm() {
 	rifaEl = numAtualEl.closest(".rifa");
 	rifaId = numAtualEl.closest(".rifa").dataset.id;
 
-	showNumsEl.insertAdjacentText("beforeend", numAtual);
+	let iEl = document.createElement("i");
+	iEl.insertAdjacentText("beforeend", numAtual);
+	showNumsEl.appendChild(iEl);
+	showNumsEl.classList.add("on");
 
 	checkRifa();
 
@@ -48,7 +51,10 @@ function confirm() {
 // limpa números
 function limpaNums() {
 	resetaRifaAtual();
-	showNumsEl.innerHTML = "";
+	showNumsEl.classList.remove("on");
+	while (showNumsEl.lastElementChild) {
+		showNumsEl.removeChild(showNumsEl.lastElementChild);
+	}
 }
 
 // reseta rifa atual
@@ -127,6 +133,24 @@ function checaTamanho() {
 		if(slidesNum == 1){
 			rifaGrid[i].style.overflowX = "hidden";
 		}
+	}
+}
+
+function expandir(ex) {	
+	elPai = ex.parentNode.parentNode;
+	if(elPai.classList.contains("expandido")){
+		elPai.classList.remove("expandido");
+	}else{
+		elPai.classList.add("expandido");
+	}	
+}
+
+function slideDescription(sl){
+	paizao = sl.parentNode;
+	if(paizao.classList.contains("slided")){
+		paizao.classList.remove("slided");
+	}else{
+		paizao.classList.add("slided");
 	}
 }
 
