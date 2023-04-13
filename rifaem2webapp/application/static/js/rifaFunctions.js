@@ -166,7 +166,15 @@ window.addEventListener("resize", (e) => {
 			btnConc[i].innerHTML = "";
 			btnConc[i].appendChild(elementIConc);
 		}
-	};
+	} else {
+		btnReset.innerHTML = "Limpar Números";
+		for(i=0;i < btnConc.length;i++){
+			btnConc[i].innerHTML = "Concluir";
+			while (btnConc[i].lastElementChild) {
+				btnConc[i].removeChild(btnConc[i].lastElementChild);
+			}
+		}
+	}
 });
 if (window.innerWidth < 1033){
 	let elementI = document.createElement("i");
@@ -179,7 +187,15 @@ if (window.innerWidth < 1033){
 		btnConc[i].innerHTML = "";
 		btnConc[i].appendChild(elementIConc);
 	}
-};
+} else {
+	btnReset.innerHTML = "Limpar Números";
+	for(i=0;i < btnConc.length;i++){
+		btnConc[i].innerHTML = "Concluir";
+		while (btnConc[i].lastElementChild) {
+			btnConc[i].removeChild(btnConc[i].lastElementChild);
+		}
+	}
+}
 
 
 // máscara telefone

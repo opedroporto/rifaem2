@@ -437,7 +437,7 @@ span.tooltips::before {
 		width: 45px;
 		aspect-ratio: 1 / 1;
 		bottom: 30px;
-		left: 30px;
+		right: 30px;
 		border: 2px solid #002803;
 		border-radius: 100vw;
 		font-size: 1.7rem;
@@ -447,7 +447,7 @@ span.tooltips::before {
 	}
 	.showNums.on {
 		left: 28px;
-		bottom: 135px;
+		bottom: 30px;
 		border-bottom: 4px solid var(--bg-color);
 		border-left: none;
 		box-shadow: inset 0px -50px 38px -20px #117a42;
