@@ -199,3 +199,18 @@ input#btnEnviar:hover {
     border-radius: 0.5em;
     font-size: 1.5em;
 }
+
+@media (max-width: 80em){
+	form.modalForm label {
+		font-size: 1.5rem;
+	}
+	input#btnEnviar {
+		font-size: 1.8rem;
+	}
+}
+
+@media (max-width: 630px){
+	.modalBody, .modalBodyF, .modalBodyP {
+		min-width: 400px;
+	}
+}

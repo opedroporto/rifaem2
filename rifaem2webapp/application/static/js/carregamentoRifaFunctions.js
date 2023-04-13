@@ -69,6 +69,7 @@ function carregaRifas() {
 			checaTamanho();
 			desabilitaNumeros();
 			desabilitaOutrasRifas();
+			
 		})
 		//.catch(error => console.log(error))
 	}
