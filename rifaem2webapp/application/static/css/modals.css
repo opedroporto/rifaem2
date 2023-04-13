@@ -26,6 +26,7 @@
 .modalBodyF {
 	height: 45%;
     width: 20%;
+	min-height: 350px;
 	grid-template-rows: 5rem 1rem 2fr;
 }
 

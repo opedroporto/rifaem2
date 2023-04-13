@@ -432,6 +432,31 @@ span.tooltips::before {
 	span.tooltips {
 		top: -40px;
 	}
+	button.resetNums,
+	.lblSub	{
+		width: 45px;
+		aspect-ratio: 1 / 1;
+		bottom: 30px;
+		left: 30px;
+		border: 2px solid #002803;
+		border-radius: 100vw;
+		font-size: 1.7rem;
+	}	
+	.lblSub {
+		bottom: 82px;
+	}
+	.showNums.on {
+		left: 28px;
+		bottom: 135px;
+		border-bottom: 4px solid var(--bg-color);
+		border-left: none;
+		box-shadow: inset 0px -50px 38px -20px #117a42;
+		justify-content: start;
+		padding-left: 0;
+		flex-direction: column;
+		padding: 1rem;
+		height: unset;
+	}
 }
 @media (max-width: 884px){
 	form.rifaGrid .slides input {
