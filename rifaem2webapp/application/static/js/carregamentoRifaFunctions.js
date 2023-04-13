@@ -69,6 +69,7 @@ function carregaRifas() {
 			checaTamanho();
 			desabilitaNumeros();
 			desabilitaOutrasRifas();
+			alteraBtns();
 			
 		})
 		//.catch(error => console.log(error))
@@ -103,6 +104,7 @@ function desabilitaNumeros() {
 
 document.addEventListener("DOMContentLoaded", () => {
 	checaTamanho();
+	alteraBtns();
 
 	document.querySelectorAll(".modalForm").forEach((form) => {
 		form.addEventListener("submit", event => {

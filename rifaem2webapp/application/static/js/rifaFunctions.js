@@ -3,7 +3,6 @@ const modalFinish = document.querySelector(".modalBgF");
 const modalPix = document.querySelector(".modalbgPix");
 const btnReset = document.querySelector(".resetNums");
 const showNumsEl = document.querySelector(".showNums");
-const btnConc = document.querySelectorAll(".lblSub");
 const numsRifa = [];
 let numAtualEl;
 let numAtual;
@@ -155,8 +154,13 @@ function slideDescription(sl){
 
 //adicionar ícones para o botão concluir e limpar números	
 window.addEventListener("resize", (e) => {
-	if (window.innerWidth < 1033){ 
-		let elementI = document.createElement("i");
+	alteraBtns();
+});
+
+function alteraBtns() {
+	const btnConc = document.querySelectorAll(".lblSub");
+	let elementI = document.createElement("i");
+	if (window.innerWidth < 1033){
 		elementI.className = "fa-regular fa-times-circle";	
 		btnReset.innerHTML = "";
 		btnReset.appendChild(elementI);
@@ -166,20 +170,10 @@ window.addEventListener("resize", (e) => {
 			btnConc[i].innerHTML = "";
 			btnConc[i].appendChild(elementIConc);
 		}
-	};
-});
-if (window.innerWidth < 1033){
-	let elementI = document.createElement("i");
-	elementI.className = "fa-regular fa-times-circle";	
-	btnReset.innerHTML = "";
-	btnReset.appendChild(elementI);
-	for(i=0;i < btnConc.length;i++){
-		let elementIConc = document.createElement("i");
-		elementIConc.className = "fa-regular fa-check-circle";	
-		btnConc[i].innerHTML = "";
-		btnConc[i].appendChild(elementIConc);
+	} else {
+		// FAZ AQUI PARA VOLTAR
 	}
-};
+}
 
 
 // máscara telefone
