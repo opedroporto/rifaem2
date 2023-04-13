@@ -171,7 +171,13 @@ function alteraBtns() {
 			btnConc[i].appendChild(elementIConc);
 		}
 	} else {
-		// FAZ AQUI PARA VOLTAR
+		btnReset.innerHTML = "Limpar Números";
+		for(i=0; i < btnConc.length; i++) {
+			btnConc[i].innerHTML = "Concluir";
+			while (btnConc[i].lastElementChild) {
+				btnConc[i].removeChild(btnConc[i].lastElementChild);
+			}
+		}
 	}
 }
 
