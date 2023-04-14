@@ -88,18 +88,14 @@ button.menu-burguer {
 }
 
 .menu-aside {
-    display: flex;
-    position: absolute;
+	display: flex;
+    position: fixed;
     justify-content: center;
     align-items: center;
     height: 100%;
-	transform: translateX(100%);
     right: 0;
     width: 420px;
     background: var(--bg-color);
-	visibility: hidden;
-	pointer-events: none;
-    transition: 1s;
     z-index: 10;
 }
 .menu-aside ul {
@@ -149,10 +145,37 @@ button.menu-burguer.on .linhas:hover .line {
 
 .menu-aside.on {
 	transform: translateX(0%);
-	visibility: visible;
-	pointer-events: all;
-    transition: 1s;
+    position: fixed;
 }
+
+.menu-aside[data-state="opened"]{
+	animation: menuAppear 1s ease-in-out forwards;
+	display: flex;
+}
+.menu-aside[data-state="closing"]{
+	animation: menuDisappear 1s ease-in-out forwards;
+}
+.menu-aside[data-state="closed"]{
+	display: none !important;
+}
+
+@keyframes menuAppear {
+	0%{
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(0%);
+	}
+}
+@keyframes menuDisappear {
+	100%{
+		transform: translateX(100%);
+	}
+	0% {
+		transform: translateX(0%);
+	}
+}
+
 button.menu-burguer.on .linhas .line:nth-of-type(1) {
     transform: rotate(45deg) translate(8px, 7px);
 	transition: .5s;
@@ -252,5 +275,17 @@ button.menu-burguer.on .linhas .line:nth-of-type(3) {
 	}
 	.menu-aside {
 		width: 100%;
+	}
+}
+
+@media (max-width: 320px) {
+	button.menu-burguer {
+		width: 30%;
+	}
+	.logo {
+		display: none;
+	}
+	header {
+		grid-template-columns: 1fr;
 	}
 }

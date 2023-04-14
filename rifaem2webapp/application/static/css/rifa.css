@@ -437,17 +437,18 @@ span.tooltips::before {
 		width: 45px;
 		aspect-ratio: 1 / 1;
 		bottom: 30px;
-		right: 30px;
+		left: 30px;
 		border: 2px solid #002803;
 		border-radius: 100vw;
 		font-size: 1.7rem;
 	}	
 	.lblSub {
-		bottom: 82px;
+		right: 30px;
+		left: unset;
 	}
 	.showNums.on {
-		left: 28px;
-		bottom: 30px;
+		left: 30px;
+		bottom: 80px;
 		border-bottom: 4px solid var(--bg-color);
 		border-left: none;
 		box-shadow: inset 0px -50px 38px -20px #117a42;
@@ -466,5 +467,53 @@ span.tooltips::before {
 @media (max-width: 678px){
 	.subBtn {
 		top: 7rem;
+	}
+}
+
+@media (max-width: 450px){
+	.imgDiv hr.last {
+		width: 1.5rem;
+	}
+	.imgDiv hr {
+		width: 2.5rem;
+	}
+	h1.nomeRifa {
+		margin-left: -.4rem;
+		font-size: 2.5rem;
+	}
+	.descInfo {
+		margin-right: 8px;
+	}
+}
+
+@media (max-width: 280px){
+	.imgDiv img {
+		height: 70px;
+		margin-left: .8rem;
+	}
+	.imgDiv hr {
+		display: none;
+	}
+	.imgDiv {
+		gap: .5rem;
+	}
+	.descOutline {
+		min-height: 180px;
+	}
+	h1.nomeRifa {
+		margin-left: 0;
+		font-size: 2.5rem;
+	}
+	h2.preco {
+		margin: 1rem 1.2rem;
+		padding: .8rem 1.2rem;
+		justify-self: center;
+		top: 5.5rem;
+		right: unset;
+	}
+	.descInfo {
+		height: 70px;
+		aspect-ratio: 3 / 1;
+		margin-right: 5px;
 	}
 }

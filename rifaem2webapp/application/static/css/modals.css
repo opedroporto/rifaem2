@@ -215,3 +215,22 @@ input#btnEnviar:hover {
 		min-width: 400px;
 	}
 }
+
+@media (max-width: 450px){
+	.modalBody, .modalBodyF, .modalBodyP {
+		min-width: 340px;
+	}
+}
+
+@media (max-width: 280px){
+	.modalBody, .modalBodyF, .modalBodyP {
+		min-width: 260px;
+	}
+	.footer {
+		justify-content: center;
+		grid-template-columns: 1fr 1fr;
+	}
+	.modalHead {
+		font-size: 1.4rem;
+	}
+}
