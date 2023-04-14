@@ -3,12 +3,15 @@ const modalFinish = document.querySelector(".modalBgF");
 const modalPix = document.querySelector(".modalbgPix");
 const btnReset = document.querySelector(".resetNums");
 const showNumsEl = document.querySelector(".showNums");
+
 const numsRifa = [];
 let numAtualEl;
 let numAtual;
 
 let rifaEl;
 let rifaId;
+
+const maximoRifaSemDivExpandir = 150;
 
 // ativa ou desativa botão concluir da rifa atual
 function checkRifa() {
@@ -184,7 +187,7 @@ function alteraBtns() {
 function checaDivExpandir() {
 	document.querySelectorAll(".rifaGrid").forEach((rifaGrid) => {
 		quantidadeNumeros = rifaGrid.querySelectorAll(".tooltip").length;
-		if (quantidadeNumeros < 100) {
+		if (quantidadeNumeros < maximoRifaSemDivExpandir) {
 			rifaGrid.querySelector(".expandRifa").style.display = "none";
 		}
 	});

@@ -96,19 +96,45 @@ Parse.Cloud.define("pedido", async (req) => {
 	if (req.params.telefone == null) throw "Telefone inválido";
 	if (req.params.email == null) throw "E-mail inválido";
 
-	// verifica se os números estão disponíveis
 	const rifa = new Rifa();
 	rifa.id = req.params.rifa;
-
+	
+	
+	// verifica se os números estão disponíveis
 	const query = new Parse.Query(Numero);
 	query.equalTo("rifa", rifa);
 	const numerosDados = await query.find({useMasterKey: true});
-
-	for (const numeroComprado of numerosDados) {
-		for (const numeroRequisitado of req.params.numerosRifa) {
+	// cada número comprado
+	for (let numeroComprado of numerosDados) {
+		// cada número requisitado
+		for (let numeroRequisitado of req.params.numerosRifa) {
 			if (numeroRequisitado == numeroComprado.toJSON().numeroRifa) throw "Número(s) inválido";
 		}
 	}
+
+	// verifica se há pedido recente com mesmo número para mesma rifa
+	const query2 = new Parse.Query(Pedido);
+	query2.equalTo("rifa", rifa);
+	//query2.equalTo("numerosRifa", req.params.numerosRifa);
+
+	let data = new Date(Date.now() - 10000 * 60);
+	query2.greaterThan('createdAt', data);
+	const pedidos = await query2.find({useMasterKey: true});
+
+	// cada pedido
+	for (let pedido of pedidos) {
+		// verifica se o número foi pedido recentemente
+		// cada número requisitado
+		for (let numeroRequisitado of req.params.numerosRifa) {
+			console.log(numeroRequisitado, pedido.toJSON().numerosRifa);
+			if (pedido.toJSON().numerosRifa.includes(numeroRequisitado)) {
+				console.log("INVALIDADO")
+				throw "Número(s) inválido";
+			}
+				
+		}
+	}
+	//if (pedidos.length > 0) throw "Número(s) inválido";
 	
 	// tempo de expiração da cobrança
 	const tempoExpiracao = 600; // 10 min
@@ -116,9 +142,9 @@ Parse.Cloud.define("pedido", async (req) => {
 	dataExpiracao.setSeconds(dataExpiracao.getSeconds() + tempoExpiracao)
 
 	// define preço da cobrança
-	const query2 = new Parse.Query(Rifa);
-	query.equalTo("objectId", req.params.rifa);
-	const rifaDados = await query2.first({useMasterKey: true});
+	const query3 = new Parse.Query(Rifa);
+	query3.equalTo("objectId", req.params.rifa);
+	const rifaDados = await query3.first({useMasterKey: true});
 	const precoNumeroRifa = rifaDados.toJSON().precoNumero;
 
 	const preco = req.params.numerosRifa.length * precoNumeroRifa;

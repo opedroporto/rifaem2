@@ -1,7 +1,10 @@
 var pagina = 1;
-const quantidade = 3;
+var quantidade = 3;
+
 var fimCarregamentoRifas = false;
 var carregandoRifas = false;
+
+var sseTimeout = 660000
 
 function mostraPagamentoConfirmado() {
 	alert("Pagamento Confirmado!");
@@ -17,6 +20,13 @@ function mostraPix(data) {
 
 	// SSE
 	var source = new EventSource("/stream");
+
+	// SSE: close connection
+	var sseCloseTimeout = setTimeout(function() {
+		source.close();
+	}, sseTimeout);
+
+	// SSE: listen for message
 	source.addEventListener("message", function(event) {
 		let txidRecebido = event.data;
 		let txidAtual = data.txid;
@@ -24,6 +34,7 @@ function mostraPix(data) {
 		if (txidRecebido == txidAtual) {
 			mostraPagamentoConfirmado();
 			source.close();
+			clearTimeout(sseCloseTimeout);
 		}
 	}, false);
 }
@@ -112,6 +123,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		form.addEventListener("submit", event => {
 			event.preventDefault();
 			
+			// desabilita botão
+			const btnEnviar = form.querySelector("#btnEnviar")
+			btnEnviar.disabled = true;
+			btnEnviar.value = "Processando...";
+
 			const formData = new FormData(form);
 			const data = Object.fromEntries(formData);
 			data.numerosRifa = numsRifa;
@@ -127,8 +143,16 @@ document.addEventListener("DOMContentLoaded", () => {
 				},
 				body: JSON.stringify(data)
 			}).then(res => res.json())
-			.then(data => mostraDadosPix(data))
-			.catch(error => requisitaCompraErro(error))
+			.then(data => {
+				mostraDadosPix(data);
+				btnEnviar.disabled = false;
+				btnEnviar.value = "Finalizar";
+			})
+			.catch(error => {
+				requisitaCompraErro(error);
+				btnEnviar.disabled = false;
+				btnEnviar.value = "Finalizar";
+			})
 		});
 	});
 });
