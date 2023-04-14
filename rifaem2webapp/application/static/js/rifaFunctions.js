@@ -124,7 +124,7 @@ function modalCloseF() {
 
 function checaTamanho() {
 	const rifaGrid = document.querySelectorAll(".rifaGrid");
-	
+
 	for(let i=0; i < rifaGrid.length; i++){
 		const slidesNum = rifaGrid[i].querySelectorAll(".slides").length;
 		
@@ -179,6 +179,15 @@ function alteraBtns() {
 			}
 		}
 	}
+}
+
+function checaDivExpandir() {
+	document.querySelectorAll(".rifaGrid").forEach((rifaGrid) => {
+		quantidadeNumeros = rifaGrid.querySelectorAll(".tooltip").length;
+		if (quantidadeNumeros < 100) {
+			rifaGrid.querySelector(".expandRifa").style.display = "none";
+		}
+	});
 }
 
 

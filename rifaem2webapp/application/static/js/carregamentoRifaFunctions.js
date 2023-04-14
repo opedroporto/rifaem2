@@ -66,6 +66,7 @@ function carregaRifas() {
 			document.querySelector(".principal").insertAdjacentHTML("beforeend", data);
 
 			fimCarregamentoPaginaRifas();
+			checaDivExpandir();
 			checaTamanho();
 			desabilitaNumeros();
 			desabilitaOutrasRifas();
@@ -105,6 +106,7 @@ function desabilitaNumeros() {
 document.addEventListener("DOMContentLoaded", () => {
 	checaTamanho();
 	alteraBtns();
+	checaDivExpandir()
 
 	document.querySelectorAll(".modalForm").forEach((form) => {
 		form.addEventListener("submit", event => {
