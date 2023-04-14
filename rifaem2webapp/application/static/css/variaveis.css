@@ -16,7 +16,6 @@
     --click-font-color: #235827;
     --numero-alocado-background: #d3d3d3;
     --numero-reservado-background: #545823;
-
     --lado-quadrado: 5em;
     --borda-quadrado: 0.4em;
     --cor-quadrado: #ccc;
@@ -28,6 +27,7 @@ html {
 html, body {
 	overflow-x: hidden;
 	scroll-behavior: smooth;
+	scroll-padding-top: 17vh;
 }
 body {
 	overflow-y: hidden;

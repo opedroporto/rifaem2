@@ -1,14 +1,12 @@
 html {
     background: linear-gradient(266deg, #036225 70%, #022a25);
 }
-html.on {
-	overflow-y: hidden;
-}
 
 /* MAIN */
 
 main {
     height: calc(100vh - 15vh + 3px);
+	min-height: 500px;
     display: grid;
 	position: relative;
 	top: -2px;
@@ -48,6 +46,7 @@ hr {
 .rightSide {
     background: var(--first-font-color);
     display: grid;
+	min-height: 500px;
 	height: calc(100vh - 15vh + 7px);
     grid-template-columns: 1fr 1fr;
 	transition: 0.4s;

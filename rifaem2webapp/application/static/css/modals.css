@@ -6,7 +6,7 @@
     display: none;
     place-items: center;
     background: #00000061;
-    z-index: 8;
+    z-index: 13;
 }
 .modalBg.on, .modalBgF.on, .modalbgPix.on {
     display: grid;
@@ -37,8 +37,24 @@
 .modalBodyP {
 	height: 70%;
     width: 40%;
-	grid-template-rows: 5rem 1rem 1fr;
+	min-width: 550px;
+	isolation: isolate;
+	min-height: 300px;
+	overflow: hidden;
+	position: relative;
+	grid-template-rows: 5rem 4rem 66%;
 }
+.modalBodyP .modalHead {
+    justify-content: center;
+	border-bottom: none;
+}
+
+i.fa-solid.fa-copy {
+    color: #003418;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
 .modalHead {
     padding: 2.4rem;
     display: flex;
@@ -47,6 +63,13 @@
     font-size: 1.5rem;
     justify-content: space-between;
 	border-bottom: 1px solid #024e2538;
+}
+
+i.fa-solid.fa-angles-down {
+    place-self: center;
+    align-self: start;
+    font-size: 1.8rem;
+    color: var(--bg-color);
 }
 
 .footer {
@@ -82,19 +105,26 @@ i.fa-solid.fa-times.fa-4x:hover {
     display: flex;
     flex-direction: column;
     place-items: center;
-    row-gap: 2rem;
+    row-gap: 1rem;
 }
 
 h2#pixChave {
-    width: 100%;
-    height: 20%;
-    line-break: anywhere;
+    width: 230px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     text-align: center;
+    color: #003418;
+    font-weight: bolder;
+    border-top: 1px solid var(--bg-color);
+    padding-top: 1rem;
 }
 
 .modalContentPix img {
 	max-width: 100%;
-    height: 60%;
+    max-height: 100%;
+    height: 50%;
+	border: 1rem solid var(--bg-color);
+    mix-blend-mode: multiply;
 }
 
 .modalContentF{
@@ -186,19 +216,30 @@ input#btnEnviar:hover {
 	display: none;
 }
 
-/* botao continuar do modal Pix */
-.btnContinuarWrapper {
-    width: 100%;
+.modalBodyP .footer {
+	align-self: end;
+}
+.footer h2 {
+	color: #003418;
 }
 
+/* botao continuar do modal Pix */
+
 .btnContinuar {
-    float: right;
-    color: white;
-    background-color: blue;
-    padding: 5;
-    padding: 0.5em;
+    color: #fff;
+    justify-self: center;
+    place-items: center;
+    display: grid;
+    min-width: 80px;
+    background-color: var(--bg-color);
+    padding: 0.55em;
     border-radius: 0.5em;
-    font-size: 1.5em;
+    font-size: 1.6em;
+    font-weight: bolder;
+    cursor: pointer;
+}
+.btnContinuar:hover {
+    background-color: var(--hover-bg-color);
 }
 
 @media (max-width: 80em){
@@ -232,5 +273,70 @@ input#btnEnviar:hover {
 	}
 	.modalHead {
 		font-size: 1.4rem;
+	}
+}
+
+/* modalPix bg squares*/
+
+.bgSquare.one {
+    position: absolute;
+    height: 120px;
+	z-index: -1;
+    aspect-ratio: 1 / 1;
+    border: 1rem solid var(--bg-color);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    padding: 1rem 1rem;
+    gap: 1rem 1rem;
+    box-sizing: border-box;
+    transform: rotate(45deg);
+    left: -10%;
+	animation: squareFalling 7s ease-in-out infinite;
+}
+.innerSquare {
+    background: var(--bg-color);
+}
+
+.bgSquare.two {
+    position: absolute;
+	z-index: -1;
+    height: 120px;
+    aspect-ratio: 1 / 1;
+    border: 1rem solid var(--bg-color);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    padding: 1rem 1rem;
+    gap: 1rem 1rem;
+    box-sizing: border-box;
+    transform: rotate(-45deg);
+    right: -10%;
+	animation: squareFalling2 8s 1s ease-in-out infinite;
+}
+
+@keyframes squareFalling {
+	0%{
+		top: -30%;
+		opacity: 1;
+		transform: rotate(0deg);
+	}
+	100%{
+		top: 100%;
+		transform: rotate(160deg);
+		opacity: 0;
+	}
+}
+
+@keyframes squareFalling2 {
+	0%{
+		top: -30%;
+		opacity: 1;
+		transform: rotate(0deg);
+	}
+	100%{
+		top: 100%;
+		transform: rotate(-160deg);
+		opacity: 0;
 	}
 }

@@ -6,14 +6,41 @@
 	<div class="modalBodyP">
 		<div class="modalHead">
 			<h2>QRCode gerado com sucesso!</h2>
-			<i class="fa-solid fa-times fa-4x" onclick="modalCloseP()"></i>
 		</div>
-		<hr class="modalHr">
+		<i class="fa-solid fa-angles-down"></i>
 		<div class="modalContentPix">
 			<img src="" alt="Pix QRCode" id="imgPix">
-			<h2 id="pixChave"></h2>
+			<h2 id="pixChave" title="Copiar"></h2>
+			<i class="fa-solid fa-copy"> Copiar</i>
 		</div>
-		<div class="btnContinuarWrapper">
+		<!--<i class="fa-solid fa-moon"></i>
+		<i class="fa-solid fa-shuttle-space"></i>
+		<i class="fa-solid fa-meteor"></i>
+		<i class="fa-solid fa-satellite"></i>-->
+		<div class="bgSquare one">
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+		</div>
+		<div class="bgSquare two">
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+			<div class="innerSquare"></div>
+		</div>
+		<div class="footer">
+			<h2>Escaneie o QRCode para pagar ou siga para os pedidos em continuar</h2>
 			<a class="btnContinuar" href={{ url_for("views_blueprint.pedidos") }}>Continuar</a>
 		</div>
 	</div>

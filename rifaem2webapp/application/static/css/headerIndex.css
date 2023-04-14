@@ -4,6 +4,7 @@ header {
     min-height: 118px;
     display: grid;
     grid-template-columns: 1fr 3fr;
+	transition: 0.4s;
 }
 nav {
     display: flex;
@@ -288,4 +289,32 @@ button.menu-burguer.on .linhas .line:nth-of-type(3) {
 	header {
 		grid-template-columns: 1fr;
 	}
+}
+
+/* header sticky*/
+
+header.sticky {
+    position: fixed;
+    background: var(--bg-linear-gradient);
+    z-index: 12;
+	width: 100%;
+	transition: 0.4s;
+}
+.sticky nav {
+	background: transparent;
+}
+.sticky nav ul li a {
+	color: #fff;
+}
+.sticky nav ul li a:hover {
+	color: var(--hover-font-color);
+}
+.sticky nav ul li a:active {
+	color: var(--click-font-color);
+}
+.sticky .logo {
+	visibility: visible;
+}
+.sticky nav .menu-burguer .linhas .line {
+    background-color: #fff;
 }
