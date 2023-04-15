@@ -112,6 +112,7 @@ Parse.Cloud.define("pedido", async (req) => {
 		}
 	}
 
+	/*
 	// verifica se há pedido recente com mesmo número para mesma rifa
 	const query2 = new Parse.Query(Pedido);
 	query2.equalTo("rifa", rifa);
@@ -128,13 +129,13 @@ Parse.Cloud.define("pedido", async (req) => {
 		for (let numeroRequisitado of req.params.numerosRifa) {
 			console.log(numeroRequisitado, pedido.toJSON().numerosRifa);
 			if (pedido.toJSON().numerosRifa.includes(numeroRequisitado)) {
-				console.log("INVALIDADO")
 				throw "Número(s) inválido";
 			}
 				
 		}
 	}
 	//if (pedidos.length > 0) throw "Número(s) inválido";
+	*/
 	
 	// tempo de expiração da cobrança
 	const tempoExpiracao = 600; // 10 min

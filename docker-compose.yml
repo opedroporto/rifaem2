@@ -26,7 +26,7 @@ services:
 
         volumes:
             # nginx config
-            - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+            - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
             
             # arquivos certbot
             - ./data/certbot/conf:/etc/letsencrypt
