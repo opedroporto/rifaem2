@@ -4,8 +4,9 @@ def init_app(app):
     # Flask
     app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 
-    # Flask-WTForms
+    # Flask-WTF
     app.config['WTF_CSRF_SECRET_KEY'] = os.getenv("WTF_CSRF_SECRET_KEY")
+    app.config['WTF_CSRF_TIME_LIMIT'] = None
 
     # Flask Mail
     app.config['MAIL_SERVER']='smtp.gmail.com'

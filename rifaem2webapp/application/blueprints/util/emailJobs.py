@@ -24,20 +24,20 @@ def async_envia_pedido_efetuado(destinatario, dados):
     thr = Thread(target=envia_pedido_efetuado, args=[destinatario, dados])
     thr.start()
 
-def async_envia_pedido_confirmado(destinatario, dados):
+def async_envia_pedido_confirmado(destinatario, dados, txid):
     @copy_current_request_context
-    def envia_pedido_efetuado(detinatario, dados):
+    def envia_pedido_efetuado(detinatario, dados, txid):
 
-        msg = Message('[Rifado2] Pedido Confirmado com Sucesso!',
+        msg = Message('[Rifado2] Pagamento Confirmado!',
             sender = os.getenv("EMAIL_USERNAME"),
             recipients = [destinatario]
         )
         
-        msg.html = render_template("pedidoConfirmadoEmail.html", dados=dados)
+        msg.html = render_template("pedidoConfirmadoEmail.html", dados=dados, txid=txid)
 
         mail.send(msg)
 
-    thr = Thread(target=envia_pedido_efetuado, args=[destinatario, dados])
+    thr = Thread(target=envia_pedido_efetuado, args=[destinatario, dados, txid])
     thr.start()
 
 def async_envia_mensagem_do_usuario(dados):

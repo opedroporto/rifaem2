@@ -25,7 +25,7 @@ services:
             - rifaem2webapp
         volumes:
             # nginx config
-            - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf:ro
+            - ./nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
         ports:
             - "80:80"
 

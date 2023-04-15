@@ -17,7 +17,6 @@ bp = Blueprint("views_blueprint", __name__)
 def init_app(app):
     @bp.route("/", methods=["GET"])
     def index():
-
         rifas = carrega_rifas(pagina=0, quantidade=3)
         
         requisita_compra_form = RequisitaCompraForm()
@@ -131,7 +130,7 @@ def init_app(app):
 
         # envia e-mail
         dados = get_dados_comprador(txid)
-        async_envia_pedido_confirmado(dados['email'], dados)
+        async_envia_pedido_confirmado(dados['email'], dados, txid)
 
         # Atualiza tela (envia evento com SSE)
         sse.publish(txid, type="message")
