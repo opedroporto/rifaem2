@@ -1,6 +1,8 @@
 /* NAVBAR */
 header {
     height: 15vh;
+	width: 100%;
+	position: absolute;
     min-height: 118px;
     display: grid;
 	background: var(--bg-linear-gradient);
@@ -89,18 +91,14 @@ button.menu-burguer {
 }
 
 .menu-aside {
-    display: flex;
-    position: absolute;
+	display: flex;
+    position: fixed;
     justify-content: center;
     align-items: center;
     height: 100%;
-	transform: translateX(100%);
     right: 0;
     width: 420px;
     background: var(--bg-color);
-	visibility: hidden;
-	pointer-events: none;
-    transition: 1s;
     z-index: 10;
 }
 .menu-aside ul {
@@ -138,6 +136,46 @@ button.menu-burguer {
     box-shadow: inset 0px -1px 0px;
 }
 
+.bgMenu-aside {
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	display: none;
+	inset: 0;
+	background: #0026129e;
+	z-index: 9;
+}
+.bgMenu-aside[data-state="opened"] {
+	display: block;
+	animation: bgFadein 1s ease-in-out forwards;
+}
+.bgMenu-aside[data-state="closing"] {
+	display: block;
+	animation: bgFadeout 1s ease-in-out forwards;
+}
+.bgMenu-aside[data-state="closed"] {
+	display: none;
+}
+
+@keyframes bgFadein {
+	0%{
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes bgFadeout {
+	100%{
+		opacity: 0;
+	}
+	0% {
+		opacity: 1;
+	}
+}
+
+
+
 /*  AO CLICAR *ON*  */
 
 button.menu-burguer.on .linhas .line {
@@ -145,11 +183,39 @@ button.menu-burguer.on .linhas .line {
 	transition: 1s;
 }
 
+
 .menu-aside.on {
 	transform: translateX(0%);
-	visibility: visible;
-	pointer-events: all;
-    transition: 1s;
+    position: fixed;
+	top: 0;
+}
+
+.menu-aside[data-state="opened"]{
+	animation: menuAppear 1s ease-in-out forwards;
+	display: flex;
+}
+.menu-aside[data-state="closing"]{
+	animation: menuDisappear 1s ease-in-out forwards;
+}
+.menu-aside[data-state="closed"]{
+	display: none !important;
+}
+
+@keyframes menuAppear {
+	0%{
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(0%);
+	}
+}
+@keyframes menuDisappear {
+	100%{
+		transform: translateX(100%);
+	}
+	0% {
+		transform: translateX(0%);
+	}
 }
 button.menu-burguer.on .linhas:hover .line {
 	background-color: var(--hover-font-color);
@@ -234,7 +300,24 @@ button.menu-burguer.on .linhas .line:nth-of-type(3) {
 /*maioria dos mobile*/
 @media (max-width: 440px) {
 	button.menu-burguer {
-		width: calc(85% - 1vw);
+		width: calc(50% - 1vw);
+	}
+	button.menu-burguer.on .linhas .line:nth-of-type(1) {
+		transform: rotate(45deg) translate(7px, 7px);
+		transition: .5s;
+	}
+	header {
+		height: 75px;
+		min-height: 75px;
+	}
+	.logo {
+		height: 75px;
+	}
+	.logo img {
+		height: 75px;
+	}
+	.linhas {
+		transform: scale(0.9);
 	}
 }
 
@@ -249,4 +332,57 @@ button.menu-burguer.on .linhas .line:nth-of-type(3) {
 	.menu-aside {
 		width: 100%;
 	}
+}
+
+@media (max-width: 370px){
+	header {
+		grid-template-columns: 1fr;
+	}
+	.logo {
+		display: none;
+	}
+	nav {
+		justify-content: center;
+		width: 12rem;
+		justify-self: end;
+	}
+}
+
+/* header sticky*/
+
+header.sticky {
+    position: fixed;
+	--top-stycky: -118px;
+	top: var(--top-stycky);
+    background: var(--bg-linear-gradient);
+    z-index: 12;
+	width: 100%;
+	transition: 0.4s;
+	animation: stickyAppear 1s ease-in-out forwards;
+}
+@keyframes stickyAppear {
+	0%{
+		top: var(--top-stycky);
+	}
+	100%{
+		top: 0;
+	}
+}
+.sticky nav {
+	background: transparent;
+}
+.sticky nav ul li a {
+	color: #fff;
+}
+.sticky nav ul li a:hover {
+	color: var(--hover-font-color);
+}
+.sticky nav ul li a:active {
+	color: var(--click-font-color);
+}
+.sticky .logo {
+	visibility: visible;
+}
+.sticky nav .menu-burguer .linhas .line {
+    background-color: #fff;
 }

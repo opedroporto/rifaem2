@@ -27,9 +27,14 @@ html {
 html, body {
 	overflow-x: hidden;
 	scroll-behavior: smooth;
-	scroll-padding-top: 17vh;
+	scroll-padding-top: 118px;
 }
 body {
 	overflow-y: hidden;
-	scroll-behavior: smooth;
+}
+
+@media (max-width: 440px) {
+	html, body {
+		scroll-padding-top: 75px;
+	}
 }

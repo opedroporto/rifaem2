@@ -292,7 +292,7 @@ span.tooltips {
 	font-size: 1.5rem;
     left: 50%;
     transform: translateX(-50%);
-    top: -47px;
+    top: calc(-3.4rem + -1rem);
     color: #fff;
     text-align: center;
     padding: 1rem;
@@ -426,9 +426,6 @@ span.tooltips::before {
 	form.rifaGrid {
 		padding: 5rem 4rem 5rem 4rem;
 	}
-	span.tooltips {
-		top: -40px;
-	}
 	button.resetNums,
 	.lblSub	{
 		width: 45px;
@@ -471,31 +468,13 @@ span.tooltips::before {
 		width: 2.5rem;
 	}
 	h1.nomeRifa {
-		margin-left: -.4rem;
 		font-size: 2.5rem;
 	}
 	.descInfo {
 		margin-right: 8px;
 	}
-}
-
-@media (max-width: 280px){
-	.imgDiv img {
-		height: 70px;
-		margin-left: .8rem;
-	}
-	.imgDiv hr {
-		display: none;
-	}
-	.imgDiv {
-		gap: .5rem;
-	}
 	.descOutline {
 		min-height: 180px;
-	}
-	h1.nomeRifa {
-		margin-left: 0;
-		font-size: 2.5rem;
 	}
 	h2.preco {
 		margin: 1rem 1.2rem;
@@ -508,5 +487,22 @@ span.tooltips::before {
 		height: 70px;
 		aspect-ratio: 3 / 1;
 		margin-right: 5px;
+	}
+	.imgDiv img {
+		height: 70px;
+		margin-left: .8rem;
+	}
+	.imgDiv {
+		gap: .5rem;
+	}
+}
+
+@media (max-width: 340px){
+	.imgDiv hr {
+		display: none;
+	}
+	
+	h1.nomeRifa {
+		font-size: 2.5rem;
 	}
 }

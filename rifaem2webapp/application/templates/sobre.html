@@ -10,10 +10,27 @@
 
         {% block body %}
             <style>
+				html, body {
+					padding-bottom: 15vh;
+				}
+				@media (max-width: 440px){
+					main {
+						top: 75px !important;
+						padding-bottom: 74px !important;
+					}
+					html, body {
+						padding-bottom: 0 !important;
+					}
+				}
+				@media (max-width: 799px){
+					html, body {
+						padding-bottom: 12vh;
+					}
+				}
 				main {
-					height: calc(100vh - 15vh);
+					top: 15vh;
+					position: relative;
 					display: grid;
-					overflow-y: scroll;
 				}
                 .container {
 					width: 100%;
@@ -117,14 +134,6 @@
 					resize: none;
 					color: #00b56d;
 				}
-                footer {
-                    background: var(--bg-color);
-					min-height: 100px;
-                    text-align: center;
-                    font-size: 2em;
-                    color: #00b56d;
-                    padding: 0.5em 0 0.5em 0;
-                }
 				.submit {
 					height: 5rem;
 					place-self: center;
@@ -209,9 +218,6 @@
                     <p> ou nos contate por contato@rifado2.com </p>
                 </section>
 		   </div>
-		    <footer>
-					Contato: contato@rifado2.com
-			</footer>
 	</main>
             
 

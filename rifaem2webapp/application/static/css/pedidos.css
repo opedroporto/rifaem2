@@ -6,10 +6,18 @@ main {
     display: grid;
     place-items: center;
 	min-height: calc(100vh - 22.5vh );
+	position: relative;
+	padding-bottom: 15vh;
+	top: 15vh;
 }
-
+@media (max-width: 440px){
+	main {
+		top: 75px;
+	}
+}
 .pedidosTitle {
-	height: 220px;
+	height: 100px;
+    margin-top: 1.5rem;
 	width: 100%;
 	display: flex;
     justify-content: center;
