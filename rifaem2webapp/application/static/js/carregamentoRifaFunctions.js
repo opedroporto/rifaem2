@@ -19,7 +19,7 @@ function mostraPix(data) {
 	document.getElementById("pixChave").innerHTML = data.copiaecola;
 
 	// SSE
-	var source = new EventSource("/stream");
+	var source = new EventSource("https://rifado2.com/stream");
 
 	// SSE: close connection
 	var sseCloseTimeout = setTimeout(function() {
