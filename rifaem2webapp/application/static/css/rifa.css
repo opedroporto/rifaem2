@@ -36,7 +36,7 @@ form.rifaGrid.expandido {
 }
 
 form.rifaGrid input {
-    width: clamp(3.7rem, 3vw + .28rem, 4rem);
+    width: 3.4rem;
     border: none;
     aspect-ratio: 1 / 1;
     border-radius: 1.2rem;
@@ -419,9 +419,6 @@ span.tooltips::before {
 
 @media (max-width: 1033px){
 
-	form.rifaGrid .slides input {
-		width: clamp(4.4rem, 3vw + .28rem, 4.6rem);
-	}
 	.subBtn {
 		top: 12rem;
 		bottom: unset;
@@ -459,11 +456,7 @@ span.tooltips::before {
 		height: unset;
 	}
 }
-@media (max-width: 884px){
-	form.rifaGrid .slides input {
-		width: clamp(3.8rem, 4vw + .1rem, 4.2rem);
-	}
-}
+
 @media (max-width: 678px){
 	.subBtn {
 		top: 7rem;
