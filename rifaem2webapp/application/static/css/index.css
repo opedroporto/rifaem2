@@ -5,11 +5,11 @@ html {
 /* MAIN */
 
 main {
-    height: calc(100vh - 15vh + 3px);
+    height: 100vh;
 	min-height: 500px;
     display: grid;
 	position: relative;
-	top: -2px;
+	top: calc(15vh - 1px);
     grid-template-columns: 1fr 3fr;
 }
 
@@ -297,7 +297,7 @@ button hr {
 		font-size: clamp(23rem, 50vw + .1rem, 40rem);
 	}
 	.rightInfo {
-		bottom: min(10rem, 20%);
+		bottom: min(14rem, 26%);
 		position: relative;
 		place-items: center;
 	}
