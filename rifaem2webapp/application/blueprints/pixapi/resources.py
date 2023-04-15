@@ -38,9 +38,13 @@ def lista_pedidos(pedidosTxid):
 
     resposta = requests.post(url, json=data, headers=headers)
     resposta = resposta.json()['result']
-    resposta.reverse()
+    resposta = list(filter(lambda pedido: pedido is not None, resposta))
 
-    return resposta
+    if resposta:
+        resposta.reverse()
+        return resposta
+
+    return []
 
 def nome_rifa(id):
     url = os.getenv("PIX_API_URL") + "nome-rifa"
