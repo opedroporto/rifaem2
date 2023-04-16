@@ -53,6 +53,10 @@ i.fa-solid.fa-copy {
     color: #003418;
     font-size: 1.4rem;
     cursor: pointer;
+	transition: color 0.4s;
+}
+i.fa-solid.fa-copy:hover {
+    color: var(--click-font-color);
 }
 
 .modalHead {
@@ -117,6 +121,10 @@ h2#pixChave {
     font-weight: bolder;
     border-top: 1px solid var(--bg-color);
     padding-top: 1rem;
+	transition: color 0.4s;
+}
+h2#pixChave:hover {
+    color: var(--click-font-color);
 }
 
 .modalContentPix img {
@@ -142,6 +150,7 @@ input#btnDecline {
 	cursor: pointer;
 }
 input#btnConfirm {
+	justify-self: end;
 	background: var(--bg-color);
     color: #fff;
 	transition: 0.4s;
@@ -151,7 +160,6 @@ input#btnConfirm:hover {
 }
 
 input#btnDecline {
-    justify-self: end;
     grid-area: nao;
 	background: unset;
 }
@@ -236,9 +244,10 @@ input#btnEnviar:hover {
     font-size: 1.6em;
     font-weight: bolder;
     cursor: pointer;
+	transition: color 0.4s;
 }
 .btnContinuar:hover {
-    background-color: var(--hover-bg-color);
+    background-color: var(--click-font-color);
 }
 
 @media (max-width: 80em){
@@ -260,11 +269,26 @@ input#btnEnviar:hover {
 	.modalBody, .modalBodyF, .modalBodyP {
 		min-width: 340px;
 	}
+	.modalBodyP {
+		height: 50%;
+	}
+}
+
+@media (max-width: 320px){
+	.modalBody, .modalBodyF, .modalBodyP {
+		min-width: 300px;
+	}
 }
 
 @media (max-width: 280px){
 	.modalBody, .modalBodyF, .modalBodyP {
 		min-width: 260px;
+	}
+	.modalBodyP {
+		height: 70%;
+	}
+	.footer h2 {
+		text-align: center;
 	}
 	.footer {
 		justify-content: center;

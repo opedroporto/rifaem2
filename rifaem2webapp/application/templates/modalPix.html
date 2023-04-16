@@ -10,8 +10,8 @@
 		<i class="fa-solid fa-angles-down"></i>
 		<div class="modalContentPix">
 			<img src="" alt="Pix QRCode" id="imgPix">
-			<h2 id="pixChave" title="Copiar"></h2>
-			<i class="fa-solid fa-copy"> Copiar</i>
+			<h2 id="pixChave" title="Copiar" onclick="copy(this)"></h2>
+			<i class="fa-solid fa-copy" onclick="copy(this.previousElementSibling)"> Copiar</i>
 		</div>
 		<!--<i class="fa-solid fa-moon"></i>
 		<i class="fa-solid fa-shuttle-space"></i>
@@ -45,3 +45,22 @@
 		</div>
 	</div>
 </div>
+
+<script defer>
+	const copyIcon = document.querySelector(".fa-solid.fa-copy");
+	function copy(that){
+		var inp =document.createElement('input');
+		document.body.appendChild(inp);
+		inp.value = that.textContent;
+		inp.select();
+		document.execCommand('copy',false);
+		inp.remove();
+						
+		copyIcon.innerHTML = " Copiado!";
+		copyIcon.style.right = "-2%";
+		setTimeout(function(){
+			copyIcon.innerHTML = " Copiar";
+			copyIcon.style.right = "0";
+		}, 2000);					
+	};			
+</script>

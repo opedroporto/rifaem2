@@ -206,6 +206,7 @@ i.fa-solid.fa-copy:hover {
 @media(max-width: 708px) {
 	.outerPart {
 		max-width: 640px;
+		scale: 0.9;
 	}
 	.container {
 		padding-bottom: 2.5rem;
@@ -261,7 +262,7 @@ i.fa-solid.fa-copy:hover {
 }
 @media(max-width: 400px) {
 	.outerPart {
-		margin-inline: 1rem;
+		margin-inline: 2rem;
 	}
 	.container {
 		margin: .5rem;

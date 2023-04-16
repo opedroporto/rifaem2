@@ -106,20 +106,16 @@ h2.rightTitle {
     animation: clippath 8s ease-in-out infinite;
 }
 
-i.fa-solid.fa-grip {
+.rightGroup button i {
     padding: 2rem;
+    height: clamp(3rem, 1vw + .1rem, 4rem);
+    aspect-ratio: 1 / 1;
     padding-inline: clamp(1rem, 1vw + .1rem, 2rem);
     margin-left: clamp(1.5rem, .1vw + .1rem, 4rem);
     border-radius: 100vw;
     transition: 0.4s;
 }
-i.fa-solid.fa-question.fa-2x {
-    margin-left: clamp(2rem, .5vw + .1rem, 4rem);
-    padding: 2rem;
-    padding-inline: clamp(1rem, 1vw + .1rem, 2rem);
-    border-radius: 100vw;
-    transition: 0.4s;
-}
+
 .contatoBar i {
     transition: 0.4s;
 }
@@ -212,7 +208,13 @@ a.semEstilo:visited {
 		margin-right: 1rem;
 		align-self: center;
 	}
-	
+	svg#Layer_1 {
+		position: absolute;
+		left: 50%;
+		height: 65px;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
 	.rightGroup button,
 	.contatoBar {
 		font-size: 0;
@@ -223,9 +225,10 @@ a.semEstilo:visited {
     .rightGroup button i {
 		width: 100%;
 		height: 100%;
+		aspect-ratio: 1 / 1;
 		scale: 0.5;
 		padding: 0 !important;
-		margin-inline: 4% 0 !important;
+		margin-inline: .38rem 0 !important;
 		font-size: 3.5rem !important;
 	}
 	.rightGroup button hr {

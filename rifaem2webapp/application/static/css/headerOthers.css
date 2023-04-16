@@ -332,19 +332,8 @@ button.menu-burguer.on .linhas .line:nth-of-type(3) {
 	.menu-aside {
 		width: 100%;
 	}
-}
-
-@media (max-width: 370px){
-	header {
-		grid-template-columns: 1fr;
-	}
-	.logo {
-		display: none;
-	}
-	nav {
-		justify-content: center;
-		width: 12rem;
-		justify-self: end;
+	nav{
+		margin-right: 1rem;
 	}
 }
 

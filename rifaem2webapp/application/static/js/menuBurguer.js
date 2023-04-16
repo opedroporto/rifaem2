@@ -3,7 +3,6 @@ const menuAside = document.querySelector(".menu-aside");
 const rifasLi = document.getElementById("rifasLink");
 const header = document.querySelector("header");
 const BgmenuAside = document.querySelector(".bgMenu-aside");
-const headerBlock = document.querySelector(".headerBlock");
 
 btnBurguer.addEventListener("click", function () {
     const aberto = btnBurguer.getAttribute('aria-expanded') === "true";
@@ -68,7 +67,8 @@ try{
 		
 	});
 }catch{};
-try{
+
+/*try{
 	window.addEventListener("scroll", function () {
 		if (window.innerWidth > 440){
 			header.classList.toggle("sticky", window.scrollY > 118);
@@ -76,4 +76,4 @@ try{
 			header.classList.toggle("sticky", window.scrollY > 75);
 		}
 	});
-}catch{};
+}catch{};*/

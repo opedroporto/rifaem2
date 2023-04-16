@@ -149,16 +149,20 @@
 				}
 				@keyframes colorGlow {
 					0%{
-						color: #022b25;
-						border-color: #022b25;
+						color: #00813f;
+						border-color: #00813f;
 					}
 					60%{
 						border-color: #00ab64;
 						color: #00ab64;
 					}
+					90%{
+						border-color: #00ab64;
+						color: #00ab64;
+					}
 					100%{
-						border-color: #022b25;
-						color: #022b25;
+						border-color: #00813f;
+						color: #00813f;
 					}
 				}
 				@keyframes boxShadow {
@@ -227,6 +231,14 @@
 					// máscara telefone
                     $(":input").inputmask();
                     $("#telefone").inputmask({"mask": "(99) 99999-9999", "Regex": "^\(?\d{2}\)?[\s-]?[\s9]?\d{4}-?\d{4}$"});
-                })
+                });
+				
+				window.addEventListener("scroll", function () {
+					if (window.innerWidth > 440){
+						header.classList.toggle("sticky", window.scrollY > 118);
+					}else {
+						header.classList.toggle("sticky", window.scrollY > 75);
+					}
+				});
             </script>
         {% endblock %}

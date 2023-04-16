@@ -143,6 +143,7 @@ form.rifaGrid.expandido .expandRifa i {
 }
 h1.nomeRifa {
     font-size: 3rem;
+	margin-left: -1rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--bg-color);
@@ -469,6 +470,7 @@ span.tooltips::before {
 	}
 	h1.nomeRifa {
 		font-size: 2.5rem;
+		margin-left: 0;
 	}
 	.descInfo {
 		margin-right: 8px;

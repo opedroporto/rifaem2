@@ -57,6 +57,14 @@
 					const outerPart = document.querySelectorAll(".outerPart");
 					const spanCopy = document.querySelectorAll(".copiar");
 					const copyIcon = document.querySelectorAll(".fa-solid.fa-copy");
+					
+					window.addEventListener("scroll", function () {
+						if (window.innerWidth > 440){
+							header.classList.toggle("sticky", window.scrollY > 118);
+						}else {
+							header.classList.toggle("sticky", window.scrollY > 75);
+						}
+					});
 
 					for(let i=0; i<spanCopy.length; i++){
 					
@@ -92,7 +100,6 @@
 						
 					}
 					function copy(that){
-						console.log(this, that)
 						var inp =document.createElement('input');
 						document.body.appendChild(inp);
 						inp.value = that.textContent;
