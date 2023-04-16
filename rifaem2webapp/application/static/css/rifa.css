@@ -56,7 +56,7 @@ form.rifaGrid input:hover {
     position: absolute;
     bottom: -5%;
     width: 100%;
-    height: 150px;
+    height: 200px;
     background: linear-gradient(to top, #fff 42%, transparent);
     z-index: 2;
     display: grid;

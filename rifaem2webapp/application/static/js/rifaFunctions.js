@@ -11,7 +11,7 @@ let numAtual;
 let rifaEl;
 let rifaId;
 
-const maximoRifaSemDivExpandir = 250;
+const maximoRifaSemDivExpandir = 100;
 
 // ativa ou desativa botão concluir da rifa atual
 function checkRifa() {
@@ -187,7 +187,7 @@ function alteraBtns() {
 function checaDivExpandir() {
 	document.querySelectorAll(".rifaGrid").forEach((rifaGrid) => {
 		quantidadeNumeros = rifaGrid.querySelectorAll(".tooltip").length;
-		if (quantidadeNumeros < maximoRifaSemDivExpandir) {
+		if (quantidadeNumeros <= maximoRifaSemDivExpandir) {
 			rifaGrid.querySelector(".expandRifa").style.display = "none";
 		}
 	});
