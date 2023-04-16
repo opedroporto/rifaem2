@@ -11,7 +11,7 @@ let numAtual;
 let rifaEl;
 let rifaId;
 
-const maximoRifaSemDivExpandir = 150;
+const maximoRifaSemDivExpandir = 250;
 
 // ativa ou desativa botão concluir da rifa atual
 function checkRifa() {

@@ -89,9 +89,26 @@ function carregaRifas() {
 }
 
 window.onscroll = () => {
-	if (Math.round(window.innerHeight + window.scrollY) === document.body.offsetHeight) {
+	// carregamento dinâmico
+	if (Math.round(window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
 		carregaRifas();
 	}
+
+	// desexpandir rifas automaticamente
+	document.querySelectorAll(".rifaGrid").forEach((rifaGrid) => {
+		// rifas expandidas
+		if (rifaGrid.classList.contains("expandido")) {
+			let rifaGridRect = rifaGrid.getBoundingClientRect()
+			// rifa acima
+			if (rifaGridRect.bottom <= 0) {
+				rifaGrid.classList.remove("expandido");
+			}
+			// rifa abaixo
+			if (rifaGridRect.top >= (window.innerHeight || document.documentElement.clientHeight)) {
+				rifaGrid.classList.remove("expandido");
+			}
+		}
+	})
 }
 
 function inicioCarregamentoPaginaRifas() {
