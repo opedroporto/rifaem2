@@ -5,8 +5,9 @@ from threading import Thread
 
 def init_app(app):
     app.register_blueprint(sse, url_prefix="/stream")
-    async_mantem_sse_ativo(app)
+    #async_mantem_sse_ativo(app)
 
+"""
 def async_mantem_sse_ativo(app):
     def mantem_sse_ativo(app):
         with app.app_context():
@@ -15,3 +16,4 @@ def async_mantem_sse_ativo(app):
                 time.sleep(10)
     thr = Thread(target=mantem_sse_ativo, args=[app])
     thr.start()
+"""

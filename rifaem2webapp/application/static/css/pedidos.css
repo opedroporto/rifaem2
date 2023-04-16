@@ -5,7 +5,7 @@ html.on {
 main {
     display: grid;
     place-items: center;
-	min-height: calc(100vh - 22.5vh );
+	min-height: calc(100vh - 22.5vh);
 	position: relative;
 	padding-bottom: 15vh;
 	top: max(118px, 15vh);
