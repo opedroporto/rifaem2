@@ -356,11 +356,9 @@ header.sticky {
 @keyframes stickyAppear {
 	0%{
 		top: var(--top-stycky);
-		opacity: 0;
 	}
 	100%{
 		top: 0;
-		opacity: 1;
 	}
 }
 .sticky nav {

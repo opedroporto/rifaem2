@@ -341,8 +341,11 @@ input#btnEnviar:hover {
 @keyframes squareFalling {
 	0%{
 		top: -30%;
-		opacity: 1;
+		opacity: 0;
 		transform: rotate(0deg);
+	}
+	10%{
+		opacity: 1;
 	}
 	100%{
 		top: 100%;
