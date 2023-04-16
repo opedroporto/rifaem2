@@ -198,6 +198,69 @@ i.fa-solid.fa-copy:hover {
     bottom: 40%;
 }
 
+/* FILTRO DE PEDIDOS */
+#pedidosHeader {
+	width: 100%;
+}
+#btnAtualizar {
+	width: 3em;
+	height: 3em;
+	background-color: #ccc;
+	padding: 0.7em;
+	border-radius: 1em;
+	cursor: pointer;
+	-webkit-filter: brightness(100%)
+}
+#btnAtualizar:hover {
+	box-shadow: 0px 0px 5px hsla(0, 0%, 50%, 0.416);
+	-webkit-filter: brightness(80%);
+    -webkit-transition: all 1s cubic-bezier(0,.7,.7,1);
+    -moz-transition: all 1s cubic-bezier(0,.7,.7,1);
+    -o-transition: all 1s cubic-bezier(0,.7,.7,1);
+    -ms-transition: all 1s cubic-bezier(0,.7,.7,1);
+    transition: all 1s cubic-bezier(0,.7,.7,1);
+}
+#filtros {
+	display: grid;
+	justify-content: center;
+	width: 100%;
+	grid-template-columns: repeat(auto-fill, minmax(14rem, 25rem));
+	gap: 1.5rem;
+}
+.btnFiltro {
+	font-size: 2.5rem;
+	padding: 0.5rem 1rem 0.5rem 1rem;
+	border: 0;
+	border-radius: 10px;
+	cursor: pointer;
+	-webkit-filter: brightness(100%)
+}
+.btnFiltro:hover {
+	box-shadow: 0px 0px 5px hsla(0, 0%, 50%, 0.416);
+	-webkit-filter: brightness(80%);
+    -webkit-transition: all 1s cubic-bezier(0,.7,.7,1);
+    -moz-transition: all 1s cubic-bezier(0,.7,.7,1);
+    -o-transition: all 1s cubic-bezier(0,.7,.7,1);
+    -ms-transition: all 1s cubic-bezier(0,.7,.7,1);
+    transition: all 1s cubic-bezier(0,.7,.7,1);
+}
+.btnFiltro.todos {
+	color: hsl(0, 0%, 50%);
+	background-color: #ccc;
+}
+.btnFiltro.pendentes {
+	color: hsl(47, 72%, 20%);
+	background-color: #dfbb3b;
+}
+.btnFiltro.pagos {
+	color: hsl(139, 47%, 13%);
+	background-color: #3aa15a;
+}
+.btnFiltro.naoPagos {
+	color: hsl(0, 47%, 13%);
+	background-color: #a13a3a;
+}
+
 @media(max-width: 974px) {
 	.container p:nth-of-type(4) {
 		max-width: 86%;
