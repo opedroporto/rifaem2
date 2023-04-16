@@ -6,3 +6,5 @@ __pycache__
 /etc
 .parse.local
 .parse.project
+*.p12
+*.pem

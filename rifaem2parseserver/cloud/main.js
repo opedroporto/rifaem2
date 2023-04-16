@@ -331,6 +331,7 @@ Parse.Cloud.define("get-pedido-comprador", async (req) => {
 		"nomeRifa": pedidoJSON.rifa.nome
 	};
 })
+
 /*
 Parse.Cloud.define("config-webhook", async (req) => {
 	configWebhook(req.params.url)
@@ -361,17 +362,3 @@ Parse.Cloud.define("login", async (req) => {
 	return user;
 });
 */
-
-
-/** curl -X POST \
-* -H "X-Parse-Application-Id: IvARJbWMwQsJdQQtnhw5f0aBpsFogUxBmnQQB5Lr" \
-* -H "X-Parse-REST-API-Key: vI5o5rwDgF8oqJB4kzs2KgfUNFY7rReOFXyp8nUq" \
-* -H "Content-Type: application/json" \
-* -d "{}" \
-* https://parseapi.back4app.com/functions/hello
-*/
-
-// If you have set a function in another cloud code file, called "test.js" (for example)
-// you need to refer it in your main.js, as you can see below:
-
-/* require("./test.js"); */
