@@ -192,3 +192,33 @@ function checaDivExpandir() {
 		}
 	});
 }
+
+function hover(){
+	const rifasImgs = document.querySelectorAll(".imgDiv img");
+    for(let i = 0; i < rifasImgs.length; i++){
+        rifasImgs[i].addEventListener('mouseenter', e => rifasImgs[i].parentNode.classList.add("slided"));
+        rifasImgs[i].addEventListener('mouseleave', e => rifasImgs[i].parentNode.classList.remove("slided"));
+	};
+};
+
+function checkClick(click){
+	if(click.target !== this) return;
+	
+	this.classList.remove("on");
+	if(this.getAttribute("data-state")){
+		menuClose();
+	};
+	if(this.className === "modalbgPix"){
+		window.location.reload();
+	}
+};
+
+function clicaFora(item) {
+	item.addEventListener("click", checkClick);		
+};
+
+const menuAsideBg = document.querySelector(".bgMenu-aside");
+clicaFora(modalConfirm);
+clicaFora(modalFinish);
+clicaFora(modalPix);
+clicaFora(menuAsideBg);

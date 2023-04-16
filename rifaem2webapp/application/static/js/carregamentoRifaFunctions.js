@@ -82,6 +82,7 @@ function carregaRifas() {
 			desabilitaNumeros();
 			desabilitaOutrasRifas();
 			alteraBtns();
+			hover();
 			
 		})
 		//.catch(error => console.log(error))

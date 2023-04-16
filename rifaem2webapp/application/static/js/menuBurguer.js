@@ -61,19 +61,11 @@ try{
 	window.addEventListener("scroll", function () {
 		if (window.innerWidth > 440){
 			header.classList.toggle("sticky", window.scrollY > offsetTop - 119);
+			console.log(offsetTop);
 		}else {
 			header.classList.toggle("sticky", window.scrollY > offsetTop - 76);
+			console.log(offsetTop);
 		}
-		
 	});
 }catch{};
 
-/*try{
-	window.addEventListener("scroll", function () {
-		if (window.innerWidth > 440){
-			header.classList.toggle("sticky", window.scrollY > 118);
-		}else {
-			header.classList.toggle("sticky", window.scrollY > 75);
-		}
-	});
-}catch{};*/
