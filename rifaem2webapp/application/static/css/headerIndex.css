@@ -360,14 +360,16 @@ header.sticky {
     z-index: 12;
 	width: 100%;
 	transition: 0.4s;
-	animation: stickyAppear 1s ease-in-out forwards;
+	animation: stickyAppear 0.5s cubic-bezier(0,.7,.7,1) forwards;
 }
 @keyframes stickyAppear {
 	0%{
 		top: var(--top-stycky);
+		opacity: 0;
 	}
 	100%{
 		top: 0;
+		opacity: 1;
 	}
 }
 .sticky nav {
