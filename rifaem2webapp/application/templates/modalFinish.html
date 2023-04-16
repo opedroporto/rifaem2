@@ -18,24 +18,17 @@
 		{{ form.email.label }} {{ form.email(size=20, autocomplete="off", pattern="[^@\s]+@[^@\s]+\.[^@\s]+") }}
 
 		{{ form.btnEnviar }}
-
-		
-		<!--label for="nome">Escreva seu nome: </label>
-		<input type="text" name="nome" id="nome" placeholder="Nome" minlength="1" maxlength="255" autocomplete="off" required>
-		
-		<label for="phone">Escreva seu telefone: </label>
-		<input type="tel" name="telefone" id="phone" placeholder="(XX) XXXXX-XXXX" pattern="^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$" autocomplete="off" required>
-
-		<label for="email">Escreva seu email: </label>
-		<input type="email" name="email" id="email" placeholder="email@domínio.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" autocomplete="off" required>
-		
-		<input type="submit" name="btnEnviar" id="btnEnviar" value="Finalizar"-->
 	</form>
 </div>
 </div>
 </div>
 
-
-<!-- input mask -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+<script type="text/javascript">
+	document.addEventListener("DOMContentLoaded", () => {
+		// máscara telefone
+		$(":input").inputmask();
+		$("#telefone").inputmask({"mask": "(99) 99999-9999", "Regex": "^\(?\d{2}\)?[\s-]?[\s9]?\d{4}-?\d{4}$"});
+	})
+</script>

@@ -191,46 +191,42 @@
 				}
                 
             </style>
-		<main>
-            <div class="container" >
-                <section>
-					<img src="../static/imagens/grifos.jpg" alt="Imagem dos grifos">
-					<h2>Quem somos</h2>
-					<h3>
-						Somos os grifos! A turma do terceiro ano de Desenvolvimento de Sistemas na ETEC Fernando Prestes.
-						Tivemos a ideia deste projeto e fizemos este site para facilitar a compra e o acesso à informação das nossas rifas, aproveite!
-						E caso tenha alguma dúvida, sugestão ou crítica que desejas fazer, contate-nos ao lado: é rapidinho e logo você terá nossa resposta.
-					</h3>
-                </section>
+			<main>
+				<div class="container" >
+					<section>
+						<img src="../static/imagens/grifos.jpg" alt="Imagem dos grifos">
+						<h2>Quem somos</h2>
+						<h3>
+							Somos os grifos! A turma do terceiro ano de Desenvolvimento de Sistemas na ETEC Fernando Prestes.
+							Tivemos a ideia deste projeto e fizemos este site para facilitar a compra e o acesso à informação das nossas rifas, aproveite!
+							E caso tenha alguma dúvida, sugestão ou crítica que desejas fazer, contate-nos ao lado: é rapidinho e logo você terá nossa resposta.
+						</h3>
+					</section>
 
-                <section id="sectionMensagem">
-                    <h2>Enviar uma mensagem</h2>
-                    <form action="/envia-mensagem" method="post">
-                        <div>{{ form.hidden_tag() }}</div>
-                        <div>{{ form.email.label }} {{ form.email(size=20, autocomplete="off", pattern="[^@\s]+@[^@\s]+\.[^@\s]+") }}</div>
-                        <div>{{ form.nome.label }} {{ form.nome(size=20, autocomplete="off") }}</div>
-                        <div>{{ form.telefone.label }} {{ form.telefone(size=20, autocomplete="off", pattern="^\([1-9]{2}\) (9[1-9])[0-9]{3}-[0-9]{4}$") }}</div>
+					<section id="sectionMensagem">
+						<h2>Enviar uma mensagem</h2>
+						<form action="/envia-mensagem" method="post">
+							<div>{{ form.hidden_tag() }}</div>
+							<div>{{ form.email.label }} {{ form.email(size=20, autocomplete="off", pattern="[^@\s]+@[^@\s]+\.[^@\s]+") }}</div>
+							<div>{{ form.nome.label }} {{ form.nome(size=20, autocomplete="off") }}</div>
+							<div>{{ form.telefone.label }} {{ form.telefone(size=20, autocomplete="off", pattern="^\([1-9]{2}\) (9[1-9])[0-9]{3}-[0-9]{4}$") }}</div>
 
-                        <div>{{ form.mensagem(cols="70", rows="8") }}</div>
-                        
-                        <div class="submit">{{ form.btnEnviar }}</div>
-                    </form>
-                    <p> ou nos contate por contato@rifado2.com </p>
-                </section>
-		   </div>
-	</main>
+							<div>{{ form.mensagem(cols="70", rows="8") }}</div>
+							
+							<div class="submit">{{ form.btnEnviar }}</div>
+						</form>
+						<p> ou nos contate por contato@rifado2.com </p>
+					</section>
+				</div>
+			</main>
             
-
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+			<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
             <script type="text/javascript">
-                document.addEventListener("DOMContentLoaded", () => {
-                    // máscara telefone
+				document.addEventListener("DOMContentLoaded", () => {
+					// máscara telefone
                     $(":input").inputmask();
                     $("#telefone").inputmask({"mask": "(99) 99999-9999", "Regex": "^\(?\d{2}\)?[\s-]?[\s9]?\d{4}-?\d{4}$"});
-
-                    //alert("Gui, pfv, modifique totalmente a estrutura e estilização dessa página pra ficar do seu gosto")
                 })
             </script>
-            <!-- input mask -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-            <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
         {% endblock %}
