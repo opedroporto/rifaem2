@@ -149,6 +149,18 @@ button hr {
     background: #fff;
 }
 
+a.semEstilo:link {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
+a.semEstilo:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
 @keyframes clippath {
     0% {
         clip-path: polygon(98% 0, 91% 23%, 100% 53%, 91% 76%, 98% 100%, 0 100%, 0 0);
@@ -209,6 +221,9 @@ button hr {
 		animation: none;
 	}
     .rightGroup button i {
+		width: 100%;
+		height: 100%;
+		scale: 0.5;
 		padding: 0 !important;
 		margin-inline: 4% 0 !important;
 		font-size: 3.5rem !important;
