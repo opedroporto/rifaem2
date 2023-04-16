@@ -7,28 +7,28 @@ from flask_mail import Message
 from ...ext.email import mail
 from ...blueprints.pixapi.resources import nome_rifa
 
-def async_envia_pedido_efetuado(destinatario, dados):
+def async_envia_pedido_efetuado(destinatario, dados, txid):
     @copy_current_request_context
-    def envia_pedido_efetuado(detinatario, dados):
+    def envia_pedido_efetuado(detinatario, dados, txid):
         dados['nomeRifa'] = nome_rifa(dados['rifa'])
     
-        msg = Message('[Rifado2] Pedido Efetuado com Sucesso!',
+        msg = Message('[Rifa EM2] Pedido Efetuado com Sucesso!',
             sender = os.getenv("EMAIL_USERNAME"),
             recipients = [destinatario]
         )
         
-        msg.html = render_template("pedidoEfetuadoEmail.html", dados=dados)
+        msg.html = render_template("pedidoEfetuadoEmail.html", dados=dados, txid=txid)
 
         mail.send(msg)
 
-    thr = Thread(target=envia_pedido_efetuado, args=[destinatario, dados])
+    thr = Thread(target=envia_pedido_efetuado, args=[destinatario, dados, txid])
     thr.start()
 
 def async_envia_pedido_confirmado(destinatario, dados, txid):
     @copy_current_request_context
     def envia_pedido_efetuado(detinatario, dados, txid):
 
-        msg = Message('[Rifado2] Pagamento Confirmado!',
+        msg = Message('[Rifa EM2] Pagamento Confirmado!',
             sender = os.getenv("EMAIL_USERNAME"),
             recipients = [destinatario]
         )
@@ -44,7 +44,7 @@ def async_envia_mensagem_do_usuario(dados):
     @copy_current_request_context
     def envia_mensagem_do_usuario(dados):
         recipients = os.getenv("EMAIL_RECIPIENTS").split(" ")
-        msg = Message('[Rifado2] Mensagem de um usuário recebida!',
+        msg = Message('[Rifa EM2] Mensagem de um usuário recebida!',
             sender = os.getenv("EMAIL_USERNAME"),
             recipients = recipients
         )

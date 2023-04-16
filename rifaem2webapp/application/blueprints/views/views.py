@@ -14,12 +14,12 @@ from .forms import RequisitaCompraForm, EnviaMensagemForm
 
 bp = Blueprint("views_blueprint", __name__)
 
+
 def init_app(app):
+    
     @bp.route("/", methods=["GET"])
     def index():
-
         rifas = carrega_rifas(pagina=0, quantidade=3)
-        
         requisita_compra_form = RequisitaCompraForm()
 
         return render_template("index.html", rifas=rifas, form=requisita_compra_form)
@@ -65,8 +65,9 @@ def init_app(app):
 
                 # SUCESSO
                 addPedido(resposta['result']['txid'])
-                async_envia_pedido_efetuado(dados['email'], dados)
+                async_envia_pedido_efetuado(dados['email'], dados, resposta['result']['txid'])
                 return dados_pix
+    
             # erro
             except NameError:
                 return abort(422, "Erro ao processar o pedido")
