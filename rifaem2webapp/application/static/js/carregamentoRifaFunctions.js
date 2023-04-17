@@ -45,6 +45,7 @@ function modalCloseP() {
 
 function mostraDadosPix(data) {
 	mostraPix(data);
+	limpaNums();
 }
 
 function requisitaCompraErro(error) {

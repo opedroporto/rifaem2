@@ -56,7 +56,7 @@ form.rifaGrid input:hover {
     position: absolute;
     bottom: -5%;
     width: 100%;
-    height: 200px;
+    height: 150px;
     background: linear-gradient(to top, #fff 42%, transparent);
     z-index: 2;
     display: grid;
@@ -331,12 +331,16 @@ span.tooltips::before {
 }
 
 .numero[data-state="reservado"] {
-    background: var(--numero-reservado-background)!important;
+    /*background: var(--numero-reservado-background)!important;*/
+    filter: hue-rotate(-30deg);
     cursor: default !important;
 }
 
 /* mostra numeros selecionados */
-
+.numero.selecionado {
+    background: var(--bg-linear-gradient);
+    cursor: default !important;
+}
 .showNums {
 	opacity: 0;
 	pointer-events: none;

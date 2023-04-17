@@ -35,19 +35,24 @@ function checkRifa() {
 function confirm() {
 	modalConfirm.classList.remove("on");
 	numsRifa.add(parseInt(numAtual));
-
+	
 	rifaEl = numAtualEl.closest(".rifa");
 	rifaId = numAtualEl.closest(".rifa").dataset.id;
-
-	atualizaShowNums();
+	
 	checkRifa();
 	desabilitaOutrasRifas();
+	atualizaShowNums();
+
+	numAtualEl.disabled = true;
+	numAtualEl.classList.add("selecionado");
+	numAtualEl.parentNode.querySelector(".tooltips").style.display = "none";
 }
 
 function atualizaShowNums() {
-	// atualiza showNums
+
 	showNumsEl.innerHTML = ""
 	numsRifa.forEach(numAtual => {
+		// atualiza showNums
 		let divEl = document.createElement("div");
 		divEl.classList.add("numDiv");
 	
@@ -64,6 +69,8 @@ function atualizaShowNums() {
 	});
 	showNumsEl.classList.add("on");
 
+
+	// reseta rifa se necessário
 	if (showNumsEl.innerHTML == "") {
 		resetaRifaAtual();
 		showNumsEl.classList.remove("on");
@@ -71,12 +78,30 @@ function atualizaShowNums() {
 }
 
 function removeNum(num) {
+	// atualiza números na rifa
+	rifaEl.querySelectorAll(".numero").forEach((numeroEl) => {
+		if (numeroEl.classList.contains("selecionado") & numeroEl.value == num) {
+			numeroEl.disabled = false;
+			numeroEl.classList.remove("selecionado");
+			numAtualEl.parentNode.querySelector(".tooltips").style.display = "inline-block";
+		}
+	});
+
 	numsRifa.delete(num);
 	atualizaShowNums();
 }
 
 // limpa números
 function limpaNums() {
+	// limpa números na rifa
+	rifaEl.querySelectorAll(".numero").forEach((numeroEl) => {
+		if (numeroEl.classList.contains("selecionado")) {
+			numeroEl.disabled = false;
+			numeroEl.classList.remove("selecionado");
+			numAtualEl.parentNode.querySelector(".tooltips").style.display = "inline-block";
+		}
+	});
+
 	resetaRifaAtual();
 	showNumsEl.classList.remove("on");
 }
