@@ -203,62 +203,104 @@ i.fa-solid.fa-copy:hover {
 	width: 100%;
 }
 #btnAtualizar {
-	width: 3em;
-	height: 3em;
-	background-color: #ccc;
-	padding: 0.7em;
-	border-radius: 1em;
-	cursor: pointer;
-	-webkit-filter: brightness(100%)
+	height: 2.6em;
+    aspect-ratio: 1 / 1;
+    padding: 0.7em;
+    border-radius: 100vw;
+    border: 2px solid;
+    cursor: pointer;
+    color: #325f60;
 }
 #btnAtualizar:hover {
 	box-shadow: 0px 0px 5px hsla(0, 0%, 50%, 0.416);
-	-webkit-filter: brightness(80%);
+	-webkit-filter: brightness(120%);
     -webkit-transition: all 1s cubic-bezier(0,.7,.7,1);
     -moz-transition: all 1s cubic-bezier(0,.7,.7,1);
     -o-transition: all 1s cubic-bezier(0,.7,.7,1);
     -ms-transition: all 1s cubic-bezier(0,.7,.7,1);
     transition: all 1s cubic-bezier(0,.7,.7,1);
 }
+#btnAtualizar.hovered {
+	animation: atualizaRotate 1s ease-in-out forwards;
+}
+
+@keyframes atualizaRotate {
+	0%{
+		transform: rotate(0deg);
+	}
+	100%{
+		transform: rotate(360deg);
+	}
+}
+
 #filtros {
 	display: grid;
-	justify-content: center;
-	width: 100%;
-	grid-template-columns: repeat(auto-fill, minmax(14rem, 25rem));
-	gap: 1.5rem;
+    place-items: center;
+}
+.fContainer {
+	display: grid;
+    justify-content: center;
+    padding: 1rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr 4.4rem;
+    gap: 1.5rem;
 }
 .btnFiltro {
-	font-size: 2.5rem;
-	padding: 0.5rem 1rem 0.5rem 1rem;
-	border: 0;
-	border-radius: 10px;
+	font-size: 1.9rem;
+    font-weight: bolder;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+    border: 2px solid #fff;
+    text-transform: uppercase;
+    outline: 2px solid;
 	cursor: pointer;
 	-webkit-filter: brightness(100%)
-}
-.btnFiltro:hover {
-	box-shadow: 0px 0px 5px hsla(0, 0%, 50%, 0.416);
-	-webkit-filter: brightness(80%);
-    -webkit-transition: all 1s cubic-bezier(0,.7,.7,1);
+	-webkit-transition: all 1s cubic-bezier(0,.7,.7,1);
     -moz-transition: all 1s cubic-bezier(0,.7,.7,1);
     -o-transition: all 1s cubic-bezier(0,.7,.7,1);
     -ms-transition: all 1s cubic-bezier(0,.7,.7,1);
     transition: all 1s cubic-bezier(0,.7,.7,1);
 }
-.btnFiltro.todos {
-	color: hsl(0, 0%, 50%);
-	background-color: #ccc;
+.btnFiltro:hover {
+	letter-spacing: 0px;
+	-webkit-filter: opacity(.99);
 }
+.btnFiltro.todos {
+	color: #3f4769;
+    outline-color: #3f4769;
+    box-shadow: inset 2px 2px 1px #3f4769, inset -2px -2px 1px #3f4769;
+}
+button.btnFiltro.todos:hover {
+    box-shadow: inset 1px 1px 100px #3f4769, inset -1px -1px 100px #3f47;
+    color: hsl(0deg 0% 100%);
+}
+
 .btnFiltro.pendentes {
 	color: hsl(47, 72%, 20%);
-	background-color: #dfbb3b;
+	outline-color: #5c4a06;
+	box-shadow: inset 2px 2px 1px #5c4a06, inset -2px -2px 1px #5c4a06;
 }
+button.btnFiltro.pendentes:hover {
+    box-shadow: inset 1px 1px 100px #5c4a06, inset -1px -1px 100px #5c4a06;
+    color: hsl(0deg 0% 100%);
+}
+
 .btnFiltro.pagos {
 	color: hsl(139, 47%, 13%);
-	background-color: #3aa15a;
+	outline-color: hsl(137deg 97% 15%);
+	box-shadow: inset 2px 2px 1px hsl(137deg 97% 15%), inset -2px -2px 1px hsl(137deg 97% 15%);
 }
+button.btnFiltro.pagos:hover {
+    box-shadow: inset 1px 1px 100px hsl(137deg 90% 15%), inset -1px -1px 100px hsl(138deg 90% 16%);
+    color: hsl(0deg 0% 100%);
+}
+
 .btnFiltro.naoPagos {
-	color: hsl(0, 47%, 13%);
-	background-color: #a13a3a;
+	color: hsl(0deg 54% 23%);
+    outline-color: #5a1b1b;
+    box-shadow: inset 2px 2px 1px hsl(0deg 54% 23%), inset -2px -2px 1px hsl(0deg 54% 23%);
+}
+button.btnFiltro.naoPagos:hover {
+    box-shadow: inset 1px 1px 100px hsl(0deg 54% 23%), inset -1px -1px 100px hsl(0deg 54% 23%);
+    color: hsl(0deg 0% 100%);
 }
 
 @media(max-width: 974px) {
@@ -415,4 +457,39 @@ i.fa-solid.fa-copy:hover {
 }
 .outerPart[data-status="P"] .container i.fa-solid.fa-copy:hover {
 	color: #dfbb3b;
+}
+
+@media(max-width: 588px) {
+	.btnFiltro {
+		font-size: clamp(1.4rem, 2.3vw, 1.9rem);
+	}
+}
+@media(max-width: 469px) {
+	.btnFiltro {
+		font-size: clamp(12px, 2.3vw, 1.9rem);
+	}
+	#btnAtualizar {
+		place-self: center;
+		grid-area: refresh;
+	}
+	.btnFiltro.naoPagos {
+		grid-area: npagos;
+	}
+	.btnFiltro.pagos {
+		grid-area: pagos;
+	}
+	.btnFiltro.pendentes {
+		grid-area: pendentes;
+	}
+	.btnFiltro.todos {
+		grid-area: todos;
+	}
+	.fContainer {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr 1fr 1fr;
+		grid-template-areas:
+			"todos pendentes"
+			"pagos npagos"
+			"refresh refresh";
+	}
 }

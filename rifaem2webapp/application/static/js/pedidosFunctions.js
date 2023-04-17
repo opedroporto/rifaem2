@@ -63,10 +63,16 @@ function copy(that){
 
 // filtros
 
-document.querySelector("#btnAtualizar").onclick = () => {
+const btnAtualizar = document.querySelector("#btnAtualizar");
+
+btnAtualizar.onclick = () => {
     location.reload();
 }
 
+btnAtualizar.addEventListener('mouseenter', function() {
+	btnAtualizar.classList.add("hovered");
+	btnAtualizar.addEventListener('animationend', e => btnAtualizar.classList.remove("hovered"));
+});
 document.querySelector(".btnFiltro.todos").onclick = () => {
     document.querySelectorAll(".outerPart").forEach((pedidoEl) => {
         pedidoEl.style.display = "block";
@@ -119,7 +125,6 @@ document.querySelector(".btnFiltro.naoPagos").onclick = () => {
 
 function limpaHrFinal() {
     document.querySelectorAll(".outerHr").forEach((hrEl) => {
-        console.log(hrEl.nextElementSibling);
         let nextEl = hrEl.nextElementSibling
         if (nextEl === null) {
             hrEl.style.display = "none";

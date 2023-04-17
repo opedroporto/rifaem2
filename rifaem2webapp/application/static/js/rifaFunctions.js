@@ -193,6 +193,8 @@ function checaDivExpandir() {
 	});
 }
 
+//hover nas imagens
+
 function hover(){
 	const rifasImgs = document.querySelectorAll(".imgDiv img");
     for(let i = 0; i < rifasImgs.length; i++){
@@ -201,6 +203,8 @@ function hover(){
 	};
 };
 
+hover();
+//clicar fora dos modals e menu burguer para sair
 function checkClick(click){
 	if(click.target !== this) return;
 	
@@ -217,8 +221,22 @@ function clicaFora(item) {
 	item.addEventListener("click", checkClick);		
 };
 
-const menuAsideBg = document.querySelector(".bgMenu-aside");
 clicaFora(modalConfirm);
 clicaFora(modalFinish);
 clicaFora(modalPix);
-clicaFora(menuAsideBg);
+
+//redirecionar para link no index
+
+const linkRifas = document.getElementById("btn__ir__rifas");
+const linkSobre = document.getElementById("btn__ir__sobre");
+const linkWpp = document.getElementById("btn__ir__wpp");
+
+linkRifas.addEventListener("click", (e) => {
+	window.location.href = "/#rifas";
+});
+linkSobre.addEventListener("click", (e) => {
+	window.location.href = "/sobre";
+});
+linkWpp.addEventListener("click", (e) => {
+	window.location.href = "http://api.whatsapp.com/send?1=pt_BR&phone=551597832738";
+});

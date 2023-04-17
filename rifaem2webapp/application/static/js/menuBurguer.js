@@ -40,6 +40,24 @@ rifasLi.addEventListener("click", function () {
 	}, {once: true});
 });
 
+function checkClick(click){
+	if(click.target !== this) return;
+	
+	this.classList.remove("on");
+	if(this.getAttribute("data-state")){
+		menuClose();
+	};
+	if(this.className === "modalbgPix"){
+		window.location.reload();
+	}
+};
+
+function clicaFora(item) {
+	item.addEventListener("click", checkClick);		
+};
+
+clicaFora(BgmenuAside);
+
 window.addEventListener("resize", (e) => {
     if (window.innerWidth > 860 && btnBurguer.getAttribute('aria-expanded') === "true"){ 
         btnBurguer.classList.remove("on");
@@ -57,6 +75,9 @@ window.addEventListener("resize", (e) => {
 try{
 	var offsets = document.getElementById('rifas').getBoundingClientRect();
 	var offsetTop = offsets.top;
+	if(offsetTop < 500){
+		offsetTop = offsetTop + 700;
+	}
 
 	window.addEventListener("scroll", function () {
 		if (window.innerWidth > 440){
