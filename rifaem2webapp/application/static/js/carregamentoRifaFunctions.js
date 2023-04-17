@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			const formData = new FormData(form);
 			const data = Object.fromEntries(formData);
-			data.numerosRifa = numsRifa;
+			data.numerosRifa = Array.from(numsRifa);
 			data.rifa = rifaId;
 			//let nomeRifa = rifaEl.querySelector(".nomeRifa").innerHTML;
 			//data.nomeRifa = nomeRifa;

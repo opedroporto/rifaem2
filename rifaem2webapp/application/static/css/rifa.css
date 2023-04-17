@@ -371,6 +371,9 @@ span.tooltips::before {
     padding: .2rem;
     color: #fff;
 }
+.numDiv {
+    display: flex;
+}
 
 
 /* RESPONSIVIDADE */

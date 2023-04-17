@@ -4,7 +4,7 @@ const modalPix = document.querySelector(".modalbgPix");
 const btnReset = document.querySelector(".resetNums");
 const showNumsEl = document.querySelector(".showNums");
 
-const numsRifa = [];
+const numsRifa = new Set();
 let numAtualEl;
 let numAtual;
 
@@ -19,7 +19,7 @@ function checkRifa() {
 	btnConcluir = rifaEl.querySelector(".lblSub");
 
 	// ativa botão concluir
-	if (numsRifa.length != 0) {
+	if (numsRifa.size != 0) {
 		btnConcluir.classList.add("on");
 		btnReset.classList.add("on");
 	}
@@ -34,33 +34,56 @@ function checkRifa() {
 // confirma número escolhido
 function confirm() {
 	modalConfirm.classList.remove("on");
-	numsRifa.push(parseInt(numAtual));
+	numsRifa.add(parseInt(numAtual));
 
 	rifaEl = numAtualEl.closest(".rifa");
 	rifaId = numAtualEl.closest(".rifa").dataset.id;
 
-	let iEl = document.createElement("i");
-	iEl.insertAdjacentText("beforeend", numAtual);
-	showNumsEl.appendChild(iEl);
+	atualizaShowNums();
+	checkRifa();
+	desabilitaOutrasRifas();
+}
+
+function atualizaShowNums() {
+	// atualiza showNums
+	showNumsEl.innerHTML = ""
+	numsRifa.forEach(numAtual => {
+		let divEl = document.createElement("div");
+		divEl.classList.add("numDiv");
+	
+		let iEl = document.createElement("i");
+		iEl.insertAdjacentText("beforeend", numAtual);
+		divEl.appendChild(iEl);
+	
+		let btnEl = document.createElement("button");
+		btnEl.innerHTML = "X";
+		btnEl.setAttribute("onclick", "removeNum(" + numAtual + ")");
+		divEl.appendChild(btnEl);
+		
+		showNumsEl.appendChild(divEl);
+	});
 	showNumsEl.classList.add("on");
 
-	checkRifa();
+	if (showNumsEl.innerHTML == "") {
+		resetaRifaAtual();
+		showNumsEl.classList.remove("on");
+	}
+}
 
-	desabilitaOutrasRifas();
+function removeNum(num) {
+	numsRifa.delete(num);
+	atualizaShowNums();
 }
 
 // limpa números
 function limpaNums() {
 	resetaRifaAtual();
 	showNumsEl.classList.remove("on");
-	while (showNumsEl.lastElementChild) {
-		showNumsEl.removeChild(showNumsEl.lastElementChild);
-	}
 }
 
 // reseta rifa atual
 function resetaRifaAtual() {
-	numsRifa.length = 0;
+	numsRifa.clear();
 	
 	checkRifa();
 

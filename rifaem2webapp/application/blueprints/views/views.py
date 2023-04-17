@@ -52,6 +52,15 @@ def init_app(app):
         dados = request.get_json()
         form = RequisitaCompraForm()
 
+        # NÚMEROS INVÁLIDOS
+        try:
+            if len(dados['numerosRifa']) != len(set(dados['numerosRifa'])):
+                return abort(400, "Número(s) inválido(s)")
+        except KeyError:
+            return abort(422, "Erro ao processar o pedido")
+        except ValueError:
+            return abort(422, "Erro ao processar o pedido")
+
         # FORM VÁLIDO
         if form.validate():
             try:
