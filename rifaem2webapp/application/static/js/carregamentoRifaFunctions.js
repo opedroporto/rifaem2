@@ -7,7 +7,14 @@ var carregandoRifas = false;
 var sseTimeout = 660000
 
 function mostraPagamentoConfirmado() {
-	alert("Pagamento Confirmado!");
+	modalConfirmBody = document.querySelector(".modalBodyP");
+	modalConfirmContent = document.querySelector(".modalContentPix");
+	modalFooterA = document.querySelector(".modalBodyP .footer a");
+	
+	document.querySelector(".modalHead h2").innerHTML = "Pagamento Confirmado!";
+	modalConfirmBody.classList.add("payed");
+	modalFooterA.innerHTML = "Fechar";
+	modalFooterA.setAttribute("href", "/");
 }
 
 function mostraPix(data) {

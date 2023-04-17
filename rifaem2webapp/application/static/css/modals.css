@@ -125,7 +125,7 @@ i.fa-solid.fa-check {
     margin-top: 8rem;
 	border: 4px solid #ebebeb;
     border-radius: 100vw;
-    display: grid;
+    display: none;
 	height: 6rem;
     place-items: center;
     aspect-ratio: 1 / 1;
@@ -133,6 +133,9 @@ i.fa-solid.fa-check {
 	animation: checkAppear 3s ease-in-out forwards;
 }
 
+.modalBodyP .modalContentPix h2.Thanks{
+	display: none;
+}
 .modalBodyP.payed .modalContentPix h2.Thanks {
     font-size: clamp(2rem, 5vw + .1rem, 2.5rem);
     text-align: center;
@@ -468,4 +471,28 @@ input#btnEnviar:hover {
 		transform: rotate(-160deg);
 		opacity: 0;
 	}
+}
+
+/* payed */
+
+.modalBodyP.payed i.fa-solid.fa-angles-down {
+	display: none;
+}
+.modalBodyP.payed .modalContentPix i.fa-solid.fa-check {
+	display: grid;
+}
+.modalBodyP.payed .modalContentPix .Thanks {
+	display: block;
+}
+.modalBodyP.payed .modalContentPix img {
+	display: none;
+}
+.modalBodyP.payed .modalContentPix #pixChave {
+	display: none;
+}
+.modalBodyP.payed .modalContentPix i.fa-solid.fa-copy {
+	display: none;
+}
+.modalBodyP.payed .footer h2 {
+	display: none;
 }
