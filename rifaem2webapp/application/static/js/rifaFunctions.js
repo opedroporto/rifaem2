@@ -4,14 +4,14 @@ const modalPix = document.querySelector(".modalbgPix");
 const btnReset = document.querySelector(".resetNums");
 const showNumsEl = document.querySelector(".showNums");
 
-const numsRifa = [];
+const numsRifa = new Set();
 let numAtualEl;
 let numAtual;
 
 let rifaEl;
 let rifaId;
 
-const maximoRifaSemDivExpandir = 250;
+const maximoRifaSemDivExpandir = 100;
 
 // ativa ou desativa botão concluir da rifa atual
 function checkRifa() {
@@ -19,7 +19,7 @@ function checkRifa() {
 	btnConcluir = rifaEl.querySelector(".lblSub");
 
 	// ativa botão concluir
-	if (numsRifa.length != 0) {
+	if (numsRifa.size != 0) {
 		btnConcluir.classList.add("on");
 		btnReset.classList.add("on");
 	}
@@ -34,33 +34,81 @@ function checkRifa() {
 // confirma número escolhido
 function confirm() {
 	modalConfirm.classList.remove("on");
-	numsRifa.push(parseInt(numAtual));
-
+	numsRifa.add(parseInt(numAtual));
+	
 	rifaEl = numAtualEl.closest(".rifa");
 	rifaId = numAtualEl.closest(".rifa").dataset.id;
+	
+	checkRifa();
+	desabilitaOutrasRifas();
+	atualizaShowNums();
 
-	let iEl = document.createElement("i");
-	iEl.insertAdjacentText("beforeend", numAtual);
-	showNumsEl.appendChild(iEl);
+	numAtualEl.disabled = true;
+	numAtualEl.classList.add("selecionado");
+	numAtualEl.parentNode.querySelector(".tooltips").style.display = "none";
+}
+
+function atualizaShowNums() {
+
+	showNumsEl.innerHTML = ""
+	numsRifa.forEach(numAtual => {
+		// atualiza showNums
+		let divEl = document.createElement("div");
+		divEl.classList.add("numDiv");
+	
+		let iEl = document.createElement("i");
+		iEl.insertAdjacentText("beforeend", numAtual);
+		divEl.appendChild(iEl);
+	
+		let btnEl = document.createElement("button");
+		btnEl.innerHTML = "X";
+		btnEl.setAttribute("onclick", "removeNum(" + numAtual + ")");
+		divEl.appendChild(btnEl);
+		
+		showNumsEl.appendChild(divEl);
+	});
 	showNumsEl.classList.add("on");
 
-	checkRifa();
 
-	desabilitaOutrasRifas();
+	// reseta rifa se necessário
+	if (showNumsEl.innerHTML == "") {
+		resetaRifaAtual();
+		showNumsEl.classList.remove("on");
+	}
+}
+
+function removeNum(num) {
+	// atualiza números na rifa
+	rifaEl.querySelectorAll(".numero").forEach((numeroEl) => {
+		if (numeroEl.classList.contains("selecionado") & numeroEl.value == num) {
+			numeroEl.disabled = false;
+			numeroEl.classList.remove("selecionado");
+			numAtualEl.parentNode.querySelector(".tooltips").style.display = "inline-block";
+		}
+	});
+
+	numsRifa.delete(num);
+	atualizaShowNums();
 }
 
 // limpa números
 function limpaNums() {
+	// limpa números na rifa
+	rifaEl.querySelectorAll(".numero").forEach((numeroEl) => {
+		if (numeroEl.classList.contains("selecionado")) {
+			numeroEl.disabled = false;
+			numeroEl.classList.remove("selecionado");
+			numAtualEl.parentNode.querySelector(".tooltips").style.display = "inline-block";
+		}
+	});
+
 	resetaRifaAtual();
 	showNumsEl.classList.remove("on");
-	while (showNumsEl.lastElementChild) {
-		showNumsEl.removeChild(showNumsEl.lastElementChild);
-	}
 }
 
 // reseta rifa atual
 function resetaRifaAtual() {
-	numsRifa.length = 0;
+	numsRifa.clear();
 	
 	checkRifa();
 
@@ -187,7 +235,7 @@ function alteraBtns() {
 function checaDivExpandir() {
 	document.querySelectorAll(".rifaGrid").forEach((rifaGrid) => {
 		quantidadeNumeros = rifaGrid.querySelectorAll(".tooltip").length;
-		if (quantidadeNumeros < maximoRifaSemDivExpandir) {
+		if (quantidadeNumeros <= maximoRifaSemDivExpandir) {
 			rifaGrid.querySelector(".expandRifa").style.display = "none";
 		}
 	});

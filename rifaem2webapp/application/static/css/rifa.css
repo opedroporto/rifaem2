@@ -331,12 +331,16 @@ span.tooltips::before {
 }
 
 .numero[data-state="reservado"] {
-    background: var(--numero-reservado-background)!important;
+    /*background: var(--numero-reservado-background)!important;*/
+    filter: hue-rotate(-30deg);
     cursor: default !important;
 }
 
 /* mostra numeros selecionados */
-
+.numero.selecionado {
+    background: var(--bg-linear-gradient);
+    cursor: default !important;
+}
 .showNums {
 	opacity: 0;
 	pointer-events: none;
@@ -370,6 +374,9 @@ span.tooltips::before {
     font-style: normal;
     padding: .2rem;
     color: #fff;
+}
+.numDiv {
+    display: flex;
 }
 
 
