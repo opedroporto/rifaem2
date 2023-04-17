@@ -7,4 +7,4 @@ WORKDIR /rifaem2webapp
 
 RUN pip install -r requirements.txt
 
-CMD gunicorn --workers=3 --worker-class=gevent --reload --bind 0.0.0.0:5000 --chdir application wsgi:app
+CMD gunicorn --workers=3 --worker-class=gevent --bind 0.0.0.0:5000 --chdir application wsgi:app
