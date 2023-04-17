@@ -364,7 +364,7 @@ span.tooltips::before {
     font-size: 1.8rem;
     z-index: 10;
 }
-.showNums i {
+.showNums i.iPreview {
     background: var(--bg-linear-gradient);
     width: clamp(3.7rem, 3vw + .28rem, 4rem);
     aspect-ratio: 1 / 1;
@@ -376,7 +376,24 @@ span.tooltips::before {
     color: #fff;
 }
 .numDiv {
-    display: flex;
+    display: grid;
+	position: relative;
+}
+.numDiv button {
+    position: absolute;
+    border-radius: 100vw;
+    aspect-ratio: 1 / 1;
+    justify-self: center;
+    height: 1.8rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    bottom: -22%;
+    border: none;
+    background: linear-gradient(45deg, #910404, #390c0c);
+    color: #ff4e4e;
+}
+.numDiv button i {
+    color: #ff4e4e;
 }
 
 

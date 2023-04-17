@@ -57,12 +57,16 @@ function atualizaShowNums() {
 		divEl.classList.add("numDiv");
 	
 		let iEl = document.createElement("i");
+		iEl.className = "iPreview";
 		iEl.insertAdjacentText("beforeend", numAtual);
 		divEl.appendChild(iEl);
 	
 		let btnEl = document.createElement("button");
-		btnEl.innerHTML = "X";
+		let iTimes = document.createElement("i");
+		iTimes.className = "fa-regular fa-times-circle";
+		btnEl.appendChild(iTimes);
 		btnEl.setAttribute("onclick", "removeNum(" + numAtual + ")");
+		btnEl.setAttribute("title", "Remover");
 		divEl.appendChild(btnEl);
 		
 		showNumsEl.appendChild(divEl);
