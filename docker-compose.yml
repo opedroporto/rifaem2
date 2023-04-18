@@ -31,6 +31,10 @@ services:
             # arquivos certbot
             - ./data/certbot/conf:/etc/letsencrypt
             - ./data/certbot/www:/var/www/certbot
+
+            # arquivos webapp
+            - ./rifaem2webapp/application/static:/rifaem2webapp/application/static
+
         ports:
             - "80:80"
             - "443:443"
