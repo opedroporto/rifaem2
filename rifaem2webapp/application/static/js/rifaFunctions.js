@@ -249,9 +249,12 @@ function checaDivExpandir() {
 
 function hover(){
 	const rifasImgs = document.querySelectorAll(".imgDiv img");
+	const rifasDesc = document.querySelectorAll(".imgDiv .descInfo");
+	
     for(let i = 0; i < rifasImgs.length; i++){
         rifasImgs[i].addEventListener('mouseenter', e => rifasImgs[i].parentNode.classList.add("slided"));
         rifasImgs[i].addEventListener('mouseleave', e => rifasImgs[i].parentNode.classList.remove("slided"));
+		rifasDesc[i].style.width = rifasImgs[i].offsetWidth + "px";
 	};
 };
 

@@ -12,11 +12,11 @@
 					<i class="fa-solid fa-chevron-right" onclick="slideDescription(this)"></i><hr class="last">
 				
 					<div class="descInfo">
-						<h2>Autor: {{ rifa.autor }}</h2>
-						<h4>Data de lançamento: {{ formata_data(rifa.dataLancamento) }}</h4>
-						<h4>Data de Encerramento: {{ formata_data(rifa.dataEncerramento, hora=True) }}</h4>
+						<h2>Autor: <wbr> {{ rifa.autor }}</h2>
+						<!--<h4>Data de lançamento: {{ formata_data(rifa.dataLancamento) }}</h4>-->
 					</div>
 				</div>
+				<h4>Data de Encerramento: {{ formata_data(rifa.dataEncerramento, hora=True) }}</h4>
 			</div>
 			
 			{# define variável numeros #}

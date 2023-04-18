@@ -127,6 +127,7 @@ i.fa-solid.fa-check {
     border-radius: 100vw;
     display: none;
 	height: 6rem;
+	min-height: 6rem;
     place-items: center;
     aspect-ratio: 1 / 1;
     padding: 1rem;

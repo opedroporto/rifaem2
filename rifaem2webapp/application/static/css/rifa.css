@@ -98,7 +98,6 @@ form.rifaGrid.expandido .expandRifa i {
 
 .descInfo {
     height: 110px;
-    aspect-ratio: 4 / 1;
     position: absolute;
     background: var(--bg-linear-gradient);
     margin-right: 5px;
@@ -142,7 +141,7 @@ form.rifaGrid.expandido .expandRifa i {
 	opacity: 1;
 	pointer-events: auto;
 	transition: 0.4s;
-    aspect-ratio: 4 / 1;
+	object-fit: contain;
     border-radius: 2rem;
 }
 h1.nomeRifa {
@@ -396,17 +395,23 @@ span.tooltips::before {
     color: #ff4e4e;
 }
 
+.descOutline h4 {
+    transform: translateX(-50%);
+    color: var(--bg-color);
+    font-size: 1.6rem;
+    left: 50%;
+    bottom: -20%;
+    position: absolute;
+}
 
 /* RESPONSIVIDADE */
 
 @media (max-width: 976px){
 	.imgDiv img {
 		height: 80px;
-		aspect-ratio: 3 / 1;
 	}
 	.descInfo {
 		height: 80px;
-		aspect-ratio: 3 / 1;
 		margin-right: 15px;
 	}
 	.descInfo h3, .descInfo h4 {
@@ -514,12 +519,11 @@ span.tooltips::before {
 		right: unset;
 	}
 	.descInfo {
-		height: 70px;
-		aspect-ratio: 3 / 1;
+		height: 55px;
 		margin-right: 5px;
 	}
 	.imgDiv img {
-		height: 70px;
+		height: 55px;
 		margin-left: .8rem;
 	}
 	.imgDiv {
