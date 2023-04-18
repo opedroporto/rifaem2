@@ -154,11 +154,11 @@ button.menu-burguer.on .linhas:hover .line {
 }
 
 .menu-aside[data-state="opened"]{
-	animation: menuAppear 1s ease-in-out forwards;
+	animation: menuAppear 0.5s cubic-bezier(.42,0,.34,1) forwards;
 	display: flex;
 }
 .menu-aside[data-state="closing"]{
-	animation: menuDisappear 1s ease-in-out forwards;
+	animation: menuDisappear 0.5s cubic-bezier(.42,0,.34,1) forwards;
 }
 .menu-aside[data-state="closed"]{
 	display: none !important;
@@ -192,11 +192,11 @@ button.menu-burguer.on .linhas:hover .line {
 }
 .bgMenu-aside[data-state="opened"] {
 	display: block;
-	animation: bgFadein 1s ease-in-out forwards;
+	animation: bgFadein 0.5s cubic-bezier(.42,0,.34,1) forwards;
 }
 .bgMenu-aside[data-state="closing"] {
 	display: block;
-	animation: bgFadeout 1s ease-in-out forwards;
+	animation: bgFadeout 0.5s cubic-bezier(.42,0,.34,1) forwards;
 }
 .bgMenu-aside[data-state="closed"] {
 	display: none;
