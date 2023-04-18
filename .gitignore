@@ -8,3 +8,4 @@ __pycache__
 .parse.project
 *.p12
 *.pem
+.swp
