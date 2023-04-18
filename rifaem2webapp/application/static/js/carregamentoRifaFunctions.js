@@ -11,8 +11,9 @@ function mostraPagamentoConfirmado() {
 	modalConfirmContent = document.querySelector(".modalContentPix");
 	modalFooterA = document.querySelector(".modalBodyP .footer a");
 	
-	document.querySelector(".modalHead h2").innerHTML = "Pagamento Confirmado!";
+	console.log(document.querySelector(".payed .modalHead h2"));
 	modalConfirmBody.classList.add("payed");
+	document.querySelector(".payed .modalHead h2").innerHTML = "Pagamento Confirmado!";
 	modalFooterA.innerHTML = "Fechar";
 	modalFooterA.setAttribute("href", "/");
 }
