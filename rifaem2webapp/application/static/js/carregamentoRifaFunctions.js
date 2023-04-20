@@ -91,6 +91,7 @@ function carregaRifas() {
 			desabilitaNumeros();
 			desabilitaOutrasRifas();
 			alteraBtns();
+			imgClick();
 			hover();
 			
 		})

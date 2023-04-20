@@ -5,9 +5,10 @@ html.on {
 main {
     display: grid;
     place-items: center;
+	align-items: start;
 	min-height: calc(100vh - 22.5vh);
 	position: relative;
-	padding-bottom: 15vh;
+	padding-bottom: 20rem;
 	top: max(118px, 15vh);
 }
 @media (max-width: 440px){

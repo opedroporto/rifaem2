@@ -3,6 +3,7 @@ const modalFinish = document.querySelector(".modalBgF");
 const modalPix = document.querySelector(".modalbgPix");
 const btnReset = document.querySelector(".resetNums");
 const showNumsEl = document.querySelector(".showNums");
+const modalImg = document.querySelector(".modal__img__bg");
 
 const numsRifa = new Set();
 let numAtualEl;
@@ -156,12 +157,17 @@ function habilitaTodasRifas() {
 // modal Confirm
 function modalcOpen(numEl) {
 	modalConfirm.classList.add("on");
+	modalConfirm.setAttribute("data-anim", "opened");
 	numAtualEl = numEl;
 	numAtual = numEl.value;
 }
 
 function modalClose() {
-	modalConfirm.classList.remove("on");
+	modalConfirm.setAttribute("data-anim", "closing"); 
+	modalConfirm.addEventListener("animationend", (e) => {
+		modalConfirm.setAttribute("data-anim", "closed"); 
+		modalConfirm.classList.remove("on");
+	}, {once: true});
 	checkRifa()
 }
 
@@ -169,12 +175,17 @@ function modalClose() {
 function modalfOpen(btnConcluirAtual) {
 	if (btnConcluirAtual.classList.contains("on")) {
 		modalFinish.classList.add("on");
+		modalFinish.setAttribute("data-anim", "opened");
 		document.getElementById("numerosRifa").value = numsRifa;
 	}
 }
 
 function modalCloseF() {
-	modalFinish.classList.remove("on");
+	modalFinish.setAttribute("data-anim", "closing"); 
+	modalFinish.addEventListener("animationend", (e) => {
+		modalFinish.setAttribute("data-anim", "closed"); 
+		modalFinish.classList.remove("on");
+	}, {once: true});
 }
 
 function checaTamanho() {
@@ -246,29 +257,56 @@ function checaDivExpandir() {
 }
 
 //hover nas imagens
-
+const rifasImgs = document.querySelectorAll(".imgDiv img");
 function hover(){
-	const rifasImgs = document.querySelectorAll(".imgDiv img");
 	const rifasDesc = document.querySelectorAll(".imgDiv .descInfo");
+	const docFontSize = parseFloat(window.getComputedStyle(document.documentElement).fontSize);
 	
     for(let i = 0; i < rifasImgs.length; i++){
         rifasImgs[i].addEventListener('mouseenter', e => rifasImgs[i].parentNode.classList.add("slided"));
         rifasImgs[i].addEventListener('mouseleave', e => rifasImgs[i].parentNode.classList.remove("slided"));
-		rifasDesc[i].style.width = rifasImgs[i].offsetWidth + "px";
+		numConvert = rifasImgs[i].offsetWidth / docFontSize;
+		rifasDesc[i].style.width = numConvert + "rem";
 	};
 };
 
 hover();
+
+function imgClick() {
+	let modalImgDesc = document.querySelector(".modalHead.Desc h2");
+	let hiddenInputDesc = document.querySelectorAll(".inputDescH");
+	for(let nI = 0; nI < rifasImgs.length; nI++){
+        rifasImgs[nI].addEventListener('click', function() {
+			modalImg.classList.add("on");
+			modalImg.setAttribute("data-anim", "opened");
+			document.querySelector(".modalContentImg img").src = rifasImgs[nI].src;
+			modalImgDesc.innerHTML = hiddenInputDesc[nI].value;
+		});
+	};
+}
+
+imgClick();
+
+window.addEventListener("resize", (e) => {
+	hover();
+});
+
 //clicar fora dos modals e menu burguer para sair
 function checkClick(click){
 	if(click.target !== this) return;
 	
-	this.classList.remove("on");
 	if(this.getAttribute("data-state")){
 		menuClose();
-	};
-	if(this.className === "modalbgPix"){
-		window.location.reload();
+	}
+	if(this.getAttribute("data-anim")){
+		this.setAttribute("data-anim", "closing");
+		this.addEventListener("animationend", (e) => {
+			this.setAttribute("data-anim", "closed"); 
+			this.classList.remove("on");
+			if(this.className === "modalbgPix"){
+				window.location.reload();
+			}
+		}, {once: true});
 	}
 };
 
@@ -279,6 +317,7 @@ function clicaFora(item) {
 clicaFora(modalConfirm);
 clicaFora(modalFinish);
 clicaFora(modalPix);
+clicaFora(modalImg);
 
 //redirecionar para link no index
 

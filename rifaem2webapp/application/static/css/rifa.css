@@ -26,6 +26,7 @@ form.rifaGrid {
     gap: .4rem .5rem;
     justify-content: center;
     padding: 5rem;
+	padding-top: 6rem !important;
     align-items: start;
     position: relative;
     margin-bottom: 2rem;
@@ -105,7 +106,6 @@ form.rifaGrid.expandido .expandRifa i {
     display: grid;
 	pointer-events: none;
     place-items: center;
-    grid-template-rows: 40% 10% 30%;
 	opacity: 0;
 	transition: 0.6s 0.1s, opacity 0.2s 0s;
 }
@@ -113,6 +113,14 @@ form.rifaGrid.expandido .expandRifa i {
 	transition: 0.6s, opacity 0.6s 0.2s;
 	pointer-events: none;
 	opacity: 1;
+}
+i.fa-solid.fa-hand-pointer {
+    color: #fff;
+    place-self: center;
+    font-size: 2rem;
+    border: 2px solid;
+    border-radius: 100vw;
+    padding: 1rem;
 }
 .imgDiv.slided img {
 	opacity: 0;
@@ -423,6 +431,10 @@ span.tooltips::before {
 	.imgDiv hr {
 		width: clamp(14rem, 15vw + 1rem, 28rem);
 	}
+	.descOutline h4 {
+		bottom: -12%;
+	}
+
 }
 
 @media (max-width: 630px){
@@ -529,6 +541,14 @@ span.tooltips::before {
 	.imgDiv {
 		gap: .5rem;
 	}
+	.descOutline h4 {
+		bottom: -10%;
+		width: 20rem;
+	}
+	i.fa-solid.fa-hand-pointer {
+		font-size: 1rem;
+		padding: .8rem;
+	}
 }
 
 @media (max-width: 340px){
@@ -538,5 +558,11 @@ span.tooltips::before {
 	
 	h1.nomeRifa {
 		font-size: 2.5rem;
+	}
+}
+
+@media (max-width: 570px){
+	.descOutline h4 {
+		bottom: -20%;
 	}
 }
