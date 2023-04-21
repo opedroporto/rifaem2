@@ -257,8 +257,8 @@ function checaDivExpandir() {
 }
 
 //hover nas imagens
-const rifasImgs = document.querySelectorAll(".imgDiv img");
 function hover(){
+	const rifasImgs = document.querySelectorAll(".imgDiv img");
 	const rifasDesc = document.querySelectorAll(".imgDiv .descInfo");
 	const docFontSize = parseFloat(window.getComputedStyle(document.documentElement).fontSize);
 	
@@ -266,13 +266,13 @@ function hover(){
         rifasImgs[i].addEventListener('mouseenter', e => rifasImgs[i].parentNode.classList.add("slided"));
         rifasImgs[i].addEventListener('mouseleave', e => rifasImgs[i].parentNode.classList.remove("slided"));
 		numConvert = rifasImgs[i].offsetWidth / docFontSize;
+		console.log(numConvert);
 		rifasDesc[i].style.width = numConvert + "rem";
 	};
 };
 
-hover();
-
 function imgClick() {
+	const rifasImgs = document.querySelectorAll(".imgDiv img");
 	let modalImgDesc = document.querySelector(".modalHead.Desc h2");
 	let hiddenInputDesc = document.querySelectorAll(".inputDescH");
 	for(let nI = 0; nI < rifasImgs.length; nI++){
@@ -284,8 +284,6 @@ function imgClick() {
 		});
 	};
 }
-
-imgClick();
 
 window.addEventListener("resize", (e) => {
 	hover();

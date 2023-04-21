@@ -91,8 +91,8 @@ function carregaRifas() {
 			desabilitaNumeros();
 			desabilitaOutrasRifas();
 			alteraBtns();
-			imgClick();
 			hover();
+			imgClick();
 			
 		})
 		//.catch(error => console.log(error))
@@ -145,7 +145,9 @@ function desabilitaNumeros() {
 document.addEventListener("DOMContentLoaded", () => {
 	checaTamanho();
 	alteraBtns();
-	checaDivExpandir()
+	checaDivExpandir();
+	hover();
+	imgClick();
 
 	document.querySelectorAll(".modalForm").forEach((form) => {
 		form.addEventListener("submit", event => {
