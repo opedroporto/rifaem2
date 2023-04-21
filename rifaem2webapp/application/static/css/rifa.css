@@ -505,13 +505,21 @@ span.tooltips::before {
 		top: 7rem;
 	}
 }
-
-@media (max-width: 450px){
+@media (max-width: 600px){
 	.imgDiv hr.last {
 		width: 1.5rem;
 	}
 	.imgDiv hr {
 		width: 2.5rem;
+	}
+}
+
+@media (max-width: 490px){
+	.imgDiv hr.last {
+		width: 1.2rem;
+	}
+	.imgDiv hr {
+		width: 2rem;
 	}
 	h1.nomeRifa {
 		font-size: 2.5rem;

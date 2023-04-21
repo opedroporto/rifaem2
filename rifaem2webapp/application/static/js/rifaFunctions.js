@@ -257,6 +257,22 @@ function checaDivExpandir() {
 }
 
 //hover nas imagens
+
+const debounce = (func, wait, immediate) => {
+    var timeout;
+    return () => {
+        const context = this, args = arguments;
+        const later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+};
+
 function hover(){
 	const rifasImgs = document.querySelectorAll(".imgDiv img");
 	const rifasDesc = document.querySelectorAll(".imgDiv .descInfo");
@@ -285,9 +301,12 @@ function imgClick() {
 	};
 }
 
-window.addEventListener("resize", (e) => {
-	hover();
-});
+window.addEventListener("resize", debounce(() => hover(),
+200, false), false);
+
+//mobile
+window.addEventListener('orientationchange', () => hover(), false);
+
 
 //clicar fora dos modals e menu burguer para sair
 function checkClick(click){

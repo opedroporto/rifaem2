@@ -10,8 +10,10 @@
 
         {% block body %}
             <style>
-				html, body {
-					padding-bottom: 15vh;
+				@media (max-height: 740px){
+					html, body {
+						padding-bottom: 10vh;
+					}
 				}
 				@media (max-width: 440px){
 					main {
@@ -23,7 +25,7 @@
 					}
 				}
 				@media (max-width: 799px){
-					html, body {
+					main {
 						padding-bottom: 12vh;
 					}
 				}
@@ -34,6 +36,7 @@
 				}
                 .container {
 					width: 100%;
+					scale: 0.9;
 					text-align: center;
 					display: grid;
 					grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -49,6 +52,7 @@
 					grid-template-rows: 40% 10% 50%;
 					place-items: center;
 					min-height: 600px;
+					max-height: 600px;
 				}
 				section img {
 					height: 150px;
