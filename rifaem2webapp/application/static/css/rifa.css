@@ -40,6 +40,7 @@ form.rifaGrid input {
     width: 3.4rem;
     border: none;
     aspect-ratio: 1 / 1;
+	height: 3.4rem;
     border-radius: 1.2rem;
     font-size: 1.5rem;
     font-weight: 800;
@@ -227,6 +228,7 @@ input#btnConc {
 	position: fixed;
     width: 200px;
     aspect-ratio: 8 / 2.5;
+	height: 60px;
     bottom: 35px;
     right: 250px;
     background: var(--bg-linear-gradient);
@@ -260,6 +262,7 @@ button.resetNums {
     position: fixed;
     width: 200px;
     aspect-ratio: 8 / 2.5;
+	height: 60px;
     bottom: 35px;
     right: 30px;
     background: var(--bg-linear-gradient);
@@ -375,6 +378,7 @@ span.tooltips::before {
     background: var(--bg-linear-gradient);
     width: clamp(3.7rem, 3vw + .28rem, 4rem);
     aspect-ratio: 1 / 1;
+	height: clamp(3.7rem, 3vw + .28rem, 4rem);
     border-radius: 1rem;
     display: grid;
     place-items: center;
@@ -390,6 +394,7 @@ span.tooltips::before {
     position: absolute;
     border-radius: 100vw;
     aspect-ratio: 1 / 1;
+	width: 1.8rem;
     justify-self: center;
     height: 1.8rem;
     font-size: 1.2rem;
@@ -476,6 +481,7 @@ span.tooltips::before {
 	.lblSub	{
 		width: 45px;
 		aspect-ratio: 1 / 1;
+		height: 45px;
 		bottom: 30px;
 		left: 30px;
 		border: 2px solid #002803;
@@ -505,13 +511,21 @@ span.tooltips::before {
 		top: 7rem;
 	}
 }
-
-@media (max-width: 450px){
+@media (max-width: 600px){
 	.imgDiv hr.last {
 		width: 1.5rem;
 	}
 	.imgDiv hr {
 		width: 2.5rem;
+	}
+}
+
+@media (max-width: 490px){
+	.imgDiv hr.last {
+		width: 1.2rem;
+	}
+	.imgDiv hr {
+		width: 2rem;
 	}
 	h1.nomeRifa {
 		font-size: 2.5rem;
