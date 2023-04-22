@@ -119,6 +119,8 @@ main {
     max-width: 22px;
     min-width: clamp(15px, 2vw + .1rem, 22px);
     aspect-ratio: 1 / 1;
+	min-height: clamp(15px, 2vw + .1rem, 22px);
+	max-height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -206,6 +208,7 @@ i.fa-solid.fa-copy:hover {
 #btnAtualizar {
 	height: 2.6em;
     aspect-ratio: 1 / 1;
+	width: 2.6em;
     padding: 0.7em;
     border-radius: 100vw;
     border: 2px solid;

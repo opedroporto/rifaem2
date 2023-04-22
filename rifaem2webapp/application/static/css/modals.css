@@ -157,6 +157,8 @@ i.fa-solid.fa-check {
 	min-height: 68px;
     place-items: center;
     aspect-ratio: 1 / 1;
+	width: 6rem;
+	min-width: 68px;
     padding: 1rem;
 	animation: checkAppear 3s ease-in-out forwards;
 }
@@ -448,6 +450,7 @@ input#btnEnviar:hover {
 	opacity: 0;
 	z-index: -1;
     aspect-ratio: 1 / 1;
+	width: 120px;
     border: 1rem solid var(--bg-color);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -469,6 +472,7 @@ input#btnEnviar:hover {
 	z-index: -1;
     height: 120px;
     aspect-ratio: 1 / 1;
+	width: 120px;
     border: 1rem solid var(--bg-color);
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
