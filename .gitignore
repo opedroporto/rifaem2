@@ -1,6 +1,5 @@
 .vscode
 .env
-flask_session
 __pycache__
 /data
 /etc
