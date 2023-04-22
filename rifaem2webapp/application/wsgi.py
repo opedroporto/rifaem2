@@ -1,6 +1,10 @@
+
 """
     Cria e configura uma instância da aplicação Flask
 """
+from gevent import monkey
+monkey.patch_all()
+
 from flask import Flask
 
 from application.ext import configuration

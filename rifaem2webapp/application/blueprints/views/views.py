@@ -55,11 +55,11 @@ def init_app(app):
         # NÚMEROS INVÁLIDOS
         try:
             if len(dados['numerosRifa']) != len(set(dados['numerosRifa'])):
-                return abort(400, "Número(s) inválido(s)")
+                return abort(400, "Número(s) inválido(s) ")
         except KeyError:
-            return abort(422, "Erro ao processar o pedido")
+            return abort(422, "Erro ao processar o pedido (cód: 42200)")
         except ValueError:
-            return abort(422, "Erro ao processar o pedido")
+            return abort(422, "Erro ao processar o pedido (cód: 42210)")
 
         # FORM VÁLIDO
         if form.validate():
@@ -79,9 +79,9 @@ def init_app(app):
     
             # erro
             except NameError:
-                return abort(422, "Erro ao processar o pedido")
+                return abort(422, "Erro ao processar o pedido (cód: 42230)")
             except KeyError:
-                return abort(422, "Erro ao processar o pedido")
+                return abort(422, "Erro ao processar o pedido (cód: 42240)")
 
         # FORM INVÁLIDO
         return abort(400, "Erro ao processar o pedido")
