@@ -147,11 +147,11 @@ button.menu-burguer {
 }
 .bgMenu-aside[data-state="opened"] {
 	display: block;
-	animation: bgFadein 1s ease-in-out forwards;
+	animation: bgFadein 0.5s cubic-bezier(.42,0,.34,1) forwards;
 }
 .bgMenu-aside[data-state="closing"] {
 	display: block;
-	animation: bgFadeout 1s ease-in-out forwards;
+	animation: bgFadeout 0.5s cubic-bezier(.42,0,.34,1) forwards;
 }
 .bgMenu-aside[data-state="closed"] {
 	display: none;
@@ -191,11 +191,11 @@ button.menu-burguer.on .linhas .line {
 }
 
 .menu-aside[data-state="opened"]{
-	animation: menuAppear 1s ease-in-out forwards;
+	animation: menuAppear 0.5s cubic-bezier(.42,0,.34,1) forwards;
 	display: flex;
 }
 .menu-aside[data-state="closing"]{
-	animation: menuDisappear 1s ease-in-out forwards;
+	animation: menuDisappear 0.5s cubic-bezier(.42,0,.34,1) forwards;
 }
 .menu-aside[data-state="closed"]{
 	display: none !important;
@@ -347,7 +347,7 @@ header.sticky {
     z-index: 12;
 	width: 100%;
 	transition: 0.4s;
-	animation: stickyAppear 1s ease-in-out forwards;
+	animation: stickyAppear 0.5s cubic-bezier(0,.7,.7,1) forwards;
 }
 @keyframes stickyAppear {
 	0%{

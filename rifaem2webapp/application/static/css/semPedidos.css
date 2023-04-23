@@ -1,3 +1,6 @@
+main {
+    align-items: center;
+}
 .centerContainer {
     display: flex;
 	height: clamp(250px, 60vw, 500px);
