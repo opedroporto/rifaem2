@@ -1,4 +1,3 @@
-from threading import Thread
 from flask import session
 
 def inicia_pedidos():
