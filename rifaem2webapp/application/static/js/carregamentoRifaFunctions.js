@@ -107,7 +107,7 @@ window.onscroll = () => {
 	// desexpandir rifas automaticamente
 	document.querySelectorAll(".rifaGrid").forEach((rifaGrid) => {
 		// rifas expandidas
-		if (rifaGrid.classList.contains("expandido")) {
+		if (rifaGrid.classList.contains("expandido") && rifaGrid.closest(".rifa") !== rifaEl) {
 			let rifaGridRect = rifaGrid.getBoundingClientRect()
 			// rifa acima
 			if (rifaGridRect.bottom <= 0) {
