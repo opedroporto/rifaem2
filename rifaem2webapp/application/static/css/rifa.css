@@ -338,8 +338,9 @@ span.tooltips::before {
     border-color: var(--bg-color) #0000 #0000 #0000;
 	z-index: 3;
 }
-
-
+.rifaDesabilitada {
+    pointer-events: none;
+}
 
 /* NÚMEROS DAS RIFAS */
 

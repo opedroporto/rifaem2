@@ -11,6 +11,7 @@ def init_app(app):
     # funções próprias
     app.jinja_env.globals.update(formata_data=formata_data)
     app.jinja_env.globals.update(pedido_esta_pendente=pedido_esta_pendente)
+    app.jinja_env.globals.update(data_encerrada=data_encerrada)
     
 
 def formata_data(data_str, hora=False):
@@ -30,15 +31,26 @@ def converte_string_para_data(data_str):
 def converte_fuso_horario_br(data):
     return data.astimezone(ZoneInfo("America/Sao_Paulo"))
 
+def data_encerrada(data_encerramento):
+    data_encerramento = converte_string_para_data(data_encerramento)
+    data_encerramento = converte_fuso_horario_br(data_encerramento)
 
-def pedido_esta_pendente(dataPedido):
-    dataPedido = converte_string_para_data(dataPedido)
-    dataPedido = converte_fuso_horario_br(dataPedido)
+    data_agora = datetime.datetime.now()
+    data_agora = converte_fuso_horario_br(data_agora)
 
-    dataAgora = datetime.datetime.now()
-    dataAgora = converte_fuso_horario_br(dataAgora)
+    if data_encerramento > data_agora:
+        return True
 
-    if dataAgora < dataPedido + datetime.timedelta(minutes = 10):
+    return False
+
+def pedido_esta_pendente(data_pedido):
+    data_pedido = converte_string_para_data(data_pedido)
+    data_pedido = converte_fuso_horario_br(data_pedido)
+
+    data_agora = datetime.datetime.now()
+    data_agora = converte_fuso_horario_br(data_agora)
+
+    if data_agora < data_pedido + datetime.timedelta(minutes = 10):
         return True
 
     return False

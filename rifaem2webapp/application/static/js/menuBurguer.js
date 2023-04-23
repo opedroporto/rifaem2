@@ -82,10 +82,10 @@ try{
 	window.addEventListener("scroll", function () {
 		if (window.innerWidth > 440){
 			header.classList.toggle("sticky", window.scrollY > offsetTop - 119);
-			console.log(offsetTop);
+			//console.log(offsetTop);
 		}else {
 			header.classList.toggle("sticky", window.scrollY > offsetTop - 76);
-			console.log(offsetTop);
+			//console.log(offsetTop);
 		}
 	});
 }catch{};

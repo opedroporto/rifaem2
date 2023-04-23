@@ -57,8 +57,7 @@ function mostraDadosPix(data) {
 }
 
 function requisitaCompraErro(error) {
-	console.log("Erro ao tentar comprar");
-	console.log(error);
+	console.log("Erro ao tentar comprar.");
 }
 
 function carregaRifas() {
@@ -86,6 +85,7 @@ function carregaRifas() {
 			document.querySelector(".principal").insertAdjacentHTML("beforeend", data);
 
 			fimCarregamentoPaginaRifas();
+			checkEncerrada();
 			checaDivExpandir();
 			checaTamanho();
 			desabilitaNumeros();
@@ -93,7 +93,6 @@ function carregaRifas() {
 			alteraBtns();
 			hover();
 			imgClick();
-			
 		})
 		//.catch(error => console.log(error))
 	}
@@ -143,6 +142,7 @@ function desabilitaNumeros() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+	checkEncerrada();
 	checaTamanho();
 	alteraBtns();
 	checaDivExpandir();

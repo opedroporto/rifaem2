@@ -1,14 +1,17 @@
 {% for rifa in rifas %}
-	<div class="rifa" data-id="{{ rifa.id }}">	
-			
+	<div class="rifa {{ 'rifaDesabilitada' if data_encerrada(rifa.dataEncerramento) }}" data-id="{{ rifa.id }}">	
 			<button type="button" class="lblSub" onclick="modalfOpen(this)">Concluir</button>
 			
 			<div class="descOutline">
 				<h2 class="preco">R$ {{ rifa.precoNumero }}</h3>
-				<h1 class="nomeRifa">{{ rifa.nome }}</h1>
+				{% if not data_encerrada(rifa.dataEncerramento) %}
+					<h1 class="nomeRifa">{{ rifa.nome }}</h1>
+				{% else %}
+					<h1 class="nomeRifa"><span style="text-decoration: line-through;">{{ rifa.nome }}</span> (ENCERRADA)</h1>
+				{% endif %}
 				<div class="imgDiv">
 					<hr>
-					<img src="{{ rifa.imagem }}" alt="Imagem da rifa">
+					<img src="{{ rifa.imagem }}" alt="Imagem da rifa" draggable="false">
 					<i class="fa-solid fa-chevron-right" onclick="slideDescription(this)"></i><hr class="last">
 				
 					<div class="descInfo">
@@ -49,14 +52,14 @@
 							<span class="tooltips">
 								<p> {{ numeroEspecial.status }} </p>
 							</span>
-							<input class="numero" style="background-color: {{ rifa.cor }};" type="button" data-state="{{ numeroEspecial.status }}" data-nome="{{ numeroEspecial.nome }}" value="{{ j }}">
+							<input class="numero" style="background-color: {{ rifa.cor }};{{ 'filter: grayscale(1);' if data_encerrada(rifa.dataEncerramento) }}" type="button" data-state="{{ numeroEspecial.status }}" data-nome="{{ numeroEspecial.nome }}" value="{{ j }}">
 						</div>
 					{% else %}
 						<div class="tooltip">
 							<span class="tooltips">
 								<p> disponível </p>
 							</span>
-							<input class="numero" style="background-color: {{ rifa.cor }};" type="button" data-state="free" onclick="modalcOpen(this)" value="{{ j }}">
+							<input class="numero" style="background-color: {{ rifa.cor }};{{ 'filter: grayscale(1);' if data_encerrada(rifa.dataEncerramento) }}" type="button" data-state="{{ numeroEspecial.status }}" type="button" data-state="free" onclick="modalcOpen(this)" value="{{ j }}">
 						</div>
 					{% endif %}
 				{% endfor %}
