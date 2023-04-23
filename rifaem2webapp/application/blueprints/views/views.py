@@ -8,7 +8,7 @@ from flask_sse import sse
 
 from ...ext.csrf import csrf
 from ...blueprints.util.emailJobs import async_envia_pedido_efetuado, async_envia_pedido_confirmado, async_envia_mensagem_do_usuario
-from ...blueprints.util.sessionJobs import async_add_pedido, async_get_pedidos
+from ...blueprints.util.sessionJobs import add_pedido, get_pedidos
 from ...blueprints.pixapi.resources import faz_pedido, carrega_rifas, lista_pedidos, get_dados_comprador
 from .forms import RequisitaCompraForm, EnviaMensagemForm
 
@@ -73,7 +73,7 @@ def init_app(app):
                 }
 
                 # SUCESSO
-                async_add_pedido(resposta['result']['txid'])
+                add_pedido(resposta['result']['txid'])
                 async_envia_pedido_efetuado(dados['email'], dados, resposta['result']['txid'])
                 return dados_pix
     
@@ -89,7 +89,7 @@ def init_app(app):
 
     @bp.route("/pedidos", methods=["GET"])
     def pedidos():
-        pedidos_txid = async_get_pedidos()
+        pedidos_txid = get_pedidos()
 
         if pedidos_txid:
             pedidos = lista_pedidos(pedidos_txid)
