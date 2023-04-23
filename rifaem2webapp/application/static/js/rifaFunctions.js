@@ -362,7 +362,15 @@ function checkEncerrada () {
 			//rifaEl.querySelector("h1").style.textDecoration = "line-through";
 			rifaEl.querySelector("h2").style.textDecoration = "line-through";
 			rifaEl.querySelector("h4").style.textDecoration = "line-through";
-			rifaEl.style.filter = "grayscale(1)";
+
+			rifaEl.childNodes.forEach(el => {
+				try {
+					el.style.filter = "grayscale(1)";
+				} catch (e) {
+
+				}
+			})
+				
 		}
 	})
 }
