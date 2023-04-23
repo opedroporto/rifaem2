@@ -71,7 +71,6 @@ Parse.Cloud.define("lista-rifas", async (req) => {
 	});
 });
 
-
 Parse.Cloud.define("nome-rifa", async (req) => {
 	// verificacoes
 	if (req.user == null) throw "Usuário não autenticado";
@@ -112,6 +111,17 @@ Parse.Cloud.define("pedido", async (req) => {
 		}
 	}
 
+	// pega dados da rifa
+	let dataAgora = new Date();
+
+	const query3 = new Parse.Query(Rifa);
+	query3.equalTo("objectId", req.params.rifa);
+	query3.lessThan('dataEncerramento', dataAgora);
+	const rifaDados = await query3.first({useMasterKey: true});
+
+	// verifica se rifa está encerrada
+	if (rifaDados == undefined) throw "Rifa inválida";
+
 	/*
 	// verifica se há pedido recente com mesmo número para mesma rifa
 	const query2 = new Parse.Query(Pedido);
@@ -143,9 +153,6 @@ Parse.Cloud.define("pedido", async (req) => {
 	dataExpiracao.setSeconds(dataExpiracao.getSeconds() + tempoExpiracao)
 
 	// define preço da cobrança
-	const query3 = new Parse.Query(Rifa);
-	query3.equalTo("objectId", req.params.rifa);
-	const rifaDados = await query3.first({useMasterKey: true});
 	const precoNumeroRifa = rifaDados.toJSON().precoNumero;
 
 	const preco = req.params.numerosRifa.length * precoNumeroRifa;

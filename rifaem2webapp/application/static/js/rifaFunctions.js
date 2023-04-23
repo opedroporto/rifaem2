@@ -279,11 +279,12 @@ function hover(){
 	const docFontSize = parseFloat(window.getComputedStyle(document.documentElement).fontSize);
 	
     for(let i = 0; i < rifasImgs.length; i++){
-        rifasImgs[i].addEventListener('mouseenter', e => rifasImgs[i].parentNode.classList.add("slided"));
-        rifasImgs[i].addEventListener('mouseleave', e => rifasImgs[i].parentNode.classList.remove("slided"));
-		numConvert = rifasImgs[i].offsetWidth / docFontSize;
-		console.log(numConvert);
-		rifasDesc[i].style.width = numConvert + "rem";
+		if (!(rifasImgs[i].closest(".rifa").classList.contains("rifaDesabilitada"))) {
+			rifasImgs[i].addEventListener('mouseenter', e => rifasImgs[i].parentNode.classList.add("slided"));
+			rifasImgs[i].addEventListener('mouseleave', e => rifasImgs[i].parentNode.classList.remove("slided"));
+			numConvert = rifasImgs[i].offsetWidth / docFontSize;
+			rifasDesc[i].style.width = numConvert + "rem";
+		}
 	};
 };
 
@@ -291,12 +292,15 @@ function imgClick() {
 	const rifasImgs = document.querySelectorAll(".imgDiv img");
 	let modalImgDesc = document.querySelector(".modalHead.Desc h2");
 	let hiddenInputDesc = document.querySelectorAll(".inputDescH");
+
 	for(let nI = 0; nI < rifasImgs.length; nI++){
         rifasImgs[nI].addEventListener('click', function() {
-			modalImg.classList.add("on");
-			modalImg.setAttribute("data-anim", "opened");
-			document.querySelector(".modalContentImg img").src = rifasImgs[nI].src;
-			modalImgDesc.innerHTML = hiddenInputDesc[nI].value;
+			if (!rifasImgs[nI].closest(".rifa").classList.contains("rifaDesabilitada")) {
+				modalImg.classList.add("on");
+				modalImg.setAttribute("data-anim", "opened");
+				document.querySelector(".modalContentImg img").src = rifasImgs[nI].src;
+				modalImgDesc.innerHTML = hiddenInputDesc[nI].value;
+			}
 		});
 	};
 }
@@ -351,3 +355,14 @@ linkSobre.addEventListener("click", (e) => {
 linkWpp.addEventListener("click", (e) => {
 	window.location.href = "http://api.whatsapp.com/send?1=pt_BR&phone=551597832738";
 });
+
+function checkEncerrada () {
+	document.querySelectorAll(".rifa").forEach((rifaEl) => {
+		if (rifaEl.classList.contains("rifaDesabilitada")) {
+			//rifaEl.querySelector("h1").style.textDecoration = "line-through";
+			rifaEl.querySelector("h2").style.textDecoration = "line-through";
+			rifaEl.querySelector("h4").style.textDecoration = "line-through";
+			rifaEl.style.filter = "grayscale(1)";
+		}
+	})
+}
