@@ -39,13 +39,13 @@ main {
 }
 #svgCarrinho .a {
     fill: var(--bg-color);
-    scale: 0.9;
+    /*scale: 0.9;*/
     transition-delay: 0.25s;
     transition: all .25s ease;
     -webkit-transition: all .25s ease;
 }
 #svgCarrinho .a:hover {
-    scale: 0.9075;
+    /*scale: 0.9075;*/
     transition-delay: 0.25s;
     transition: all .25s ease;
     -webkit-transition: all .25s ease;
