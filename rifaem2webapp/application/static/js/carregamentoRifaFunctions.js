@@ -1,4 +1,4 @@
-var pagina = 1;
+var pagina = 0;
 var quantidade = 3;
 
 var fimCarregamentoRifas = false;
@@ -142,6 +142,7 @@ function desabilitaNumeros() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+	carregaRifas();
 	checkEncerrada();
 	checaTamanho();
 	alteraBtns();

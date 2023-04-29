@@ -6,7 +6,7 @@
 }
 .principal {
     background: var(--first-font-color);
-	min-height: 1000px;
+	min-height: 10px;
 }
 .rifa {
     display: grid;

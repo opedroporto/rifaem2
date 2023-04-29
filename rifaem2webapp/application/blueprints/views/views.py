@@ -2,12 +2,9 @@
     Definição das views
 """
 import os
-import requests
-import time
 
 from flask import Blueprint, request, render_template, abort, redirect, url_for, Response
 from flask_sse import sse
-from threading import Thread
 
 from ...ext.csrf import csrf
 from ...blueprints.util.emailJobs import async_envia_pedido_efetuado, async_envia_pedido_confirmado, async_envia_mensagem_do_usuario
@@ -22,10 +19,10 @@ def init_app(app):
     
     @bp.route("/", methods=["GET"])
     def index():
-        rifas = carrega_rifas(pagina=0, quantidade=3)
+        #rifas = carrega_rifas(pagina=0, quantidade=3)
         requisita_compra_form = RequisitaCompraForm()
 
-        return render_template("index.html", rifas=rifas, form=requisita_compra_form)
+        return render_template("index.html", form=requisita_compra_form)
 
     @bp.route("/rifa", methods=["POST"])
     def rifa():
@@ -152,13 +149,3 @@ def init_app(app):
         return "", 200
 
     app.register_blueprint(bp)
-    async_mantem_ativo(app)
-
-def async_mantem_ativo(app):
-    def mantem_ativo(app):
-        with app.app_context():
-            while True:
-                requests.get("https://" + os.getenv("HOSTNAME") + "/bot_mantem_ativo")
-                time.sleep(60)
-    thr = Thread(target=mantem_ativo, args=[app])
-    thr.start()
