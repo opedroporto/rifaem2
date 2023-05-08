@@ -1,13 +1,22 @@
 {% for rifa in rifas %}
+	{% if rifa.numeroVencedor %}
+		<div id="divVencedor">
+			<h1><span style="color: black;">Número Vencedor: <span id="numVencedor" style="background-color:{{ rifa.cor }};">{{ rifa.numeroVencedor }}</span></span></h1>
+		</div>
+	{% endif %}
 	<div class="rifa {{ 'rifaDesabilitada' if data_encerrada(rifa.dataEncerramento) }}" data-id="{{ rifa.id }}">	
 			<button type="button" class="lblSub" onclick="modalfOpen(this)">Concluir</button>
 			
 			<div class="descOutline">
-				<h2 class="preco">R$ {{ rifa.precoNumero }}</h3>
+				<h2 class="preco">R$ {{ rifa.precoNumero }}</h2>
 				{% if not data_encerrada(rifa.dataEncerramento) %}
 					<h1 class="nomeRifa">{{ rifa.nome }}</h1>
-				{% else %}
-					<h1 class="nomeRifa"><span style="text-decoration: line-through;">{{ rifa.nome }}</span> (ENCERRADA)</h1>
+					{% else %}
+					<h1 class="nomeRifa"><span style="text-decoration: line-through;">{{ rifa.nome }}</span> 
+						{% if not rifa.numeroVencedor %}
+							<span style="color: black;"> (ENCERRADA)</span>
+						{% endif %}
+					</h1>
 				{% endif %}
 				<div class="imgDiv">
 					<hr>

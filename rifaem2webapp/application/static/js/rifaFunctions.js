@@ -353,7 +353,7 @@ linkSobre.addEventListener("click", (e) => {
 	window.location.href = "/sobre";
 });
 linkWpp.addEventListener("click", (e) => {
-	window.location.href = "http://api.whatsapp.com/send?1=pt_BR&phone=551597832738";
+	window.location.href = "http://api.whatsapp.com/send?1=pt_BR&phone=5515998521081";
 });
 
 function checkEncerrada () {

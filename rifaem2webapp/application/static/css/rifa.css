@@ -16,6 +16,26 @@
         "rifa";
     position: relative;
 }
+#divVencedor {
+    margin-top: 6rem;
+    text-align: center;    
+}
+#numVencedor {
+    border-radius: 1rem;
+    padding: 0.3em;
+    color: white;
+    font-weight: bold;
+    font-size: xx-large;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+}
+#divVencedor h1 {
+    font-size: 3rem;
+	margin-left: -1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--bg-color);
+}
 form.rifaGrid {
     display: flex;
     flex-wrap: wrap;

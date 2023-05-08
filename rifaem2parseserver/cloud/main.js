@@ -66,7 +66,8 @@ Parse.Cloud.define("lista-rifas", async (req) => {
 			"dataEncerramento": r.dataEncerramento.iso,
 			"precoNumero": r.precoNumero,
 			"numeroMaximo": r.numeroMaximo,
-			"numeros": r.numeros
+			"numeros": r.numeros,
+			"numeroVencedor": r.numeroVencedor
 		}
 	});
 });
