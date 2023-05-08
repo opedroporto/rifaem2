@@ -41,8 +41,10 @@
 					display: grid;
 					grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
                 }
+				.container > * {
+					margin: 4rem 2rem;
+				}
 				section {
-					margin: 4rem 6rem;
 					justify-self: center;
 					max-width: 800px;
 					background: var(--bg-linear-gradient);
@@ -54,7 +56,7 @@
 					min-height: 600px;
 					max-height: 600px;
 				}
-				section img {
+				section #mainImg {
 					height: 150px;
 					border-radius: 100vw;
 					outline: 4px solid #006834;
@@ -82,7 +84,7 @@
 					animation: colorGlow 10s ease-in-out infinite;
 				}
 				section#sectionMensagem {
-					grid-template-rows: 20% 60% 20%;
+					grid-template-rows: 30% 55% 20%;
 					justify-self: auto;
 				}
 				#sectionMensagem h2 {
@@ -197,19 +199,81 @@
 						margin: 1rem 1rem;
 					}
 				}
+
+				#etecLink {
+					color: hsl(156, 100%, 45%);
+				}
+				#etecLink:hover {
+					color: hsl(156, 100%, 65%);
+				}
+
+				#newsContainer {
+					display: grid;
+					grid-template-columns: 2fr repeat(2, 1fr);
+					grid-template-rows: 1fr repeat(4, 3fr);
+					grid-column-gap: 0px;
+					grid-row-gap: 0px;
+					min-height: 600px;
+					max-height: 600px;
+				}
+				#newsContainer a img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+				#newsTitle { grid-area: 1 / 1 / 2 / 4; }
+				#img1 { grid-area: 2 / 1 / 3 / 3; }
+				#img2 { grid-area: 2 / 3 / 5 / 4; }
+				#img3 { grid-area: 3 / 1 / 5 / 2; }
+				#img4 { grid-area: 3 / 2 / 5 / 3; }
+				#img5 { grid-area: 5 / 1 / 6 / 2; }
+				#img6 { grid-area: 5 / 2 / 6 / 4; }
+
+				#newsTitle {
+					border-radius: 4rem 4rem 0 0;
+					background: var(--bg-linear-gradient);
+					display: grid;
+					place-items: center;
+					font-size: 1.2em;
+					padding: 1em;
+					color: #00813f;
+				}
+				#img4 img {
+					object-position: 0;
+				}
+				#img5 img {
+					object-position: 10%;
+					border-radius: 0 0 0 4em;
+				}
+				#img6 img {
+					border-radius: 0 0 4em 0;
+				}
                 
             </style>
 			<main>
 				<div class="container" >
 					<section>
-						<img src="../static/imagens/grifos.webp" alt="Imagem dos grifos">
+						<img id="mainImg" src="../static/imagens/grifos.webp" alt="Imagem dos grifos">
 						<h2>Quem somos</h2>
 						<h3>
-							Somos os grifos! A turma do terceiro ano de Desenvolvimento de Sistemas na ETEC Fernando Prestes.
+							Somos os grifos! A turma do terceiro ano de Desenvolvimento de Sistemas na 
+							<a id="etecLink" target="_blank" href="https://www.etecfernandoprestes.com.br/">ETEC Fernando Prestes</a>.
 							Tivemos a ideia deste projeto e fizemos este site para facilitar a compra e o acesso à informação das nossas rifas, aproveite!
 							E caso tenha alguma dúvida, sugestão ou crítica que desejas fazer, contate-nos ao lado: é rapidinho e logo você terá nossa resposta.
 						</h3>
 					</section>
+
+					<div id="newsContainer">
+						<div id="newsTitle">
+							<h1>Quem é a ETEC Fernando Prestes?</h1>
+						</div>
+						<a id="img1" target="_blank" href="https://www.jornalcruzeiro.com.br/sorocaba/noticias/2022/04/691387-alunos-da-etec-fernando-prestes-auxiliam-pessoas-a-declarar-o-ir.html"><img src="../static/imagens/news1.jpg"></a>
+						<a id="img2" target="_blank" href="https://www.jornalcruzeiro.com.br/sorocaba/noticias/2022/04/692724-alunos-da-fernando-prestes-tiram-primeiro-titulo-de-eleitor.html"><img src="../static/imagens/news2.jpg"></a>
+						<a id="img3" target="_blank" href="https://www.jornalcruzeiro.com.br/sorocaba/noticias/2022/11/704573-gincana-do-fernando-prestes-arrecada-quase-7t-de-racao.html"><img src="../static/imagens/news3.jpg"></a>
+						<a id="img4" target="_blank" href="https://www.etecfernandoprestes.com.br/noticias"><img src="../static/imagens/news4.jpg"></a>
+						<a id="img5" target="_blank" href="https://www.jornalcruzeiro.com.br/sorocaba/noticias/2022/10/703110-etec-fernando-prestes-esta-com-inscricoes-abertas-para-concurso-publico.html"><img src="../static/imagens/news5.jpg"></a>
+						<a id="img6" target="_blank" href="https://www.jornalcruzeiro.com.br/alunos-de-etec-fernando-prestes-arrecadam-leite-para-doacao.html"><img src="../static/imagens/news6.jpg"></a>
+					</div>
 
 					<section id="sectionMensagem">
 						<h2>Enviar uma mensagem</h2>
