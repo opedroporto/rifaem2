@@ -38,7 +38,8 @@ def data_encerrada(data_encerramento):
     data_agora = datetime.datetime.now()
     data_agora = converte_fuso_horario_br(data_agora)
 
-    if data_encerramento > data_agora:
+    print(data_encerramento, data_agora)
+    if data_agora > data_encerramento:
         return True
 
     return False

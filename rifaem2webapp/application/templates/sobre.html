@@ -29,6 +29,11 @@
 						padding-bottom: 12vh;
 					}
 				}
+				html, body {
+					overflow-x: unset;
+					height: 100vh;
+					overflow-y: unset;
+				}
 				main {
 					top: max(118px, 15vh);
 					position: relative;
@@ -215,6 +220,16 @@
 					grid-row-gap: 0px;
 					min-height: 600px;
 					max-height: 600px;
+					justify-self: center;
+					max-width: 800px;
+					overflow: hidden;
+				}
+				#newsContainer a {
+					filter:brightness(90%);
+					overflow: hidden;
+				}
+				#newsContainer a:hover {
+					filter:brightness(100%);
 				}
 				#newsContainer a img {
 					width: 100%;
@@ -267,12 +282,12 @@
 						<div id="newsTitle">
 							<h1>Quem é a ETEC Fernando Prestes?</h1>
 						</div>
-						<a id="img1" target="_blank" href="https://www.jornalcruzeiro.com.br/sorocaba/noticias/2022/04/691387-alunos-da-etec-fernando-prestes-auxiliam-pessoas-a-declarar-o-ir.html"><img src="../static/imagens/news1.jpg"></a>
-						<a id="img2" target="_blank" href="https://www.jornalcruzeiro.com.br/sorocaba/noticias/2022/04/692724-alunos-da-fernando-prestes-tiram-primeiro-titulo-de-eleitor.html"><img src="../static/imagens/news2.jpg"></a>
-						<a id="img3" target="_blank" href="https://www.jornalcruzeiro.com.br/sorocaba/noticias/2022/11/704573-gincana-do-fernando-prestes-arrecada-quase-7t-de-racao.html"><img src="../static/imagens/news3.jpg"></a>
-						<a id="img4" target="_blank" href="https://www.etecfernandoprestes.com.br/noticias"><img src="../static/imagens/news4.jpg"></a>
-						<a id="img5" target="_blank" href="https://www.jornalcruzeiro.com.br/sorocaba/noticias/2022/10/703110-etec-fernando-prestes-esta-com-inscricoes-abertas-para-concurso-publico.html"><img src="../static/imagens/news5.jpg"></a>
-						<a id="img6" target="_blank" href="https://www.jornalcruzeiro.com.br/alunos-de-etec-fernando-prestes-arrecadam-leite-para-doacao.html"><img src="../static/imagens/news6.jpg"></a>
+						<a id="img1" target="_blank" href="https://www.jornalcruzeiro.com.br/sorocaba/noticias/2022/04/691387-alunos-da-etec-fernando-prestes-auxiliam-pessoas-a-declarar-o-ir.html"><img src="../static/imagens/news1.webp"></a>
+						<a id="img2" target="_blank" href="https://www.jornalcruzeiro.com.br/sorocaba/noticias/2022/04/692724-alunos-da-fernando-prestes-tiram-primeiro-titulo-de-eleitor.html"><img src="../static/imagens/news2.webp"></a>
+						<a id="img3" target="_blank" href="https://www.jornalcruzeiro.com.br/sorocaba/noticias/2022/11/704573-gincana-do-fernando-prestes-arrecada-quase-7t-de-racao.html"><img src="../static/imagens/news3.webp"></a>
+						<a id="img4" target="_blank" href="https://www.etecfernandoprestes.com.br/noticias"><img src="../static/imagens/news4.webp"></a>
+						<a id="img5" target="_blank" href="https://www.jornalcruzeiro.com.br/sorocaba/noticias/2022/10/703110-etec-fernando-prestes-esta-com-inscricoes-abertas-para-concurso-publico.html"><img src="../static/imagens/news5.webp"></a>
+						<a id="img6" target="_blank" href="https://www.jornalcruzeiro.com.br/alunos-de-etec-fernando-prestes-arrecadam-leite-para-doacao.html"><img src="../static/imagens/news6.webp"></a>
 					</div>
 
 					<section id="sectionMensagem">
