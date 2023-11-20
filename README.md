@@ -1,12 +1,29 @@
 # Aplicativo Web para Rifas Virtuais
-É um aplicativo web que possibilita pessoas a participarem de rifas, comprando números de rifas e realizando pagamentos por PIX no próprio website.
+É um aplicativo web que possibilita pessoas a participarem de rifas, comprando números de rifas e realizando pagamentos por 
+PIX no próprio website ([rifado2.com](https://rifado2.com)).
+
+![image](https://github.com/opedroporto/rifaem2/assets/77935889/e5849aba-3181-469b-ba3e-09173235b549)
 
 ## Conteúdos
+- [Pré-visualização](#preview)
 - [Instalação](#instalacao)
 - [Como rodar](#uso)
+- [Acesso](#acesso)
 - [Estrutura dos arquivos](#estrutura)
 - [Suporte](#suporte)
 
+<a name="preview"/>
+
+## Pré-visualização
+
+![image](https://github.com/opedroporto/rifaem2/assets/77935889/60a57828-f98d-4f8b-8a5c-38b1939bd096)
+![image](https://github.com/opedroporto/rifaem2/assets/77935889/21035e1b-ad1c-42a2-8cba-cd93d6009d0d)
+![image](https://github.com/opedroporto/rifaem2/assets/77935889/c7412051-5b1c-4522-8ee6-5e5c8388c70a)
+![image](https://github.com/opedroporto/rifaem2/assets/77935889/c9bc806a-456f-4c66-a947-eca29066fb4c)
+![image](https://github.com/opedroporto/rifaem2/assets/77935889/e268f195-6acd-4488-86b1-5b9d2bfe022f)
+
+<br>
+<br>
 <a name="instalacao"/>
 
 ## Instalação
@@ -52,6 +69,13 @@ Execute o script:
 Acesse a aplicação em [http://localhost](http://localhost) :white_check_mark:
 
 Fique à vontade para modificar qualquer arquivo do projeto e adaptá-lo às suas necessidades.
+<br>
+<br>
+<a name="acesso"/>
+
+## Acesso
+
+[rifado2.com](https://rifado2.com)
 
 <br>
 <br>
@@ -71,9 +95,8 @@ Fique à vontade para modificar qualquer arquivo do projeto e adaptá-lo às sua
 │   ├── cloud
 │   │   ├── main.js
 │   │   ├── package.json
-│   │   ├── pix.js
-│   │   └── producao-443302-rifaem2.p12
-│   ├── dbqueries
+│   │   └── pix.js
+│   ├── dbstatements
 │   │   └── indexParaExpiracaodoNumeroAlocado.js
 │   └── public
 │       └── index.html
@@ -100,6 +123,9 @@ Fique à vontade para modificar qualquer arquivo do projeto e adaptá-lo às sua
 │   │   │   ├── csrf.py
 │   │   │   ├── email.py
 │   │   │   ├── errorhandler.py
+│   │   │   ├── flask_session
+│   │   │   │   ├── __init__.py
+│   │   │   │   └── sessions.py
 │   │   │   ├── session.py
 │   │   │   └── sse.py
 │   │   ├── static
@@ -108,6 +134,8 @@ Fique à vontade para modificar qualquer arquivo do projeto e adaptá-lo às sua
 │   │   │   │   ├── headerIndex.css
 │   │   │   │   ├── headerOthers.css
 │   │   │   │   ├── index.css
+│   │   │   │   ├── lib
+│   │   │   │   │   └── fontawesome-free-6.4.0-web
 │   │   │   │   ├── modals.css
 │   │   │   │   ├── pedidos.css
 │   │   │   │   ├── rifa.css
@@ -116,11 +144,22 @@ Fique à vontade para modificar qualquer arquivo do projeto e adaptá-lo às sua
 │   │   │   ├── imagens
 │   │   │   │   ├── LogoCompleto.png
 │   │   │   │   ├── grifos.jpg
+│   │   │   │   ├── grifos.webp
 │   │   │   │   ├── logoIcone.ico
-│   │   │   │   └── logoIcone.png
+│   │   │   │   ├── logoIcone.png
+│   │   │   │   ├── news1.webp
+│   │   │   │   ├── news2.webp
+│   │   │   │   ├── news3.webp
+│   │   │   │   ├── news4.webp
+│   │   │   │   ├── news5.webp
+│   │   │   │   └── news6.webp
 │   │   │   └── js
 │   │   │       ├── carregamentoRifaFunctions.js
+│   │   │       ├── lib
+│   │   │       │   ├── jquery.inputmask.min.js
+│   │   │       │   └── jquery.min.js
 │   │   │       ├── menuBurguer.js
+│   │   │       ├── pedidosFunctions.js
 │   │   │       └── rifaFunctions.js
 │   │   ├── templates
 │   │   │   ├── 404.html
@@ -130,6 +169,7 @@ Fique à vontade para modificar qualquer arquivo do projeto e adaptá-lo às sua
 │   │   │   ├── mensagemUsuarioEmail.html
 │   │   │   ├── modalConfirm.html
 │   │   │   ├── modalFinish.html
+│   │   │   ├── modalImg.html
 │   │   │   ├── modalPix.html
 │   │   │   ├── paginaRifa.html
 │   │   │   ├── pedidoConfirmadoEmail.html
@@ -139,6 +179,7 @@ Fique à vontade para modificar qualquer arquivo do projeto e adaptá-lo às sua
 │   │   │   ├── semPedidos.html
 │   │   │   └── sobre.html
 │   │   └── wsgi.py
+│   ├── env
 │   └── requirements.txt
 └── run-webapp.sh
 
